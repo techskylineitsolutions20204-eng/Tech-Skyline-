@@ -16,7 +16,9 @@ import {
   Quote,
   AlertCircle,
   Globe,
-  Briefcase
+  Briefcase,
+  ExternalLink,
+  FileText
 } from 'lucide-react';
 import { 
   CONTACT_INFO, 
@@ -52,6 +54,10 @@ function App() {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsMenuOpen(false);
     }
+  };
+
+  const openGoogleForm = () => {
+    window.open(CONTACT_INFO.googleFormUrl, '_blank');
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -148,7 +154,7 @@ ${formData.message}`;
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8">
+            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               {['Home', 'Services', 'Training', 'Staffing', 'Reviews', 'Contact'].map((item) => (
                 <button 
                   key={item}
@@ -158,6 +164,12 @@ ${formData.message}`;
                   {item}
                 </button>
               ))}
+              <button 
+                onClick={openGoogleForm}
+                className="bg-primary-600 hover:bg-primary-500 text-white px-5 py-2.5 rounded-lg font-bold transition-all shadow-md shadow-primary-600/20 flex items-center gap-2 text-sm uppercase tracking-wide"
+              >
+                Apply Now <ExternalLink size={14} />
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -182,6 +194,12 @@ ${formData.message}`;
                   {item}
                 </button>
               ))}
+              <button 
+                onClick={openGoogleForm}
+                className="text-left bg-primary-50 text-primary-600 font-bold py-3 px-3 rounded flex items-center gap-2"
+              >
+                Apply Now <ExternalLink size={16} />
+              </button>
             </div>
           </div>
         )}
@@ -557,6 +575,17 @@ ${formData.message}`;
                     <h4 className="font-bold text-white text-lg">Email Us</h4>
                     <p className="text-slate-400 mt-1">{CONTACT_INFO.email}</p>
                   </div>
+                </div>
+                
+                {/* Registration Button Callout */}
+                <div className="pt-6 border-t border-slate-800">
+                  <p className="text-slate-400 mb-4">Prefer to fill a detailed application form?</p>
+                  <button 
+                    onClick={openGoogleForm}
+                    className="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2"
+                  >
+                    <FileText size={20} className="text-primary-400" /> Fill Online Registration Form
+                  </button>
                 </div>
               </div>
             </div>

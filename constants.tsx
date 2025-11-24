@@ -26,7 +26,8 @@ export const CONTACT_INFO = {
   company: "Techskyline.in",
   tagline: "Premier IT Consulting, Staffing, and Corporate Training Solutions.",
   address: "Marshall St, San Antonio, TX 78212, USA",
-  logo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=100&q=80" // Using a tech-abstract logo placeholder
+  logo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=100&q=80", // Using a tech-abstract logo placeholder
+  googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfcG6IKVRWZg0qi0V7eBRvRDozo0HRifzhEM5vEfLtFLvADbA/viewform"
 };
 
 export const HERO_CONTENT = {
