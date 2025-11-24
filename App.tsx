@@ -13,7 +13,9 @@ import {
   Users,
   MapPin,
   Star,
-  Quote
+  Quote,
+  AlertCircle,
+  Send
 } from 'lucide-react';
 import { 
   CONTACT_INFO, 
@@ -31,6 +33,14 @@ import {
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    interest: 'Corporate Training',
+    message: ''
+  });
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -40,6 +50,84 @@ function App() {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsMenuOpen(false);
     }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors: { [key: string]: string } = {};
+    
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+    
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^[+]?[\d\s-]{10,}$/.test(formData.phone.trim())) {
+       // Basic phone validation: allows +, digits, spaces, hyphens, min length 10
+       newErrors.phone = 'Please enter a valid phone number';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleWhatsApp = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    const text = `*New Inquiry from Techskyline.in*
+    
+*Name:* ${formData.name}
+*Phone:* ${formData.phone}
+*Email:* ${formData.email}
+*Interest:* ${formData.interest}
+*Message:* ${formData.message}`;
+
+    const encodedText = encodeURIComponent(text);
+    // Using the specific number provided: +91-8106243684
+    window.open(`https://wa.me/918106243684?text=${encodedText}`, '_blank');
+  };
+
+  const handleEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    const subject = `Inquiry: ${formData.interest} - ${formData.name}`;
+    const body = `Name: ${formData.name}
+Phone: ${formData.phone}
+Email: ${formData.email}
+Interest: ${formData.interest}
+
+Message:
+${formData.message}`;
+
+    const mailtoLink = `mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
   };
 
   return (
@@ -484,24 +572,65 @@ function App() {
 
             <div className="bg-white p-8 rounded-2xl shadow-lg h-fit">
               <h3 className="text-xl font-bold text-slate-900 mb-6">Send us a message</h3>
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Name</label>
-                    <input type="text" className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all" placeholder="John Doe" />
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Name <span className="text-red-500">*</span></label>
+                    <input 
+                      type="text" 
+                      name="name" 
+                      value={formData.name} 
+                      onChange={handleInputChange} 
+                      className={`w-full px-4 py-2 rounded-lg border focus:ring-2 outline-none transition-all ${errors.name ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'}`}
+                      placeholder="John Doe" 
+                    />
+                    {errors.name && (
+                      <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                        <AlertCircle size={12} /> {errors.name}
+                      </p>
+                    )}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Phone</label>
-                    <input type="tel" className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all" placeholder="+1 (555) 000-0000" />
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Phone <span className="text-red-500">*</span></label>
+                    <input 
+                      type="tel" 
+                      name="phone" 
+                      value={formData.phone} 
+                      onChange={handleInputChange} 
+                      className={`w-full px-4 py-2 rounded-lg border focus:ring-2 outline-none transition-all ${errors.phone ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'}`}
+                      placeholder="+1 (555) 000-0000" 
+                    />
+                    {errors.phone && (
+                      <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                        <AlertCircle size={12} /> {errors.phone}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
-                  <input type="email" className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all" placeholder="john@example.com" />
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Email <span className="text-red-500">*</span></label>
+                  <input 
+                    type="email" 
+                    name="email" 
+                    value={formData.email} 
+                    onChange={handleInputChange} 
+                    className={`w-full px-4 py-2 rounded-lg border focus:ring-2 outline-none transition-all ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'}`}
+                    placeholder="john@example.com" 
+                  />
+                  {errors.email && (
+                    <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                      <AlertCircle size={12} /> {errors.email}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Interest</label>
-                  <select className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all">
+                  <select 
+                    name="interest" 
+                    value={formData.interest} 
+                    onChange={handleInputChange} 
+                    className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all"
+                  >
                     <option>Corporate Training</option>
                     <option>IT Staffing</option>
                     <option>Consulting Services</option>
@@ -509,12 +638,39 @@ function App() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Message</label>
-                  <textarea rows={4} className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all" placeholder="How can we help you?"></textarea>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Message <span className="text-red-500">*</span></label>
+                  <textarea 
+                    rows={4} 
+                    name="message" 
+                    value={formData.message} 
+                    onChange={handleInputChange} 
+                    className={`w-full px-4 py-2 rounded-lg border focus:ring-2 outline-none transition-all ${errors.message ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-primary-500 focus:border-primary-500'}`}
+                    placeholder="How can we help you?"
+                  ></textarea>
+                  {errors.message && (
+                    <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
+                      <AlertCircle size={12} /> {errors.message}
+                    </p>
+                  )}
                 </div>
-                <button type="submit" className="w-full bg-primary-600 text-white font-semibold py-3 rounded-lg hover:bg-primary-700 transition-colors shadow-lg hover:shadow-primary-500/30">
-                  Send Message
-                </button>
+                
+                <div className="grid grid-cols-1 gap-3 pt-2">
+                  <button 
+                    onClick={handleWhatsApp}
+                    type="button" 
+                    className="w-full bg-[#25D366] text-white font-semibold py-3 rounded-lg hover:bg-[#128C7E] transition-colors shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+                  >
+                    <MessageCircle size={20} /> Send via WhatsApp
+                  </button>
+                  
+                  <button 
+                    onClick={handleEmail}
+                    type="button" 
+                    className="w-full bg-primary-600 text-white font-semibold py-3 rounded-lg hover:bg-primary-700 transition-colors shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+                  >
+                    <Mail size={20} /> Send via Email
+                  </button>
+                </div>
               </form>
             </div>
           </div>
