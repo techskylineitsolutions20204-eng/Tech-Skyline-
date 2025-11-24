@@ -4,6 +4,7 @@ export interface ServiceItem {
   title: string;
   description: string;
   icon: LucideIcon;
+  image?: string;
 }
 
 export interface CourseCategory {
@@ -12,9 +13,17 @@ export interface CourseCategory {
 }
 
 export interface Testimonial {
+  id: number;
   text: string;
   author: string;
   role: string;
+  rating: number;
+  image?: string;
+}
+
+export interface Client {
+  name: string;
+  logo: string;
 }
 
 export interface StatItem {

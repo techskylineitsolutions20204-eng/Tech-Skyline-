@@ -16,14 +16,14 @@ import {
   Zap,
   Layers
 } from 'lucide-react';
-import { ServiceItem, CourseCategory, StatItem, FeatureItem } from './types';
+import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial } from './types';
 
 export const CONTACT_INFO = {
   contactName: "Abhinav",
   phone: "408-614-0468",
   whatsapp: "+91-8106243684",
   email: "techskylineitsolutions20204@gmail.com",
-  company: "Tech Skyline IT Solutions",
+  company: "Techskyline.in",
   tagline: "Premier IT Consulting, Staffing, and Corporate Training Solutions.",
   address: "Marshall St, San Antonio, TX 78212, USA"
 };
@@ -45,32 +45,84 @@ export const CONSULTING_SERVICES: ServiceItem[] = [
   {
     title: "Cloud Consulting",
     description: "Executing cloud technologies to achieve a rapid speed of IT evolution, reduce costs, and migrate to the cloud. We help you gain max value from cloud computing.",
-    icon: Cloud
+    icon: Cloud,
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "Big Data Consulting",
     description: "Transforming huge volumes of raw data into actionable insights for informed decision-making and accelerated business development.",
-    icon: Database
+    icon: Database,
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "IoT Consulting",
     description: "Enhancing business management with IoT. We plan the networking of IoT devices, set up real-time data analytics, and create monitoring apps.",
-    icon: Cpu
+    icon: Cpu,
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "Data Quality Consulting",
     description: "Safeguarding a high quality of data from ERP, CRM, SMC, and other business critical systems via profiling and cleansing.",
-    icon: ShieldCheck
+    icon: ShieldCheck,
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "Technology Consulting",
     description: "Driving your future with advanced solutions in IT governance, security, data management, applications and compliance.",
-    icon: Layers
+    icon: Layers,
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80"
   },
   {
     title: "IT Staffing",
     description: "Connecting world-class talent with top companies. Permanent, contract, and temporary staffing solutions.",
-    icon: Briefcase
+    icon: Briefcase,
+    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80"
+  }
+];
+
+export const CLIENTS: Client[] = [
+  { name: "Oracle", logo: "https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" },
+  { name: "SAP", logo: "https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" },
+  { name: "Salesforce", logo: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg" },
+  { name: "Microsoft", logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" },
+  { name: "Workday", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Workday_logo.svg/2560px-Workday_logo.svg.png" },
+  { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" },
+  { name: "Cisco", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
+  { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
+];
+
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    id: 1,
+    text: "The training at Techskyline was a game-changer for my career. The instructors are industry experts who provide real-time scenarios. I got placed in a top MNC within a month of completing my Data Science certification!",
+    author: "Priya Sharma",
+    role: "Data Scientist (Placed at Capgemini)",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"
+  },
+  {
+    id: 2,
+    text: "Techskyline's IT staffing team is phenomenal. They understood our requirements perfectly and provided us with highly skilled SAP consultants in record time. Their screening process is top-notch.",
+    author: "Michael Chen",
+    role: "Hiring Manager, Tech Corp",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80"
+  },
+  {
+    id: 3,
+    text: "I was looking to switch my domain to Cloud Computing. The AWS course here is comprehensive and practical. The placement assistance team guided me through resume building and mock interviews.",
+    author: "Rahul Verma",
+    role: "Cloud Engineer (Placed at Deloitte)",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80"
+  },
+  {
+    id: 4,
+    text: "The corporate training delivered by Techskyline for our DevOps team was exceptional. It has significantly improved our deployment efficiency. Highly recommended for corporate upskilling.",
+    author: "Sarah Johnson",
+    role: "CTO, StartUp Hub",
+    rating: 4,
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80"
   }
 ];
 
