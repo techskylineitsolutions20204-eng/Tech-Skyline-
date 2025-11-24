@@ -18,6 +18,7 @@ export interface Testimonial {
   author: string;
   role: string;
   rating: number;
+  category: 'Student - Placement' | 'Student - Learning' | 'Client - Consulting';
   image?: string;
 }
 
@@ -36,4 +37,10 @@ export interface FeatureItem {
   title: string;
   description: string;
   icon: LucideIcon;
+}
+
+export interface TechCategory {
+  title: string;
+  image: string;
+  description: string;
 }

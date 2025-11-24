@@ -16,7 +16,7 @@ import {
   Zap,
   Layers
 } from 'lucide-react';
-import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial } from './types';
+import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory } from './types';
 
 export const CONTACT_INFO = {
   contactName: "Abhinav",
@@ -25,13 +25,15 @@ export const CONTACT_INFO = {
   email: "techskylineitsolutions20204@gmail.com",
   company: "Techskyline.in",
   tagline: "Premier IT Consulting, Staffing, and Corporate Training Solutions.",
-  address: "Marshall St, San Antonio, TX 78212, USA"
+  address: "Marshall St, San Antonio, TX 78212, USA",
+  logo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=100&q=80" // Using a tech-abstract logo placeholder
 };
 
 export const HERO_CONTENT = {
   title: "INFORMATION TECHNOLOGY CONSULTING",
   subtitle: "GET YOUR BUSINESS & IT STRATEGIES ALIGN TOGETHER",
-  description: "Information technology (IT) consulting services helps you shape a winning IT strategy. For past decades we are into IT consulting and expertly guide your IT and digital transformation initiatives from strategy to implementation."
+  description: "Information technology (IT) consulting services helps you shape a winning IT strategy. For past decades we are into IT consulting and expertly guide your IT and digital transformation initiatives from strategy to implementation.",
+  image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80" // Tech hand touching screen concept
 };
 
 export const STATS: StatItem[] = [
@@ -89,40 +91,78 @@ export const CLIENTS: Client[] = [
   { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" },
   { name: "Cisco", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
   { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
+  { name: "RedHat", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg" },
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: 1,
-    text: "The training at Techskyline was a game-changer for my career. The instructors are industry experts who provide real-time scenarios. I got placed in a top MNC within a month of completing my Data Science certification!",
+    text: "The placement assistance at Techskyline is outstanding! After completing the Data Science course, the team helped me refine my resume and conducted mock interviews. I landed a job at a top MNC within 3 weeks.",
     author: "Priya Sharma",
     role: "Data Scientist (Placed at Capgemini)",
     rating: 5,
+    category: "Student - Placement",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"
   },
   {
     id: 2,
-    text: "Techskyline's IT staffing team is phenomenal. They understood our requirements perfectly and provided us with highly skilled SAP consultants in record time. Their screening process is top-notch.",
+    text: "As a hiring manager, I rely on Techskyline for our IT staffing needs. They provide highly skilled SAP and Cloud consultants who are ready to deliver from day one. A trusted partner for over 5 years.",
     author: "Michael Chen",
-    role: "Hiring Manager, Tech Corp",
+    role: "Director of Engineering, Tech Corp",
     rating: 5,
+    category: "Client - Consulting",
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80"
   },
   {
     id: 3,
-    text: "I was looking to switch my domain to Cloud Computing. The AWS course here is comprehensive and practical. The placement assistance team guided me through resume building and mock interviews.",
+    text: "The learning experience was immersive. The real-time scenarios in the SAP S/4 HANA training helped me understand complex concepts easily. The instructors are true industry experts.",
     author: "Rahul Verma",
-    role: "Cloud Engineer (Placed at Deloitte)",
+    role: "SAP Consultant",
     rating: 5,
+    category: "Student - Learning",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80"
   },
   {
     id: 4,
-    text: "The corporate training delivered by Techskyline for our DevOps team was exceptional. It has significantly improved our deployment efficiency. Highly recommended for corporate upskilling.",
+    text: "Techskyline's corporate training for our Cyber Security team was comprehensive and up-to-date with the latest threats. It has significantly strengthened our internal security protocols.",
     author: "Sarah Johnson",
-    role: "CTO, StartUp Hub",
-    rating: 4,
+    role: "CISO, Fintech Innovations",
+    rating: 5,
+    category: "Client - Consulting",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80"
+  }
+];
+
+export const FEATURED_TECHNOLOGIES: TechCategory[] = [
+  {
+    title: "SAP S/4 HANA",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
+    description: "Enterprise Resource Planning"
+  },
+  {
+    title: "Data Science & AI",
+    image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=600&q=80",
+    description: "Machine Learning, Python"
+  },
+  {
+    title: "Cyber Security",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80",
+    description: "Network Defense, Ethical Hacking"
+  },
+  {
+    title: "DevOps & Cloud",
+    image: "https://images.unsplash.com/photo-1667372393119-c85c020799a3?auto=format&fit=crop&w=600&q=80",
+    description: "CI/CD, AWS, Azure, Docker"
+  },
+  {
+    title: "Cisco Networking",
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bbc7f?auto=format&fit=crop&w=600&q=80",
+    description: "CCNA, CCNP, Enterprise"
+  },
+  {
+    title: "Power BI & Analytics",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
+    description: "Business Intelligence"
   }
 ];
 
