@@ -181,7 +181,6 @@ export const FEATURED_TECHNOLOGIES: TechCategory[] = [
 export const INTERNSHIP_PROGRAM = {
   title: "Internship & Self-Learning Program",
   description: "Designed for College Students and Self Learners. Join our comprehensive program featuring Live Sessions, 24/7 Lab Access, and complete Study Notes & Materials to bridge the gap between academic knowledge and industry requirements.",
-  paymentLink: "https://www.paypal.com/ncp/payment/WWE93W3VHWRNL",
   features: [
     { title: "Live Expert Sessions", icon: MonitorPlay, desc: "Interactive live training with industry experts on real-time concepts." },
     { title: "Live Labs Access", icon: Wrench, desc: "24/7 access to pre-configured live labs with all required tools installed." },

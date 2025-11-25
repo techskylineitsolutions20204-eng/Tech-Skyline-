@@ -19,7 +19,6 @@ import {
   Briefcase,
   ExternalLink,
   FileText,
-  CreditCard,
   Laptop,
   LayoutList,
   Lock
@@ -63,10 +62,6 @@ function App() {
 
   const openGoogleForm = () => {
     window.open(CONTACT_INFO.googleFormUrl, '_blank');
-  };
-
-  const openPayPal = () => {
-    window.open(INTERNSHIP_PROGRAM.paymentLink, '_blank');
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -486,10 +481,10 @@ ${formData.message}`;
              <p className="text-slate-600 max-w-3xl mx-auto text-lg">{INTERNSHIP_PROGRAM.description}</p>
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-12 items-start">
-             {/* Left: Features & Tech */}
-             <div className="flex-1 w-full">
-               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+          <div className="flex flex-col gap-12 items-start">
+             {/* Main Content Area - Full Width */}
+             <div className="w-full">
+               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
                  {INTERNSHIP_PROGRAM.features.map((feat, idx) => (
                    <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-primary-100 flex gap-4 items-start">
                      <div className="bg-primary-50 text-primary-600 p-3 rounded-lg shrink-0">
@@ -532,82 +527,46 @@ ${formData.message}`;
                  </div>
                </div>
 
-               {/* Student Portal Resources Access - NEW SECTION */}
+               {/* Student Portal Resources Access - FULL WIDTH DASHBOARD */}
                <div className="bg-slate-900 text-white p-8 rounded-2xl shadow-xl overflow-hidden relative">
                  <div className="absolute top-0 right-0 p-4 opacity-10">
                    <Laptop size={120} />
                  </div>
-                 <h4 className="font-bold text-xl mb-2 flex items-center gap-2 relative z-10">
-                    <Lock size={20} className="text-primary-400" /> Student Portal & Resource Access
-                 </h4>
-                 <p className="text-slate-400 text-sm mb-6 max-w-xl relative z-10">
-                   Enrolled students get instant access to our comprehensive digital learning ecosystem.
-                 </p>
+                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 relative z-10">
+                    <div>
+                        <h4 className="font-bold text-xl mb-2 flex items-center gap-2">
+                            <Lock size={20} className="text-primary-400" /> Student Portal & Resource Access
+                        </h4>
+                        <p className="text-slate-400 text-sm max-w-xl">
+                            Instant access to our comprehensive digital learning ecosystem for enrolled students.
+                        </p>
+                    </div>
+                    <button 
+                        onClick={openGoogleForm}
+                        className="mt-4 md:mt-0 bg-primary-600 hover:bg-primary-500 text-white px-6 py-2 rounded-lg font-bold text-sm shadow-lg flex items-center gap-2 transition-all"
+                    >
+                        Register for Access <ExternalLink size={16} />
+                    </button>
+                 </div>
                  
-                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 relative z-10">
                    {INTERNSHIP_PROGRAM.studentResources?.map((res, idx) => (
-                     <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-4 rounded-lg hover:bg-slate-800 transition-all group cursor-pointer" onClick={openPayPal}>
-                        <div className="flex items-start gap-3">
-                           <div className="bg-slate-700 p-2 rounded-md group-hover:bg-primary-600 group-hover:text-white transition-colors text-primary-400">
-                             <res.icon size={20} />
-                           </div>
+                     <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-4 rounded-lg hover:bg-slate-800 transition-all group cursor-pointer h-full">
+                        <div className="flex flex-col gap-3 h-full justify-between">
                            <div>
-                             <h5 className="font-bold text-white text-sm">{res.title}</h5>
-                             <p className="text-xs text-slate-400 mt-1 mb-3">{res.description}</p>
-                             <span className="text-xs font-bold text-primary-400 uppercase tracking-wide flex items-center gap-1">
-                               {res.linkText} <ArrowRight size={10} />
-                             </span>
+                                <div className="bg-slate-700 p-2 rounded-md group-hover:bg-primary-600 group-hover:text-white transition-colors text-primary-400 w-fit mb-3">
+                                    <res.icon size={20} />
+                                </div>
+                                <h5 className="font-bold text-white text-sm mb-2">{res.title}</h5>
+                                <p className="text-xs text-slate-400 mb-3 leading-snug">{res.description}</p>
                            </div>
+                           <span className="text-xs font-bold text-primary-400 uppercase tracking-wide flex items-center gap-1 mt-auto">
+                               {res.linkText} <ArrowRight size={10} />
+                           </span>
                         </div>
                      </div>
                    ))}
                  </div>
-               </div>
-             </div>
-
-             {/* Right: Payment Card */}
-             <div className="w-full lg:w-96 shrink-0">
-               <div className="bg-white p-8 rounded-2xl shadow-xl border-t-4 border-primary-600 sticky top-28">
-                 <div className="text-center mb-6">
-                   <h3 className="text-2xl font-bold text-slate-900">Enroll Today</h3>
-                   <p className="text-slate-500 mt-2">Get full access to live sessions and labs instantly.</p>
-                 </div>
-                 
-                 <div className="space-y-4 mb-8">
-                   <div className="flex items-center gap-3 text-sm text-slate-700">
-                     <CheckCircle2 size={18} className="text-green-500" />
-                     <span>Live Interactive Sessions</span>
-                   </div>
-                   <div className="flex items-center gap-3 text-sm text-slate-700">
-                     <CheckCircle2 size={18} className="text-green-500" />
-                     <span>24/7 Live Labs Access</span>
-                   </div>
-                   <div className="flex items-center gap-3 text-sm text-slate-700">
-                     <CheckCircle2 size={18} className="text-green-500" />
-                     <span>Comprehensive Notes & Materials</span>
-                   </div>
-                   <div className="flex items-center gap-3 text-sm text-slate-700">
-                     <CheckCircle2 size={18} className="text-green-500" />
-                     <span>Class Recordings Access</span>
-                   </div>
-                   <div className="flex items-center gap-3 text-sm text-slate-700">
-                     <CheckCircle2 size={18} className="text-green-500" />
-                     <span>Industry Recognized Certificate</span>
-                   </div>
-                 </div>
-
-                 <button 
-                   onClick={openPayPal}
-                   className="w-full bg-[#0070BA] hover:bg-[#005ea6] text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3 group"
-                 >
-                   <span>Pay via</span> 
-                   <span className="italic font-extrabold font-serif">PayPal</span>
-                   <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
-                 </button>
-                 
-                 <p className="text-xs text-center text-slate-400 mt-4">
-                   Secure payment processed by PayPal. All major credit/debit cards accepted.
-                 </p>
                </div>
              </div>
           </div>
