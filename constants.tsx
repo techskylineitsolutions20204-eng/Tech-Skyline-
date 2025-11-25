@@ -20,7 +20,12 @@ import {
   CreditCard,
   Video,
   FileText,
-  LayoutList
+  LayoutList,
+  PlayCircle,
+  Terminal,
+  FolderOpen,
+  PenTool,
+  UserCheck
 } from 'lucide-react';
 import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory } from './types';
 
@@ -210,6 +215,38 @@ export const INTERNSHIP_PROGRAM = {
     "Python Programming",
     "Python Full Stack",
     "Full Stack Web Development"
+  ],
+  studentResources: [
+    {
+      title: "Live Video Archive",
+      description: "Direct access to daily live session links and complete HD video recording library.",
+      icon: PlayCircle,
+      linkText: "Watch Sessions"
+    },
+    {
+      title: "24/7 Lab Dashboard",
+      description: "One-click access to your personalized cloud lab environment with all tools installed.",
+      icon: Terminal,
+      linkText: "Launch Lab"
+    },
+    {
+      title: "Course Materials",
+      description: "Repository of PDF notes, datasets, lab manuals, and interview guides.",
+      icon: FolderOpen,
+      linkText: "Download Docs"
+    },
+    {
+      title: "Live Practice Arena",
+      description: "Interactive coding challenges, quizzes, and real-time assessments.",
+      icon: PenTool,
+      linkText: "Start Practice"
+    },
+    {
+      title: "Portfolio Builder",
+      description: "Digital portal to build, host, and showcase your live projects to recruiters.",
+      icon: UserCheck,
+      linkText: "Create Portfolio"
+    }
   ]
 };
 

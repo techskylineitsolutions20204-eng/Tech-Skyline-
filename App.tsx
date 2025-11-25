@@ -21,7 +21,8 @@ import {
   FileText,
   CreditCard,
   Laptop,
-  LayoutList
+  LayoutList,
+  Lock
 } from 'lucide-react';
 import { 
   CONTACT_INFO, 
@@ -517,7 +518,8 @@ ${formData.message}`;
                   </div>
                </div>
 
-               <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                {/* Technologies List */}
+               <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 mb-10">
                  <h4 className="font-bold text-xl text-slate-900 mb-6 flex items-center gap-2">
                    <Zap className="text-yellow-500 fill-current" /> Technologies Covered
                  </h4>
@@ -526,6 +528,38 @@ ${formData.message}`;
                      <span key={idx} className="px-4 py-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg font-medium text-sm hover:border-primary-300 hover:text-primary-700 transition-colors">
                        {tech}
                      </span>
+                   ))}
+                 </div>
+               </div>
+
+               {/* Student Portal Resources Access - NEW SECTION */}
+               <div className="bg-slate-900 text-white p-8 rounded-2xl shadow-xl overflow-hidden relative">
+                 <div className="absolute top-0 right-0 p-4 opacity-10">
+                   <Laptop size={120} />
+                 </div>
+                 <h4 className="font-bold text-xl mb-2 flex items-center gap-2 relative z-10">
+                    <Lock size={20} className="text-primary-400" /> Student Portal & Resource Access
+                 </h4>
+                 <p className="text-slate-400 text-sm mb-6 max-w-xl relative z-10">
+                   Enrolled students get instant access to our comprehensive digital learning ecosystem.
+                 </p>
+                 
+                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
+                   {INTERNSHIP_PROGRAM.studentResources?.map((res, idx) => (
+                     <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-4 rounded-lg hover:bg-slate-800 transition-all group cursor-pointer" onClick={openPayPal}>
+                        <div className="flex items-start gap-3">
+                           <div className="bg-slate-700 p-2 rounded-md group-hover:bg-primary-600 group-hover:text-white transition-colors text-primary-400">
+                             <res.icon size={20} />
+                           </div>
+                           <div>
+                             <h5 className="font-bold text-white text-sm">{res.title}</h5>
+                             <p className="text-xs text-slate-400 mt-1 mb-3">{res.description}</p>
+                             <span className="text-xs font-bold text-primary-400 uppercase tracking-wide flex items-center gap-1">
+                               {res.linkText} <ArrowRight size={10} />
+                             </span>
+                           </div>
+                        </div>
+                     </div>
                    ))}
                  </div>
                </div>
