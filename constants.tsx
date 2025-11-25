@@ -17,7 +17,10 @@ import {
   Layers,
   MonitorPlay,
   Wrench,
-  CreditCard
+  CreditCard,
+  Video,
+  FileText,
+  LayoutList
 } from 'lucide-react';
 import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory } from './types';
 
@@ -172,24 +175,40 @@ export const FEATURED_TECHNOLOGIES: TechCategory[] = [
 
 export const INTERNSHIP_PROGRAM = {
   title: "Internship & Self-Learning Program",
-  description: "Designed for College Students and Self Learners, our program bridges the gap between academic knowledge and industry requirements with hands-on labs and live expert sessions.",
+  description: "Designed for College Students and Self Learners. Join our comprehensive program featuring Live Sessions, 24/7 Lab Access, and complete Study Notes & Materials to bridge the gap between academic knowledge and industry requirements.",
   paymentLink: "https://www.paypal.com/ncp/payment/WWE93W3VHWRNL",
   features: [
-    { title: "Live Sessions", icon: MonitorPlay, desc: "Interactive training with industry experts on real-time concepts." },
-    { title: "Lab Access", icon: Wrench, desc: "24/7 access to pre-configured labs with required tools for practice." },
-    { title: "Structured Curriculum", icon: BookOpen, desc: "Step-by-step learning path from basics to advanced topics." },
-    { title: "Secure Payment", icon: CreditCard, desc: "Easy one-time enrollment fee via PayPal secure gateway." }
+    { title: "Live Expert Sessions", icon: MonitorPlay, desc: "Interactive live training with industry experts on real-time concepts." },
+    { title: "Live Labs Access", icon: Wrench, desc: "24/7 access to pre-configured live labs with all required tools installed." },
+    { title: "Class Recordings", icon: Video, desc: "Lifetime access to HD recordings of all live sessions for revision." },
+    { title: "Study Notes & Materials", icon: FileText, desc: "Comprehensive study notes, interview questions, and project documentation." },
+    { title: "Real-time Projects", icon: Briefcase, desc: "Work on live industry use-cases to build a strong portfolio." },
+    { title: "Tools for Practice", icon: Code, desc: "Access to required software tools and practice environments." }
+  ],
+  programSteps: [
+    "Fundamentals & Theory",
+    "Advanced Concepts & Tools",
+    "Live Labs & Practice",
+    "Real-time Projects",
+    "Certification & Portfolio"
   ],
   technologies: [
     "Artificial Intelligence (AI)",
-    "Generative AI & Agentic AI",
-    "Power BI & Tableau",
-    "AWS & Azure DevOps",
-    "IoT & RPA (Robotic Process Automation)",
-    "Cyber Security & Cloud Security",
-    "Oracle Primavera Unifier & P6",
+    "Generative AI",
+    "Agentic AI",
+    "Power BI",
+    "Tableau",
+    "AWS DevOps",
+    "Azure DevOps",
+    "Internet of Things (IoT)",
+    "Robotic Process Automation (RPA)",
+    "Cyber Security",
+    "Cloud Security",
+    "Oracle Primavera Unifier",
+    "Oracle Primavera P6",
     "Scrum Master",
-    "Python & Python Full Stack",
+    "Python Programming",
+    "Python Full Stack",
     "Full Stack Web Development"
   ]
 };

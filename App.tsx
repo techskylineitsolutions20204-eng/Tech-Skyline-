@@ -20,7 +20,8 @@ import {
   ExternalLink,
   FileText,
   CreditCard,
-  Laptop
+  Laptop,
+  LayoutList
 } from 'lucide-react';
 import { 
   CONTACT_INFO, 
@@ -500,6 +501,21 @@ ${formData.message}`;
                    </div>
                  ))}
                </div>
+               
+               {/* Program Structure Flow */}
+               <div className="mb-10 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                  <h4 className="font-bold text-slate-900 mb-6 flex items-center gap-2">
+                    <LayoutList className="text-primary-600" size={20} /> Program Structure
+                  </h4>
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    {INTERNSHIP_PROGRAM.programSteps.map((step, idx) => (
+                       <div key={idx} className="bg-slate-50 p-4 rounded-lg border border-slate-100 text-center relative group hover:border-primary-200 transition-colors">
+                          <div className="text-2xl font-bold text-primary-200 mb-2 group-hover:text-primary-500 transition-colors">0{idx+1}</div>
+                          <div className="font-bold text-slate-800 text-sm leading-tight">{step}</div>
+                       </div>
+                    ))}
+                  </div>
+               </div>
 
                <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
                  <h4 className="font-bold text-xl text-slate-900 mb-6 flex items-center gap-2">
@@ -526,15 +542,23 @@ ${formData.message}`;
                  <div className="space-y-4 mb-8">
                    <div className="flex items-center gap-3 text-sm text-slate-700">
                      <CheckCircle2 size={18} className="text-green-500" />
-                     <span>Lifetime Course Material Access</span>
+                     <span>Live Interactive Sessions</span>
+                   </div>
+                   <div className="flex items-center gap-3 text-sm text-slate-700">
+                     <CheckCircle2 size={18} className="text-green-500" />
+                     <span>24/7 Live Labs Access</span>
+                   </div>
+                   <div className="flex items-center gap-3 text-sm text-slate-700">
+                     <CheckCircle2 size={18} className="text-green-500" />
+                     <span>Comprehensive Notes & Materials</span>
+                   </div>
+                   <div className="flex items-center gap-3 text-sm text-slate-700">
+                     <CheckCircle2 size={18} className="text-green-500" />
+                     <span>Class Recordings Access</span>
                    </div>
                    <div className="flex items-center gap-3 text-sm text-slate-700">
                      <CheckCircle2 size={18} className="text-green-500" />
                      <span>Industry Recognized Certificate</span>
-                   </div>
-                   <div className="flex items-center gap-3 text-sm text-slate-700">
-                     <CheckCircle2 size={18} className="text-green-500" />
-                     <span>Project Portfolio Building</span>
                    </div>
                  </div>
 
