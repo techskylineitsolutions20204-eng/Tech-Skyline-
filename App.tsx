@@ -18,7 +18,9 @@ import {
   Globe,
   Briefcase,
   ExternalLink,
-  FileText
+  FileText,
+  CreditCard,
+  Laptop
 } from 'lucide-react';
 import { 
   CONTACT_INFO, 
@@ -32,7 +34,8 @@ import {
   CERTIFICATION_TEXT,
   CLIENTS,
   TESTIMONIALS,
-  FEATURED_TECHNOLOGIES
+  FEATURED_TECHNOLOGIES,
+  INTERNSHIP_PROGRAM
 } from './constants';
 
 function App() {
@@ -58,6 +61,10 @@ function App() {
 
   const openGoogleForm = () => {
     window.open(CONTACT_INFO.googleFormUrl, '_blank');
+  };
+
+  const openPayPal = () => {
+    window.open(INTERNSHIP_PROGRAM.paymentLink, '_blank');
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -154,8 +161,8 @@ ${formData.message}`;
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-              {['Home', 'Services', 'Training', 'Staffing', 'Reviews', 'Contact'].map((item) => (
+            <div className="hidden lg:flex items-center space-x-6">
+              {['Home', 'Services', 'Training', 'Internships', 'Staffing', 'Reviews', 'Contact'].map((item) => (
                 <button 
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -173,7 +180,7 @@ ${formData.message}`;
             </div>
 
             {/* Mobile Menu Button */}
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <button onClick={toggleMenu} className="text-slate-600 hover:text-primary-600">
                 {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
               </button>
@@ -183,13 +190,13 @@ ${formData.message}`;
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-b border-slate-200 absolute w-full shadow-lg">
+          <div className="lg:hidden bg-white border-b border-slate-200 absolute w-full shadow-lg h-[calc(100vh-6rem)] overflow-y-auto">
             <div className="flex flex-col p-4 space-y-4">
-              {['Home', 'Services', 'Training', 'Staffing', 'Reviews', 'Contact'].map((item) => (
+              {['Home', 'Services', 'Training', 'Internships', 'Staffing', 'Reviews', 'Contact'].map((item) => (
                 <button 
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
-                  className="text-left text-slate-600 font-medium py-2 hover:bg-slate-50 px-2 rounded"
+                  className="text-left text-slate-600 font-medium py-2 hover:bg-slate-50 px-2 rounded uppercase"
                 >
                   {item}
                 </button>
@@ -292,61 +299,78 @@ ${formData.message}`;
             <div className="md:w-1/2">
               <div className="relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                  alt="Team collaboration" 
-                  className="rounded-2xl shadow-2xl w-full h-auto z-10 relative"
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" 
+                  alt="Team Collaboration" 
+                  className="rounded-2xl shadow-2xl relative z-10"
                 />
-                <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-primary-100 rounded-full -z-0"></div>
-                <div className="absolute -top-10 -left-10 w-32 h-32 bg-slate-100 rounded-full -z-0"></div>
-                
-                {/* Float Card */}
-                <div className="absolute -bottom-6 left-6 bg-white p-4 rounded-xl shadow-lg border border-slate-100 flex items-center gap-3 max-w-xs z-20">
-                   <div className="bg-green-100 p-2 rounded-full text-green-600">
-                     <Award size={24} />
-                   </div>
-                   <div>
-                     <p className="font-bold text-slate-900">Award Winning</p>
-                     <p className="text-xs text-slate-500">Training & Staffing</p>
-                   </div>
-                </div>
+                <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-primary-600 rounded-2xl z-0 hidden md:block"></div>
+                <div className="absolute -top-6 -left-6 w-full h-full border-2 border-slate-200 rounded-2xl z-0 hidden md:block"></div>
               </div>
             </div>
             <div className="md:w-1/2">
-              <div className="inline-block px-4 py-1.5 bg-primary-50 text-primary-700 rounded-full text-sm font-bold mb-6">
-                WHO WE ARE
+              <h2 className="text-sm font-bold text-primary-600 uppercase tracking-widest mb-2">About Us</h2>
+              <h3 className="text-3xl font-bold text-slate-900 mb-6">Leading IT Online Training Hub & Consulting Partner</h3>
+              <div className="prose prose-slate text-slate-600 mb-8">
+                 {ABOUT_TRAINING_TEXT.split('\n').map((paragraph, idx) => (
+                   <p key={idx} className="mb-4 leading-relaxed">{paragraph}</p>
+                 ))}
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight">Empowering Businesses & Careers Through Technology</h2>
-              <div className="space-y-6 text-slate-600 leading-relaxed text-lg">
-                <p>{ABOUT_TRAINING_TEXT.split('\n\n')[0]}</p>
-                <p>{ABOUT_TRAINING_TEXT.split('\n\n')[1]}</p>
-              </div>
-              <div className="mt-8 flex gap-4">
-                <button onClick={() => scrollToSection('contact')} className="text-primary-600 font-bold hover:text-primary-700 inline-flex items-center gap-2">
-                  Learn more about us <ArrowRight size={20} />
-                </button>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="text-primary-600 shrink-0 mt-1" size={20} />
+                  <div>
+                    <h4 className="font-bold text-slate-900">Real-time Scenarios</h4>
+                    <p className="text-sm text-slate-600">Training based on actual industry projects</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="text-primary-600 shrink-0 mt-1" size={20} />
+                  <div>
+                    <h4 className="font-bold text-slate-900">Hands-on Experience</h4>
+                    <p className="text-sm text-slate-600">Practical interactive sessions</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="text-primary-600 shrink-0 mt-1" size={20} />
+                  <div>
+                    <h4 className="font-bold text-slate-900">Expert Instructors</h4>
+                    <p className="text-sm text-slate-600">Learn from industry veterans</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                   <CheckCircle2 className="text-primary-600 shrink-0 mt-1" size={20} />
+                   <div>
+                     <h4 className="font-bold text-slate-900">Placement Support</h4>
+                     <p className="text-sm text-slate-600">Mock interviews & resume building</p>
+                   </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Technologies Section */}
-      <section className="py-20 bg-slate-50">
+       {/* Featured Technologies Section */}
+       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Master In-Demand Technologies</h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Our training programs cover the most critical skills needed in today's tech landscape.
-            </p>
+          <div className="text-center mb-12">
+            <h2 className="text-sm font-bold text-primary-600 uppercase tracking-widest mb-2">Expertise</h2>
+            <h3 className="text-3xl font-bold text-slate-900">Featured Technologies</h3>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {FEATURED_TECHNOLOGIES.map((tech, index) => (
-              <div key={index} className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all cursor-pointer">
-                <div className="absolute inset-0 bg-slate-900/60 group-hover:bg-slate-900/40 transition-colors z-10"></div>
-                <img src={tech.image} alt={tech.title} className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute bottom-0 left-0 p-6 z-20 w-full">
-                  <h3 className="text-2xl font-bold text-white mb-1">{tech.title}</h3>
-                  <p className="text-slate-200 text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">{tech.description}</p>
+              <div key={index} className="group relative overflow-hidden rounded-xl bg-white shadow-md hover:shadow-xl transition-all duration-300">
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={tech.image} 
+                    alt={tech.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6">
+                  <h4 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">{tech.title}</h4>
+                  <p className="text-slate-600 text-sm">{tech.description}</p>
                 </div>
               </div>
             ))}
@@ -354,29 +378,37 @@ ${formData.message}`;
         </div>
       </section>
 
-      {/* Consulting Services */}
+      {/* Services Section */}
       <section id="services" className="py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Our Core Services</h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Comprehensive IT solutions tailored to your business needs.
+            <h2 className="text-sm font-bold text-primary-600 uppercase tracking-widest mb-2">Our Solutions</h2>
+            <h3 className="text-3xl font-bold text-slate-900">IT Consulting Services</h3>
+            <p className="text-slate-600 mt-4 max-w-2xl mx-auto">
+              Expertly guiding your IT and digital transformation initiatives from strategy to implementation.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {CONSULTING_SERVICES.map((service, index) => (
-              <div key={index} className="group rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-primary-100 overflow-hidden transition-all duration-300 flex flex-col h-full">
-                <div className="p-8 flex-1 flex flex-col">
-                  <div className="w-14 h-14 bg-primary-50 rounded-xl flex items-center justify-center text-primary-600 mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors">
-                     <service.icon size={28} />
+              <div key={index} className="bg-slate-50 rounded-xl overflow-hidden hover:shadow-xl transition-shadow border border-slate-100 group">
+                <div className="h-48 overflow-hidden">
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-8">
+                  <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center text-primary-600 mb-6 -mt-14 relative z-10 border border-slate-100">
+                    <service.icon size={24} />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h3>
-                  <p className="text-slate-600 leading-relaxed mb-6 flex-1">
+                  <h4 className="text-xl font-bold text-slate-900 mb-3">{service.title}</h4>
+                  <p className="text-slate-600 leading-relaxed mb-4 text-sm">
                     {service.description}
                   </p>
-                  <a href="#contact" className="inline-flex items-center text-primary-600 font-bold hover:text-primary-700 mt-auto">
-                    Get Consultation <ChevronRight size={16} className="ml-1" />
+                  <a href="#contact" className="inline-flex items-center text-primary-600 font-semibold text-sm hover:text-primary-700">
+                    Learn more <ChevronRight size={16} />
                   </a>
                 </div>
               </div>
@@ -386,51 +418,185 @@ ${formData.message}`;
       </section>
 
       {/* Training Section */}
-      <section id="training" className="py-20 bg-slate-900 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-800/30 rounded-l-full blur-3xl -z-0"></div>
+      <section id="training" className="py-20 bg-slate-900 text-white relative">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-10"></div>
         <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-             <div>
-               <h2 className="text-3xl md:text-4xl font-bold mb-4">Specialized IT Training</h2>
-               <p className="text-slate-400 text-lg max-w-2xl">
-                 From corporate upskilling to individual certification, we provide the learning path to success.
+          <div className="flex flex-col lg:flex-row gap-16">
+             <div className="lg:w-1/3">
+               <h2 className="text-sm font-bold text-primary-400 uppercase tracking-widest mb-2">Education</h2>
+               <h3 className="text-3xl font-bold mb-6">Comprehensive IT Training</h3>
+               <p className="text-slate-300 mb-8 leading-relaxed">
+                 We provide 100+ courses online with interactive training. Our courses are designed by industry experts to equip students with skills they can immediately apply in the workplace.
                </p>
-             </div>
-             <button onClick={() => scrollToSection('contact')} className="bg-primary-600 hover:bg-primary-500 text-white px-8 py-3 rounded-lg font-bold shadow-lg shadow-primary-900/50 transition-all">
-               View Course Catalog
-             </button>
-          </div>
-
-          <div className="grid lg:grid-cols-4 gap-6">
-             {COURSE_CATEGORIES.map((category, index) => (
-               <div key={index} className="bg-slate-800/50 border border-slate-700 p-6 rounded-xl hover:bg-slate-800 transition-colors">
-                 <h4 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                   <div className="w-2 h-8 bg-primary-500 rounded-full"></div>
-                   {category.name}
+               <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 mb-8">
+                 <h4 className="font-bold flex items-center gap-2 mb-4">
+                   <Award className="text-yellow-400" size={20} /> Certification Support
                  </h4>
-                 <ul className="space-y-3">
-                   {category.courses.map((course, i) => (
-                     <li key={i} className="text-slate-400 text-sm hover:text-primary-400 cursor-default transition-colors flex items-center gap-2">
-                       <div className="w-1.5 h-1.5 bg-slate-600 rounded-full"></div> {course}
-                     </li>
-                   ))}
-                 </ul>
+                 <p className="text-sm text-slate-400 mb-4">
+                   {CERTIFICATION_TEXT.substring(0, 150)}...
+                 </p>
+                 <button onClick={() => scrollToSection('contact')} className="text-primary-400 text-sm font-bold hover:text-primary-300">
+                   Get Certified Now &rarr;
+                 </button>
                </div>
-             ))}
+               
+               <div className="mb-6">
+                 <h4 className="font-bold mb-4">Software Testing Expertise</h4>
+                 <div className="flex flex-wrap gap-2">
+                   {TESTING_SERVICES.map((test, idx) => (
+                     <span key={idx} className="bg-slate-800 text-slate-300 px-3 py-1 rounded-full text-xs border border-slate-700 hover:border-primary-500 transition-colors cursor-default">
+                       {test}
+                     </span>
+                   ))}
+                 </div>
+               </div>
+             </div>
+             
+             <div className="lg:w-2/3">
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 {COURSE_CATEGORIES.map((category, index) => (
+                   <div key={index} className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700 hover:bg-slate-800 transition-colors">
+                     <h4 className="text-xl font-bold text-white mb-4 border-b border-slate-700 pb-2">{category.name}</h4>
+                     <ul className="space-y-2">
+                       {category.courses.map((course, cIdx) => (
+                         <li key={cIdx} className="flex items-center text-slate-300 text-sm">
+                           <span className="w-1.5 h-1.5 bg-primary-500 rounded-full mr-2"></span>
+                           {course}
+                         </li>
+                       ))}
+                     </ul>
+                   </div>
+                 ))}
+               </div>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Internship & Self-Learning Section */}
+      <section id="internships" className="py-20 bg-primary-50 relative overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
+          <div className="text-center mb-12">
+             <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
+               <Laptop size={14} /> For Students & Self-Learners
+             </div>
+             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{INTERNSHIP_PROGRAM.title}</h2>
+             <p className="text-slate-600 max-w-3xl mx-auto text-lg">{INTERNSHIP_PROGRAM.description}</p>
           </div>
 
-          <div className="mt-12 p-8 bg-primary-900/50 border border-primary-800 rounded-2xl flex flex-col md:flex-row items-center gap-8">
-             <div className="md:w-2/3">
-               <h3 className="text-2xl font-bold mb-2">Certification Matters</h3>
-               <p className="text-slate-300">{CERTIFICATION_TEXT.split('\n\n')[1]}</p>
+          <div className="flex flex-col lg:flex-row gap-12 items-start">
+             {/* Left: Features & Tech */}
+             <div className="flex-1 w-full">
+               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                 {INTERNSHIP_PROGRAM.features.map((feat, idx) => (
+                   <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-primary-100 flex gap-4 items-start">
+                     <div className="bg-primary-50 text-primary-600 p-3 rounded-lg shrink-0">
+                       <feat.icon size={24} />
+                     </div>
+                     <div>
+                       <h4 className="font-bold text-slate-900 mb-1">{feat.title}</h4>
+                       <p className="text-sm text-slate-600">{feat.desc}</p>
+                     </div>
+                   </div>
+                 ))}
+               </div>
+
+               <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                 <h4 className="font-bold text-xl text-slate-900 mb-6 flex items-center gap-2">
+                   <Zap className="text-yellow-500 fill-current" /> Technologies Covered
+                 </h4>
+                 <div className="flex flex-wrap gap-3">
+                   {INTERNSHIP_PROGRAM.technologies.map((tech, idx) => (
+                     <span key={idx} className="px-4 py-2 bg-slate-50 border border-slate-200 text-slate-700 rounded-lg font-medium text-sm hover:border-primary-300 hover:text-primary-700 transition-colors">
+                       {tech}
+                     </span>
+                   ))}
+                 </div>
+               </div>
              </div>
-             <div className="md:w-1/3 flex justify-center">
-                <div className="flex -space-x-4">
-                  <div className="w-16 h-16 rounded-full bg-slate-800 border-4 border-slate-900 flex items-center justify-center text-xs font-bold">AWS</div>
-                  <div className="w-16 h-16 rounded-full bg-slate-800 border-4 border-slate-900 flex items-center justify-center text-xs font-bold">SAP</div>
-                  <div className="w-16 h-16 rounded-full bg-slate-800 border-4 border-slate-900 flex items-center justify-center text-xs font-bold">CISCO</div>
+
+             {/* Right: Payment Card */}
+             <div className="w-full lg:w-96 shrink-0">
+               <div className="bg-white p-8 rounded-2xl shadow-xl border-t-4 border-primary-600 sticky top-28">
+                 <div className="text-center mb-6">
+                   <h3 className="text-2xl font-bold text-slate-900">Enroll Today</h3>
+                   <p className="text-slate-500 mt-2">Get full access to live sessions and labs instantly.</p>
+                 </div>
+                 
+                 <div className="space-y-4 mb-8">
+                   <div className="flex items-center gap-3 text-sm text-slate-700">
+                     <CheckCircle2 size={18} className="text-green-500" />
+                     <span>Lifetime Course Material Access</span>
+                   </div>
+                   <div className="flex items-center gap-3 text-sm text-slate-700">
+                     <CheckCircle2 size={18} className="text-green-500" />
+                     <span>Industry Recognized Certificate</span>
+                   </div>
+                   <div className="flex items-center gap-3 text-sm text-slate-700">
+                     <CheckCircle2 size={18} className="text-green-500" />
+                     <span>Project Portfolio Building</span>
+                   </div>
+                 </div>
+
+                 <button 
+                   onClick={openPayPal}
+                   className="w-full bg-[#0070BA] hover:bg-[#005ea6] text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3 group"
+                 >
+                   <span>Pay via</span> 
+                   <span className="italic font-extrabold font-serif">PayPal</span>
+                   <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+                 </button>
+                 
+                 <p className="text-xs text-center text-slate-400 mt-4">
+                   Secure payment processed by PayPal. All major credit/debit cards accepted.
+                 </p>
+               </div>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Staffing Section */}
+      <section id="staffing" className="py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex flex-col md:flex-row gap-16 items-center">
+            <div className="md:w-1/2 order-2 md:order-1">
+               <h2 className="text-sm font-bold text-primary-600 uppercase tracking-widest mb-2">Recruitment</h2>
+               <h3 className="text-3xl font-bold text-slate-900 mb-6">IT Staffing Solutions</h3>
+               <p className="text-slate-600 mb-6 leading-relaxed">
+                 We enable you to achieve and optimize the most strategic and variable component to business success—right people, with right skills, competencies, and attitudes.
+               </p>
+               
+               <div className="space-y-6">
+                 {STAFFING_FEATURES.map((feature, index) => (
+                   <div key={index} className="flex gap-4">
+                     <div className="mt-1 bg-primary-50 p-2 rounded-lg text-primary-600 h-fit">
+                       <feature.icon size={20} />
+                     </div>
+                     <div>
+                       <h4 className="font-bold text-slate-900 text-lg">{feature.title}</h4>
+                       <p className="text-slate-600 text-sm mt-1">{feature.description}</p>
+                     </div>
+                   </div>
+                 ))}
+               </div>
+            </div>
+            <div className="md:w-1/2 order-1 md:order-2">
+              <div className="relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" 
+                  alt="Professional Staffing" 
+                  className="rounded-2xl shadow-xl"
+                />
+                <div className="absolute bottom-8 left-8 bg-white p-6 rounded-xl shadow-lg max-w-xs hidden sm:block">
+                  <div className="flex items-center gap-3 mb-2">
+                    <Users className="text-primary-600" />
+                    <span className="font-bold text-slate-900 text-2xl">98.8%</span>
+                  </div>
+                  <p className="text-slate-600 text-sm font-medium">Client satisfaction and retention in IT contract staffing</p>
                 </div>
-             </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -439,40 +605,26 @@ ${formData.message}`;
       <section id="reviews" className="py-20 bg-slate-50">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Success Stories & Reviews</h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              See what our students and corporate clients have to say about our training and staffing solutions.
-            </p>
+            <h2 className="text-sm font-bold text-primary-600 uppercase tracking-widest mb-2">Testimonials</h2>
+            <h3 className="text-3xl font-bold text-slate-900">Success Stories</h3>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {TESTIMONIALS.map((testimonial) => (
-              <div key={testimonial.id} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col h-full hover:shadow-lg transition-all">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex gap-1 text-yellow-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={14} fill={i < testimonial.rating ? "currentColor" : "none"} className={i < testimonial.rating ? "" : "text-slate-300"} />
-                    ))}
-                  </div>
-                  <span className={`text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider ${
-                    testimonial.category.includes('Placement') ? 'bg-green-100 text-green-700' :
-                    testimonial.category.includes('Learning') ? 'bg-blue-100 text-blue-700' :
-                    'bg-purple-100 text-purple-700'
-                  }`}>
-                    {testimonial.category.split(' - ')[1]}
-                  </span>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {TESTIMONIALS.map((item) => (
+              <div key={item.id} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 relative">
+                <Quote className="absolute top-6 right-6 text-slate-100 rotate-180" size={48} />
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(item.rating)].map((_, i) => (
+                    <Star key={i} className="fill-yellow-400 text-yellow-400" size={16} />
+                  ))}
                 </div>
-                
-                <div className="mb-6 relative flex-1">
-                  <Quote size={24} className="text-slate-200 mb-2" />
-                  <p className="text-slate-700 text-sm leading-relaxed">"{testimonial.text}"</p>
-                </div>
-                
-                <div className="mt-auto flex items-center gap-3 pt-4 border-t border-slate-50">
-                  <img src={testimonial.image} alt={testimonial.author} className="w-10 h-10 rounded-full object-cover ring-2 ring-white shadow-sm" />
+                <p className="text-slate-700 mb-6 italic relative z-10 leading-relaxed">"{item.text}"</p>
+                <div className="flex items-center gap-4">
+                  <img src={item.image} alt={item.author} className="w-12 h-12 rounded-full object-cover ring-2 ring-slate-100" />
                   <div>
-                    <h5 className="font-bold text-slate-900 text-sm">{testimonial.author}</h5>
-                    <p className="text-xs text-slate-500 font-medium">{testimonial.role}</p>
+                    <h5 className="font-bold text-slate-900">{item.author}</h5>
+                    <p className="text-xs text-slate-500 font-semibold uppercase">{item.role}</p>
+                    <span className="text-xs text-primary-600 bg-primary-50 px-2 py-0.5 rounded-full mt-1 inline-block">{item.category}</span>
                   </div>
                 </div>
               </div>
@@ -481,290 +633,239 @@ ${formData.message}`;
         </div>
       </section>
 
-      {/* Staffing Section */}
-      <section id="staffing" className="py-20 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="inline-block px-4 py-1.5 bg-purple-50 text-purple-700 rounded-full text-sm font-bold mb-6">
-                IT STAFFING SOLUTIONS
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Connecting Talent with Opportunity</h2>
-              <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                Whether you are looking for new talent or ready to make a career move, our team of experienced recruiters is ready to assist you. We specialize in permanent, contract, and temporary positions.
-              </p>
-              
-              <div className="grid sm:grid-cols-2 gap-6">
-                {STAFFING_FEATURES.map((feature, index) => (
-                  <div key={index} className="flex gap-4">
-                    <div className="shrink-0 mt-1">
-                      <div className="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center text-primary-600">
-                        <feature.icon size={20} />
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900 mb-1">{feature.title}</h4>
-                      <p className="text-sm text-slate-500">{feature.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative">
-              <div className="bg-slate-100 rounded-3xl p-8 transform rotate-3 absolute inset-0 -z-10"></div>
-              <img 
-                src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80" 
-                alt="Meeting" 
-                className="rounded-2xl shadow-xl w-full" 
-              />
-              <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg border border-slate-100 max-w-xs">
-                <p className="font-bold text-slate-900 text-lg mb-1">90%+</p>
-                <p className="text-slate-600 text-sm">Of our business comes from referrals and repeat clients.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-slate-900 text-white border-t border-slate-800">
+      <section id="contact" className="py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
-              <h2 className="text-3xl font-bold mb-6">Get In Touch</h2>
-              <p className="text-slate-400 mb-10 text-lg">
-                Ready to transform your business or career? Contact us today for a free consultation.
+              <h2 className="text-sm font-bold text-primary-600 uppercase tracking-widest mb-2">Get In Touch</h2>
+              <h3 className="text-3xl font-bold text-slate-900 mb-6">Contact Us</h3>
+              <p className="text-slate-600 mb-8">
+                Ready to transform your business or career? Reach out to us for a consultation.
               </p>
               
-              <div className="space-y-8">
-                <div className="flex items-start gap-4 group">
-                  <div className="bg-slate-800 p-4 rounded-xl text-primary-400 group-hover:bg-primary-600 group-hover:text-white transition-colors">
-                    <MapPin size={24} />
+              <div className="space-y-6 mb-10">
+                <a href={`tel:${CONTACT_INFO.phone}`} className="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors group">
+                  <div className="bg-primary-100 p-3 rounded-full text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-colors">
+                    <Phone size={20} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white text-lg">Visit Us</h4>
-                    <p className="text-slate-400 mt-1">{CONTACT_INFO.address}</p>
+                    <h4 className="font-bold text-slate-900">Call Us</h4>
+                    <p className="text-slate-600 group-hover:text-primary-600 transition-colors">{CONTACT_INFO.contactName}: {CONTACT_INFO.phone}</p>
                   </div>
-                </div>
-
-                <div className="flex items-start gap-4 group">
-                  <div className="bg-slate-800 p-4 rounded-xl text-primary-400 group-hover:bg-primary-600 group-hover:text-white transition-colors">
-                    <Phone size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-white text-lg">Call Us</h4>
-                    <p className="text-slate-400 mt-1">Abhinav: {CONTACT_INFO.phone}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 group">
-                  <div className="bg-slate-800 p-4 rounded-xl text-primary-400 group-hover:bg-primary-600 group-hover:text-white transition-colors">
-                    <MessageCircle size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-white text-lg">WhatsApp</h4>
-                    <p className="text-slate-400 mt-1">{CONTACT_INFO.whatsapp}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 group">
-                  <div className="bg-slate-800 p-4 rounded-xl text-primary-400 group-hover:bg-primary-600 group-hover:text-white transition-colors">
-                    <Mail size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-white text-lg">Email Us</h4>
-                    <p className="text-slate-400 mt-1">{CONTACT_INFO.email}</p>
-                  </div>
-                </div>
+                </a>
                 
-                {/* Registration Button Callout */}
-                <div className="pt-6 border-t border-slate-800">
-                  <p className="text-slate-400 mb-4">Prefer to fill a detailed application form?</p>
-                  <button 
-                    onClick={openGoogleForm}
-                    className="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2"
-                  >
-                    <FileText size={20} className="text-primary-400" /> Fill Online Registration Form
-                  </button>
+                <a href={`https://wa.me/${CONTACT_INFO.whatsapp.replace(/\D/g,'')}`} target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors group">
+                  <div className="bg-green-100 p-3 rounded-full text-green-600 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                    <MessageCircle size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900">WhatsApp</h4>
+                    <p className="text-slate-600 group-hover:text-green-600 transition-colors">{CONTACT_INFO.whatsapp}</p>
+                  </div>
+                </a>
+                
+                <a href={`mailto:${CONTACT_INFO.email}`} className="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors group">
+                  <div className="bg-blue-100 p-3 rounded-full text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <Mail size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900">Email Us</h4>
+                    <p className="text-slate-600 group-hover:text-blue-600 transition-colors break-all">{CONTACT_INFO.email}</p>
+                  </div>
+                </a>
+
+                <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors">
+                   <div className="bg-red-100 p-3 rounded-full text-red-600">
+                     <MapPin size={20} />
+                   </div>
+                   <div>
+                     <h4 className="font-bold text-slate-900">Location</h4>
+                     <p className="text-slate-600">{CONTACT_INFO.address}</p>
+                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="bg-white rounded-2xl p-8 text-slate-800 shadow-2xl">
-              <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-              <form className="space-y-5">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">Name <span className="text-red-500">*</span></label>
+              <div className="bg-slate-100 p-6 rounded-xl border border-slate-200">
+                 <h4 className="font-bold text-slate-900 mb-2">Student Registration</h4>
+                 <p className="text-sm text-slate-600 mb-4">Are you a student or candidate looking to register?</p>
+                 <button 
+                  onClick={openGoogleForm}
+                  className="w-full bg-white border border-slate-300 text-slate-700 hover:text-primary-600 hover:border-primary-500 font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                 >
+                   <FileText size={18} /> Fill Online Application Form
+                 </button>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-100">
+              <h4 className="text-xl font-bold text-slate-900 mb-6">Send us a Message</h4>
+              <form className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-sm font-semibold text-slate-700">Your Name *</label>
                     <input 
                       type="text" 
-                      name="name" 
-                      value={formData.name} 
-                      onChange={handleInputChange} 
-                      className={`w-full px-4 py-3 rounded-lg bg-slate-50 border focus:ring-2 outline-none transition-all ${errors.name ? 'border-red-500 focus:ring-red-200' : 'border-slate-200 focus:ring-primary-500 focus:border-primary-500'}`}
-                      placeholder="Your Name" 
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className={`w-full px-4 py-3 rounded-lg border ${errors.name ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-primary-100 focus:border-primary-500'} focus:outline-none focus:ring-4 transition-all`}
+                      placeholder="John Doe"
                     />
-                    {errors.name && (
-                      <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
-                        <AlertCircle size={12} /> {errors.name}
-                      </p>
-                    )}
+                    {errors.name && <p className="text-xs text-red-500 flex items-center gap-1"><AlertCircle size={10} /> {errors.name}</p>}
                   </div>
-                  <div>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">Phone <span className="text-red-500">*</span></label>
+                  <div className="space-y-1">
+                    <label className="text-sm font-semibold text-slate-700">Phone Number *</label>
                     <input 
                       type="tel" 
-                      name="phone" 
-                      value={formData.phone} 
-                      onChange={handleInputChange} 
-                      className={`w-full px-4 py-3 rounded-lg bg-slate-50 border focus:ring-2 outline-none transition-all ${errors.phone ? 'border-red-500 focus:ring-red-200' : 'border-slate-200 focus:ring-primary-500 focus:border-primary-500'}`}
-                      placeholder="Your Number" 
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className={`w-full px-4 py-3 rounded-lg border ${errors.phone ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-primary-100 focus:border-primary-500'} focus:outline-none focus:ring-4 transition-all`}
+                      placeholder="+1 (555) 000-0000"
                     />
-                    {errors.phone && (
-                      <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
-                        <AlertCircle size={12} /> {errors.phone}
-                      </p>
-                    )}
+                    {errors.phone && <p className="text-xs text-red-500 flex items-center gap-1"><AlertCircle size={10} /> {errors.phone}</p>}
                   </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Email <span className="text-red-500">*</span></label>
-                  <input 
-                    type="email" 
-                    name="email" 
-                    value={formData.email} 
-                    onChange={handleInputChange} 
-                    className={`w-full px-4 py-3 rounded-lg bg-slate-50 border focus:ring-2 outline-none transition-all ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-slate-200 focus:ring-primary-500 focus:border-primary-500'}`}
-                    placeholder="john@example.com" 
-                  />
-                  {errors.email && (
-                    <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
-                      <AlertCircle size={12} /> {errors.email}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Interest</label>
-                  <div className="relative">
-                    <select 
-                      name="interest" 
-                      value={formData.interest} 
-                      onChange={handleInputChange} 
-                      className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none appearance-none"
-                    >
-                      <option>Corporate Training</option>
-                      <option>IT Staffing</option>
-                      <option>Consulting Services</option>
-                      <option>Course Enrollment</option>
-                    </select>
-                    <ChevronRight className="absolute right-4 top-1/2 transform -translate-y-1/2 rotate-90 text-slate-400 pointer-events-none" size={16} />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Message <span className="text-red-500">*</span></label>
-                  <textarea 
-                    rows={3} 
-                    name="message" 
-                    value={formData.message} 
-                    onChange={handleInputChange} 
-                    className={`w-full px-4 py-3 rounded-lg bg-slate-50 border focus:ring-2 outline-none transition-all ${errors.message ? 'border-red-500 focus:ring-red-200' : 'border-slate-200 focus:ring-primary-500 focus:border-primary-500'}`}
-                    placeholder="How can we help you?"
-                  ></textarea>
-                  {errors.message && (
-                    <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
-                      <AlertCircle size={12} /> {errors.message}
-                    </p>
-                  )}
                 </div>
                 
-                <div className="grid grid-cols-1 gap-3 pt-2">
-                  <button 
-                    onClick={handleWhatsApp}
-                    type="button" 
-                    className="w-full bg-[#25D366] text-white font-bold py-3 rounded-lg hover:bg-[#128C7E] transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 transform active:scale-95"
-                  >
-                    <MessageCircle size={20} /> Chat on WhatsApp
-                  </button>
-                  
-                  <button 
-                    onClick={handleEmail}
-                    type="button" 
-                    className="w-full bg-primary-600 text-white font-bold py-3 rounded-lg hover:bg-primary-700 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 transform active:scale-95"
-                  >
-                    <Mail size={20} /> Send Inquiry Email
-                  </button>
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-slate-700">Email Address *</label>
+                  <input 
+                    type="email" 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-primary-100 focus:border-primary-500'} focus:outline-none focus:ring-4 transition-all`}
+                    placeholder="john@example.com"
+                  />
+                  {errors.email && <p className="text-xs text-red-500 flex items-center gap-1"><AlertCircle size={10} /> {errors.email}</p>}
                 </div>
+
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-slate-700">Interested In</label>
+                  <select 
+                    name="interest"
+                    value={formData.interest}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-all bg-white"
+                  >
+                    <option>Corporate Training</option>
+                    <option>Individual Training</option>
+                    <option>Internship & Self-Learning</option>
+                    <option>IT Staffing</option>
+                    <option>Consulting Services</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-slate-700">Message *</label>
+                  <textarea 
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className={`w-full px-4 py-3 rounded-lg border ${errors.message ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-primary-100 focus:border-primary-500'} focus:outline-none focus:ring-4 transition-all`}
+                    placeholder="Tell us about your requirements..."
+                  ></textarea>
+                  {errors.message && <p className="text-xs text-red-500 flex items-center gap-1"><AlertCircle size={10} /> {errors.message}</p>}
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4 pt-2">
+                   <button 
+                    onClick={handleWhatsApp}
+                    className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+                   >
+                     <MessageCircle size={18} /> WhatsApp
+                   </button>
+                   <button 
+                    onClick={handleEmail}
+                    className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-4 rounded-lg transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+                   >
+                     <Mail size={18} /> Email
+                   </button>
+                </div>
+                <p className="text-xs text-center text-slate-400 mt-2">
+                   Clicking buttons will open WhatsApp or your Email client directly.
+                </p>
               </form>
+              <div className="mt-8 rounded-lg overflow-hidden h-48 border border-slate-200">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3472.636683833246!2d-98.4981144!3d29.4475591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x865c5f590499092b%3A0x6280436270517596!2sMarshall%20St%2C%20San%20Antonio%2C%20TX%2078212%2C%20USA!5e0!3m2!1sen!2sin!4v1714828192031!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="100%" 
+                  style={{border:0}} 
+                  allowFullScreen={true} 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Office Location"
+                ></iframe>
+              </div>
             </div>
-          </div>
-          
-          {/* Map Embed - Now below form for better mobile layout */}
-          <div className="mt-16 w-full h-80 bg-slate-800 rounded-2xl overflow-hidden shadow-lg border border-slate-700">
-            <iframe 
-              className="w-full h-full border-0 opacity-80 hover:opacity-100 transition-opacity"
-              src="https://maps.google.com/maps?q=Marshall%20St%2C%20San%20Antonio%2C%20TX%2078212%2C%20USA&t=&z=14&ie=UTF8&iwloc=&output=embed"
-              title="Tech Skyline Location"
-              loading="lazy"
-            ></iframe>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-950 text-slate-400 py-12 border-t border-slate-900">
+      <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div className="col-span-1 md:col-span-1">
-              <div className="flex items-center gap-2 mb-6 text-white">
-                <div className="w-8 h-8 bg-primary-600 rounded flex items-center justify-center font-bold text-sm">TS</div>
-                <span className="font-bold text-xl tracking-tight">TECH SKYLINE</span>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4 text-white">
+                <div className="w-8 h-8 rounded bg-primary-600 flex items-center justify-center font-bold text-sm">TS</div>
+                <span className="font-bold text-xl">TECH SKYLINE</span>
               </div>
-              <p className="text-sm leading-relaxed mb-6 text-slate-500">
+              <p className="text-sm mb-4">
                 {CONTACT_INFO.tagline}
               </p>
+              <div className="flex space-x-4">
+                <a href="#" className="hover:text-white transition-colors"><Globe size={20} /></a>
+                <a href="#" className="hover:text-white transition-colors"><MessageCircle size={20} /></a>
+              </div>
             </div>
             
             <div>
-              <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-wider">Services</h4>
-              <ul className="space-y-3 text-sm">
-                <li><button onClick={() => scrollToSection('services')} className="hover:text-primary-400 transition-colors">IT Consulting</button></li>
-                <li><button onClick={() => scrollToSection('staffing')} className="hover:text-primary-400 transition-colors">Staffing Solutions</button></li>
-                <li><button onClick={() => scrollToSection('training')} className="hover:text-primary-400 transition-colors">Corporate Training</button></li>
-                <li><button onClick={() => scrollToSection('services')} className="hover:text-primary-400 transition-colors">Cloud Migration</button></li>
+              <h4 className="text-white font-bold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-sm">
+                <li><button onClick={() => scrollToSection('home')} className="hover:text-primary-400 transition-colors">Home</button></li>
+                <li><button onClick={() => scrollToSection('services')} className="hover:text-primary-400 transition-colors">Services</button></li>
+                <li><button onClick={() => scrollToSection('training')} className="hover:text-primary-400 transition-colors">Training</button></li>
+                <li><button onClick={() => scrollToSection('staffing')} className="hover:text-primary-400 transition-colors">Staffing</button></li>
+                <li><button onClick={() => scrollToSection('contact')} className="hover:text-primary-400 transition-colors">Contact</button></li>
               </ul>
             </div>
-
+            
             <div>
-              <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-wider">Top Courses</h4>
-              <ul className="space-y-3 text-sm">
-                <li className="hover:text-primary-400 cursor-pointer">AWS & Cloud Computing</li>
-                <li className="hover:text-primary-400 cursor-pointer">Data Science & AI</li>
-                <li className="hover:text-primary-400 cursor-pointer">SAP S4 HANA</li>
-                <li className="hover:text-primary-400 cursor-pointer">DevOps Engineering</li>
-                <li className="hover:text-primary-400 cursor-pointer">Cyber Security</li>
+              <h4 className="text-white font-bold mb-4">Services</h4>
+              <ul className="space-y-2 text-sm">
+                <li>IT Consulting</li>
+                <li>Corporate Training</li>
+                <li>Staff Augmentation</li>
+                <li>Cloud Solutions</li>
+                <li>Data Analytics</li>
               </ul>
             </div>
-
+            
             <div>
-              <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-wider">Contact Info</h4>
-              <ul className="space-y-4 text-sm">
-                <li className="flex items-start gap-3">
-                  <MapPin size={16} className="mt-0.5 shrink-0 text-primary-500" /> 
-                  <span className="text-slate-400">{CONTACT_INFO.address}</span>
+              <h4 className="text-white font-bold mb-4">Contact Info</h4>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-start gap-2">
+                  <MapPin size={16} className="mt-0.5 shrink-0" />
+                  <span>{CONTACT_INFO.address}</span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <Phone size={16} className="text-primary-500" /> 
-                  <span className="text-slate-400">{CONTACT_INFO.phone}</span>
+                <li className="flex items-center gap-2">
+                  <Phone size={16} />
+                  <a href={`tel:${CONTACT_INFO.phone}`} className="hover:text-primary-400 transition-colors">{CONTACT_INFO.phone}</a>
                 </li>
-                <li className="flex items-center gap-3">
-                  <Mail size={16} className="text-primary-500" /> 
-                  <span className="text-slate-400">{CONTACT_INFO.email}</span>
+                <li className="flex items-center gap-2">
+                  <Mail size={16} />
+                  <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-primary-400 transition-colors break-all">{CONTACT_INFO.email}</a>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="pt-8 border-t border-slate-900 text-center text-xs text-slate-600">
-            <p>&copy; {new Date().getFullYear()} {CONTACT_INFO.company}. All rights reserved. | <span className="hover:text-slate-400 cursor-pointer">Privacy Policy</span> | <span className="hover:text-slate-400 cursor-pointer">Terms of Service</span></p>
+          <div className="border-t border-slate-800 pt-8 text-center text-sm">
+            <p>&copy; {new Date().getFullYear()} {CONTACT_INFO.company}. All rights reserved.</p>
           </div>
         </div>
       </footer>

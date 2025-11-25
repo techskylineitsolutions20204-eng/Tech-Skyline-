@@ -14,7 +14,10 @@ import {
   CheckCircle,
   Award,
   Zap,
-  Layers
+  Layers,
+  MonitorPlay,
+  Wrench,
+  CreditCard
 } from 'lucide-react';
 import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory } from './types';
 
@@ -166,6 +169,30 @@ export const FEATURED_TECHNOLOGIES: TechCategory[] = [
     description: "Business Intelligence"
   }
 ];
+
+export const INTERNSHIP_PROGRAM = {
+  title: "Internship & Self-Learning Program",
+  description: "Designed for College Students and Self Learners, our program bridges the gap between academic knowledge and industry requirements with hands-on labs and live expert sessions.",
+  paymentLink: "https://www.paypal.com/ncp/payment/WWE93W3VHWRNL",
+  features: [
+    { title: "Live Sessions", icon: MonitorPlay, desc: "Interactive training with industry experts on real-time concepts." },
+    { title: "Lab Access", icon: Wrench, desc: "24/7 access to pre-configured labs with required tools for practice." },
+    { title: "Structured Curriculum", icon: BookOpen, desc: "Step-by-step learning path from basics to advanced topics." },
+    { title: "Secure Payment", icon: CreditCard, desc: "Easy one-time enrollment fee via PayPal secure gateway." }
+  ],
+  technologies: [
+    "Artificial Intelligence (AI)",
+    "Generative AI & Agentic AI",
+    "Power BI & Tableau",
+    "AWS & Azure DevOps",
+    "IoT & RPA (Robotic Process Automation)",
+    "Cyber Security & Cloud Security",
+    "Oracle Primavera Unifier & P6",
+    "Scrum Master",
+    "Python & Python Full Stack",
+    "Full Stack Web Development"
+  ]
+};
 
 export const TESTING_SERVICES = [
   "Software Testing",
