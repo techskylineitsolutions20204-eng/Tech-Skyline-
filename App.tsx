@@ -22,7 +22,10 @@ import {
   FileText,
   Laptop,
   LayoutList,
-  Lock
+  Lock,
+  Building,
+  MapPinned,
+  Heading
 } from 'lucide-react';
 import { 
   CONTACT_INFO, 
@@ -49,6 +52,9 @@ function App() {
     name: '',
     phone: '',
     email: '',
+    location: '',
+    company: '',
+    subject: '',
     interest: 'Corporate Training',
     message: ''
   });
@@ -131,6 +137,10 @@ function App() {
       newErrors.email = 'Please enter a valid email address';
     }
 
+    if (!formData.subject.trim()) {
+      newErrors.subject = 'Subject is required';
+    }
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     }
@@ -148,8 +158,13 @@ function App() {
 *Name:* ${formData.name}
 *Phone:* ${formData.phone}
 *Email:* ${formData.email}
+*Location:* ${formData.location || 'Not Specified'}
+*Company/College:* ${formData.company || 'Not Specified'}
 *Interest:* ${formData.interest}
-*Message:* ${formData.message}`;
+*Subject:* ${formData.subject}
+
+*Message:* 
+${formData.message}`;
 
     const encodedText = encodeURIComponent(text);
     window.open(`https://wa.me/918106243684?text=${encodedText}`, '_blank');
@@ -159,14 +174,27 @@ function App() {
     e.preventDefault();
     if (!validateForm()) return;
 
-    const subject = `Inquiry: ${formData.interest} - ${formData.name}`;
-    const body = `Name: ${formData.name}
+    const subject = `[Inquiry]: ${formData.interest} - ${formData.subject}`;
+    const body = `You have received a new inquiry from the website contact form.
+
+CONTACT DETAILS
+----------------
+Name: ${formData.name}
 Phone: ${formData.phone}
 Email: ${formData.email}
+Location: ${formData.location || 'Not Specified'}
+Organization: ${formData.company || 'Not Specified'}
+
+INQUIRY DETAILS
+----------------
 Interest: ${formData.interest}
+Subject: ${formData.subject}
 
 Message:
-${formData.message}`;
+${formData.message}
+
+----------------
+Sent from Techskyline.in`;
 
     const mailtoLink = `mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
@@ -793,7 +821,7 @@ ${formData.message}`;
               <form className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="text-sm font-semibold text-slate-700">Your Name *</label>
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Your Name *</label>
                     <input 
                       type="text" 
                       name="name"
@@ -805,7 +833,7 @@ ${formData.message}`;
                     {errors.name && <p className="text-xs text-red-500 flex items-center gap-1"><AlertCircle size={10} /> {errors.name}</p>}
                   </div>
                   <div className="space-y-1">
-                    <label className="text-sm font-semibold text-slate-700">Phone Number *</label>
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Phone Number *</label>
                     <input 
                       type="tel" 
                       name="phone"
@@ -818,38 +846,87 @@ ${formData.message}`;
                   </div>
                 </div>
                 
-                <div className="space-y-1">
-                  <label className="text-sm font-semibold text-slate-700">Email Address *</label>
-                  <input 
-                    type="email" 
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-primary-100 focus:border-primary-500'} focus:outline-none focus:ring-4 transition-all`}
-                    placeholder="john@example.com"
-                  />
-                  {errors.email && <p className="text-xs text-red-500 flex items-center gap-1"><AlertCircle size={10} /> {errors.email}</p>}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Email Address *</label>
+                    <input 
+                      type="email" 
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-primary-100 focus:border-primary-500'} focus:outline-none focus:ring-4 transition-all`}
+                      placeholder="john@example.com"
+                    />
+                    {errors.email && <p className="text-xs text-red-500 flex items-center gap-1"><AlertCircle size={10} /> {errors.email}</p>}
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Current Location</label>
+                    <div className="relative">
+                      <input 
+                        type="text" 
+                        name="location"
+                        value={formData.location}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-all pl-10"
+                        placeholder="City, Country"
+                      />
+                      <MapPinned size={16} className="absolute left-3 top-3.5 text-slate-400" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Company / College</label>
+                    <div className="relative">
+                      <input 
+                        type="text" 
+                        name="company"
+                        value={formData.company}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-all pl-10"
+                        placeholder="Organization Name"
+                      />
+                      <Building size={16} className="absolute left-3 top-3.5 text-slate-400" />
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Interested In</label>
+                    <select 
+                      name="interest"
+                      value={formData.interest}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-all bg-white"
+                    >
+                      <option>Structured Courses (Job Oriented)</option>
+                      <option>Internship & Live Projects</option>
+                      <option>Corporate Training</option>
+                      <option>Individual Training</option>
+                      <option>IT Staffing</option>
+                      <option>Consulting Services</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-sm font-semibold text-slate-700">Interested In</label>
-                  <select 
-                    name="interest"
-                    value={formData.interest}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-all bg-white"
-                  >
-                    <option>Corporate Training</option>
-                    <option>Individual Training</option>
-                    <option>Internship & Self-Learning</option>
-                    <option>IT Staffing</option>
-                    <option>Consulting Services</option>
-                    <option>Other</option>
-                  </select>
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Subject / Course Name *</label>
+                  <div className="relative">
+                    <input 
+                      type="text" 
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      className={`w-full px-4 py-3 rounded-lg border ${errors.subject ? 'border-red-500 focus:ring-red-200' : 'border-slate-300 focus:ring-primary-100 focus:border-primary-500'} focus:outline-none focus:ring-4 transition-all pl-10`}
+                      placeholder="e.g. SAP HANA Training / Java Internship"
+                    />
+                    <Heading size={16} className="absolute left-3 top-3.5 text-slate-400" />
+                    {errors.subject && <p className="text-xs text-red-500 flex items-center gap-1 mt-1"><AlertCircle size={10} /> {errors.subject}</p>}
+                  </div>
                 </div>
                 
                 <div className="space-y-1">
-                  <label className="text-sm font-semibold text-slate-700">Message *</label>
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">Message *</label>
                   <textarea 
                     name="message"
                     value={formData.message}
