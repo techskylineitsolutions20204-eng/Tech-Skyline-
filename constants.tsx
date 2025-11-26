@@ -37,15 +37,16 @@ export const CONTACT_INFO = {
   company: "Techskyline.in",
   tagline: "Premier IT Consulting, Staffing, and Corporate Training Solutions.",
   address: "Marshall St, San Antonio, TX 78212, USA",
-  logo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=100&q=80", // Using a tech-abstract logo placeholder
+  logo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=100&q=80", // Small logo for nav
+  heroLogo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=500&q=80", // Large logo placeholder
   googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfcG6IKVRWZg0qi0V7eBRvRDozo0HRifzhEM5vEfLtFLvADbA/viewform"
 };
 
 export const HERO_CONTENT = {
-  title: "INFORMATION TECHNOLOGY CONSULTING",
+  quote: "Technology brings everything closer and connected",
   subtitle: "GET YOUR BUSINESS & IT STRATEGIES ALIGN TOGETHER",
   description: "Information technology (IT) consulting services helps you shape a winning IT strategy. For past decades we are into IT consulting and expertly guide your IT and digital transformation initiatives from strategy to implementation.",
-  image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80" // Tech hand touching screen concept
+  image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80"
 };
 
 export const STATS: StatItem[] = [
