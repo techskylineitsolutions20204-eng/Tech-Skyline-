@@ -196,7 +196,11 @@ ${formData.message}
 ----------------
 Sent from Techskyline.in`;
 
-    const mailtoLink = `mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    // Ensure we use the exact email provided by the user
+    const targetEmail = "techskylineitsolutions20204@gmail.com";
+    const mailtoLink = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    // Use window.location.href to trigger the default mail client
     window.location.href = mailtoLink;
   };
 
@@ -949,7 +953,7 @@ Sent from Techskyline.in`;
                     onClick={handleEmail}
                     className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
                    >
-                     <Mail size={18} /> Email
+                     <Mail size={18} /> Send via Email
                    </button>
                 </div>
                 <p className="text-xs text-center text-slate-400 mt-2">
