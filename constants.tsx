@@ -1,3 +1,4 @@
+
 import { 
   Cloud, 
   Database, 
@@ -249,6 +250,41 @@ export const INTERNSHIP_PROGRAM = {
     }
   ]
 };
+
+export const SAMPLE_CLASSES = [
+  {
+    id: 1,
+    title: "Gen AI: Prompt Engineering Fundamentals",
+    type: "Video",
+    duration: "1h 15m",
+    author: "Dr. Sarah Smith",
+    thumbnail: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 2,
+    title: "AWS Security Specialist Interview Guide",
+    type: "Audio",
+    duration: "45m",
+    author: "James Wilson",
+    thumbnail: "https://images.unsplash.com/photo-1478737270239-2f02b77ac6d5?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 3,
+    title: "Python API Development: Live Coding",
+    type: "Video",
+    duration: "55m",
+    author: "Tech Skyline Team",
+    thumbnail: "https://images.unsplash.com/photo-1526379623606-b3097339e75e?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 4,
+    title: "Project Management: Scrum Daily Standup",
+    type: "Audio",
+    duration: "30m",
+    author: "Agile Coach Dave",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80"
+  }
+];
 
 export const TESTING_SERVICES = [
   "Software Testing",

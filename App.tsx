@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { 
   Menu, 
@@ -25,7 +26,13 @@ import {
   Lock,
   Building,
   MapPinned,
-  Heading
+  Heading,
+  Headphones,
+  Play,
+  Volume2,
+  Maximize,
+  Video as VideoIcon,
+  XCircle
 } from 'lucide-react';
 import { 
   CONTACT_INFO, 
@@ -40,13 +47,15 @@ import {
   CLIENTS,
   TESTIMONIALS,
   FEATURED_TECHNOLOGIES,
-  INTERNSHIP_PROGRAM
+  INTERNSHIP_PROGRAM,
+  SAMPLE_CLASSES
 } from './constants';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [itemsPerSlide, setItemsPerSlide] = useState(3);
+  const [activeClass, setActiveClass] = useState<any>(null);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -203,8 +212,63 @@ Sent from Techskyline.in`;
 
   return (
     // Updated Root Background: Vibrant Dark Multi-Color Gradient
-    <div className="min-h-screen bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-indigo-900 via-purple-900 to-slate-900 text-slate-100 font-sans selection:bg-cyan-500 selection:text-white">
+    <div className="min-h-screen bg-[conic-gradient(at_top_right,_var(--tw-gradient-stops))] from-indigo-900 via-purple-900 to-slate-900 text-slate-100 font-sans selection:bg-cyan-500 selection:text-white relative">
       
+      {/* Media Player Modal */}
+      {activeClass && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-300">
+          <div className="bg-slate-900 w-full max-w-4xl rounded-2xl overflow-hidden shadow-2xl border border-white/10 flex flex-col relative">
+             <div className="flex justify-between items-center p-4 border-b border-white/10 bg-slate-800">
+               <h3 className="text-white font-bold flex items-center gap-2">
+                 {activeClass.type === 'Video' ? <VideoIcon size={20} className="text-cyan-400"/> : <Headphones size={20} className="text-purple-400"/>}
+                 {activeClass.title}
+               </h3>
+               <button onClick={() => setActiveClass(null)} className="text-slate-400 hover:text-white transition-colors">
+                 <XCircle size={24}/>
+               </button>
+             </div>
+             
+             <div className="aspect-video bg-black relative flex items-center justify-center group">
+               {/* Simulation of player */}
+               <img src={activeClass.thumbnail} className="absolute inset-0 w-full h-full object-cover opacity-40" alt="Thumbnail"/>
+               <div className="z-10 bg-cyan-500/90 backdrop-blur-sm p-4 rounded-full shadow-lg shadow-cyan-500/40 cursor-pointer hover:scale-110 transition-transform">
+                 <Play size={48} className="text-white fill-white ml-1"/>
+               </div>
+               
+               {/* Simulated Controls */}
+               <div className="absolute bottom-0 w-full p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                  <div className="h-1 bg-slate-600/50 rounded-full mb-4 overflow-hidden cursor-pointer">
+                     <div className="h-full w-1/3 bg-cyan-500 relative">
+                       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-md"></div>
+                     </div>
+                  </div>
+                  <div className="flex justify-between text-white items-center">
+                     <div className="flex gap-4 items-center">
+                       <Play size={20} className="fill-white"/>
+                       <Volume2 size={20}/>
+                       <span className="text-xs self-center font-mono">12:30 / {activeClass.duration}</span>
+                     </div>
+                     <Maximize size={20}/>
+                  </div>
+               </div>
+             </div>
+             
+             <div className="p-6 bg-slate-800/50">
+                <div className="flex justify-between items-start">
+                   <div>
+                      <h4 className="font-bold text-white mb-1">Session Recording Preview</h4>
+                      <p className="text-cyan-400 text-sm mb-3">Instructor: {activeClass.author}</p>
+                   </div>
+                   <button className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-xs font-bold transition-colors">Download Notes</button>
+                </div>
+                <p className="text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+                  This is a sample recording from our digital library. Students enrolled in our internship program get full access to high-definition recordings of every live session, downloadable audio tracks for offline learning, and synchronized transcriptions to ensure no concept is missed.
+                </p>
+             </div>
+          </div>
+        </div>
+      )}
+
       {/* Navigation - Glassmorphism */}
       <nav className="fixed top-0 w-full bg-slate-900/60 backdrop-blur-xl shadow-lg z-50 border-b border-white/10">
         <div className="container mx-auto px-4 md:px-6">
@@ -651,7 +715,7 @@ Sent from Techskyline.in`;
                </div>
 
                {/* Student Portal Resources Access - Glass Card */}
-               <div className="bg-gradient-to-r from-slate-900/90 to-indigo-900/90 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl overflow-hidden relative">
+               <div className="bg-gradient-to-r from-slate-900/90 to-indigo-900/90 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl overflow-hidden relative mb-10">
                  <div className="absolute top-0 right-0 p-4 opacity-5">
                    <Laptop size={200} className="text-white" />
                  </div>
@@ -692,6 +756,43 @@ Sent from Techskyline.in`;
                      </div>
                    ))}
                  </div>
+               </div>
+
+               {/* Digital Class Library (Recorded Video & Audio) */}
+               <div className="bg-slate-900/60 backdrop-blur-md p-8 rounded-3xl border border-white/10">
+                  <h4 className="font-bold text-white mb-6 flex items-center gap-3 text-xl">
+                    <VideoIcon className="text-purple-400" size={24} /> Digital Class Library
+                  </h4>
+                  <p className="text-slate-400 text-sm mb-6">Preview our collection of recorded classes available on-demand.</p>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {SAMPLE_CLASSES.map((cls) => (
+                      <div 
+                        key={cls.id} 
+                        onClick={() => setActiveClass(cls)}
+                        className="bg-slate-800 rounded-xl overflow-hidden shadow-lg border border-white/5 hover:border-cyan-500/50 hover:shadow-cyan-500/20 transition-all cursor-pointer group"
+                      >
+                         <div className="h-32 relative overflow-hidden bg-black">
+                            <img src={cls.thumbnail} alt={cls.title} className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-500"/>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                               <div className="bg-white/10 backdrop-blur-sm p-2 rounded-full border border-white/20 group-hover:bg-cyan-500 group-hover:border-cyan-500 transition-colors">
+                                  {cls.type === 'Video' ? <Play size={24} className="fill-white text-white pl-1"/> : <Headphones size={24} className="text-white"/>}
+                               </div>
+                            </div>
+                            <span className="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded font-mono">
+                              {cls.duration}
+                            </span>
+                            <span className={`absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${cls.type === 'Video' ? 'bg-purple-600' : 'bg-emerald-600'}`}>
+                              {cls.type}
+                            </span>
+                         </div>
+                         <div className="p-4">
+                            <h5 className="font-bold text-white text-sm line-clamp-2 leading-tight mb-2 group-hover:text-cyan-400 transition-colors">{cls.title}</h5>
+                            <p className="text-xs text-slate-400">{cls.author}</p>
+                         </div>
+                      </div>
+                    ))}
+                  </div>
                </div>
              </div>
           </div>
