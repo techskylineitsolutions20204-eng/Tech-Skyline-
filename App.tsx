@@ -69,6 +69,16 @@ function App() {
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
+  // Analytics Helper Function
+  const trackEvent = (eventName: string, params: Record<string, any> = {}) => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', eventName, {
+        ...params,
+        send_to: 'G-F2RRW778DV'
+      });
+    }
+  };
+
   // Responsive carousel settings
   useEffect(() => {
     const handleResize = () => {
@@ -90,12 +100,14 @@ function App() {
     setCurrentSlide((prev) => 
       prev >= FEATURED_TECHNOLOGIES.length - itemsPerSlide ? 0 : prev + 1
     );
+    trackEvent('interact_carousel', { action: 'next', slide_index: currentSlide });
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) => 
       prev === 0 ? FEATURED_TECHNOLOGIES.length - itemsPerSlide : prev - 1
     );
+    trackEvent('interact_carousel', { action: 'prev', slide_index: currentSlide });
   };
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -105,11 +117,22 @@ function App() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsMenuOpen(false);
+      trackEvent('section_view', { section_name: id });
     }
   };
 
   const openGoogleForm = () => {
+    trackEvent('click_apply', { destination: 'google_form', label: 'Apply Now' });
     window.open(CONTACT_INFO.googleFormUrl, '_blank');
+  };
+
+  const handleClassSelect = (cls: any) => {
+    setActiveClass(cls);
+    trackEvent('select_content', { 
+      content_type: cls.type, 
+      item_id: cls.id.toString(),
+      item_name: cls.title
+    });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -155,12 +178,21 @@ function App() {
     }
 
     setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      trackEvent('form_validation_error', { errors: Object.keys(newErrors).join(',') });
+    }
     return Object.keys(newErrors).length === 0;
   };
 
   const handleWhatsApp = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
+
+    trackEvent('generate_lead', { 
+      method: 'WhatsApp', 
+      interest: formData.interest,
+      location: formData.location
+    });
 
     const text = `*New Inquiry from Techskyline.in*
     
@@ -182,6 +214,12 @@ ${formData.message}`;
   const handleEmail = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
+
+    trackEvent('generate_lead', { 
+      method: 'Email', 
+      interest: formData.interest,
+      location: formData.location
+    });
 
     const subject = `[Inquiry]: ${formData.interest} - ${formData.subject}`;
     const body = `You have received a new inquiry from the website contact form.
@@ -352,11 +390,6 @@ Sent from Techskyline.in`;
             <div className="mb-10 relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500 rounded-full"></div>
               <div className="relative bg-black/40 backdrop-blur-sm p-6 rounded-3xl border border-white/10 shadow-2xl">
-                {/* 
-                  NOTE: This uses the large logo URL from constants. 
-                  If you have a specific file, ensure CONTACT_INFO.heroLogo points to it.
-                  Using a stylized placeholder layout for visual impact if image fails.
-                */}
                 <img 
                   src={CONTACT_INFO.heroLogo} 
                   alt="Tech Skyline IT Solutions" 
@@ -775,7 +808,7 @@ Sent from Techskyline.in`;
              {SAMPLE_CLASSES.map((cls) => (
                 <div 
                   key={cls.id} 
-                  onClick={() => setActiveClass(cls)}
+                  onClick={() => handleClassSelect(cls)}
                   className="bg-slate-800 rounded-xl overflow-hidden shadow-lg border border-white/5 hover:border-cyan-500/50 hover:shadow-cyan-500/20 transition-all cursor-pointer group hover:-translate-y-1"
                 >
                    <div className="h-40 relative overflow-hidden bg-black">
