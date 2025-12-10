@@ -44,3 +44,17 @@ export interface TechCategory {
   image: string;
   description: string;
 }
+
+export interface ValueItem {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+}
+
+export interface TeamMember {
+  name: string;
+  role: string;
+  bio: string;
+  image: string;
+  linkedin?: string;
+}

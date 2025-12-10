@@ -31,9 +31,18 @@ import {
   TrendingUp,
   ClipboardCheck,
   Target,
-  Presentation
+  Presentation,
+  Download,
+  FileCode,
+  Trophy,
+  Activity,
+  Lock,
+  Heart,
+  Lightbulb,
+  Compass,
+  Users2
 } from 'lucide-react';
-import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory } from './types';
+import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory, ValueItem, TeamMember } from './types';
 
 export const CONTACT_INFO = {
   contactName: "Abhinav",
@@ -382,3 +391,45 @@ Our training sessions are mainly targeted on key concepts, hands-on experience a
 export const CERTIFICATION_TEXT = `Software Certification is formal recognition of a level of proficiency in the information technology (IT) quality assurance industry. The recipient is acknowledged as having an overall comprehension of the disciplines and skills represented in a comprehensive body of knowledge for a respective software discipline.
 
 We are conducting certification training programs with highly qualified experienced industry professionals. Certification identifies an individual as a quality assurance leader and earns the candidate the respect of colleagues and managers.`;
+
+export const ABOUT_US_CONTENT = {
+  mission: "To empower individuals and organizations by bridging the gap between talent and technology through world-class training, innovative consulting, and strategic staffing solutions.",
+  vision: "To be the global leader in IT workforce transformation, recognized for integrity, excellence, and the ability to unlock human potential in the digital age.",
+  story: `Founded with a simple yet ambitious goal, Techskyline IT Solutions began as a response to the growing disconnect between academic learning and industry demands. Over the last decade, we have evolved from a specialized training institute into a comprehensive IT solutions provider.
+
+Today, we stand at the intersection of education and enterprise. We don't just teach technology; we implement it. Our dual focus on consulting and training creates a unique ecosystem where our instructors are practicing consultants, and our consultants are lifelong learners. This synergy ensures that our clients receive the most current, practical, and effective solutions available in the market.`,
+  values: [
+    { title: "Excellence", description: "We set high standards for ourselves and our students, striving for perfection in every code we write and every class we teach.", icon: Award },
+    { title: "Integrity", description: "Transparency and honesty are the foundations of our relationships with clients, students, and partners.", icon: ShieldCheck },
+    { title: "Innovation", description: "We embrace change and continuously adapt to the evolving technology landscape to stay ahead of the curve.", icon: Lightbulb },
+    { title: "Collaboration", description: "We believe in the power of teamwork and community, fostering an environment where knowledge is shared freely.", icon: Users2 },
+    { title: "Student-Centric", description: "Your success is our success. We are dedicated to providing the support and resources needed for your growth.", icon: Heart },
+    { title: "Results-Driven", description: "We focus on tangible outcomes—whether it's a successful project delivery or a student landing their dream job.", icon: Target }
+  ],
+  team: [
+    {
+      name: "Abhinav",
+      role: "Founder & CEO",
+      bio: "With over 15 years of experience in the IT industry, Abhinav leads Techskyline with a passion for technology and education. His vision drives the company's strategic growth and commitment to quality.",
+      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      name: "Dr. Sarah Smith",
+      role: "Head of Training",
+      bio: "A veteran educator and technologist, Dr. Smith oversees our curriculum development and instructor quality assurance. She ensures our training programs remain cutting-edge.",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80"
+    },
+    {
+      name: "James Wilson",
+      role: "Chief Technology Officer",
+      bio: "James brings deep expertise in Cloud Computing and Cybersecurity. He leads our consulting division, helping enterprise clients navigate their digital transformation journeys.",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80"
+    },
+     {
+      name: "Priya Sharma",
+      role: "Director of Staffing",
+      bio: "Priya specializes in talent acquisition and resource management. Her team connects top-tier tech talent with our global client base.",
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80"
+    }
+  ]
+};
