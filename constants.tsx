@@ -26,7 +26,12 @@ import {
   Terminal,
   FolderOpen,
   PenTool,
-  UserCheck
+  UserCheck,
+  Settings,
+  TrendingUp,
+  ClipboardCheck,
+  Target,
+  Presentation
 } from 'lucide-react';
 import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory } from './types';
 
@@ -251,6 +256,34 @@ export const INTERNSHIP_PROGRAM = {
   ]
 };
 
+export const CORPORATE_TRAINING = {
+  title: "Corporate Training Solutions",
+  subtitle: "Transform Your Workforce",
+  description: "We partner with organizations to build high-performance technical teams. From fresh graduate onboarding to niche upskilling for senior architects, our training programs are customized to meet specific business objectives.",
+  benefits: [
+    { title: "Customized Curriculum", description: "Training modules tailored specifically to your project requirements and tech stack.", icon: Settings },
+    { title: "Flexible Delivery Models", description: "Choose from Virtual Instructor-Led (VILT), Classroom, or Hybrid learning modes.", icon: Presentation },
+    { title: "Hands-on Labs", description: "24/7 access to cloud-based labs for practical coding and implementation experience.", icon: Cloud },
+    { title: "Skill Gap Analysis", description: "Pre-training assessments to identify areas of improvement and track progress.", icon: BarChart },
+    { title: "Project-Based Learning", description: "Employees work on real-time PoCs and capstone projects relevant to your business.", icon: Layers },
+    { title: "ROI Measurement", description: "Detailed post-training reports and performance analytics to measure impact.", icon: TrendingUp }
+  ],
+  process: [
+    { step: "01", title: "Assessment", desc: "We analyze skill gaps and business goals.", icon: ClipboardCheck },
+    { step: "02", title: "Design", desc: "SMEs curate a syllabus aligned with your projects.", icon: PenTool },
+    { step: "03", title: "Delivery", desc: "Expert-led sessions with interactive labs.", icon: MonitorPlay },
+    { step: "04", title: "Practice", desc: "Real-world case studies and capstone projects.", icon: Code },
+    { step: "05", title: "Evaluation", desc: "Performance tracking and impact reporting.", icon: Target }
+  ],
+  technologies: [
+    { category: "Cloud & DevOps", items: ["AWS", "Azure", "Google Cloud", "Kubernetes", "Docker", "Terraform", "Ansible", "Jenkins"] },
+    { category: "Data & AI", items: ["Generative AI", "Machine Learning", "Data Engineering", "Power BI", "Tableau", "Snowflake", "Databricks"] },
+    { category: "Enterprise Apps", items: ["SAP S/4 HANA", "Salesforce", "ServiceNow", "Workday", "Oracle Cloud", "Microsoft Dynamics 365"] },
+    { category: "Cybersecurity", items: ["Ethical Hacking", "Cloud Security", "CISSP", "Network Security", "IAM", "DevSecOps", "SIEM"] },
+    { category: "Modern Web", items: ["React/Node.js", "Java Spring Boot", "Python Django", ".NET Core", "Angular", "Microservices", "GraphQL"] }
+  ]
+};
+
 export const SAMPLE_CLASSES = [
   {
     id: 1,
@@ -258,7 +291,8 @@ export const SAMPLE_CLASSES = [
     type: "Video",
     duration: "1h 15m",
     author: "Dr. Sarah Smith",
-    thumbnail: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80"
+    thumbnail: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80",
+    videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
   },
   {
     id: 2,
@@ -266,7 +300,8 @@ export const SAMPLE_CLASSES = [
     type: "Audio",
     duration: "45m",
     author: "James Wilson",
-    thumbnail: "https://images.unsplash.com/photo-1478737270239-2f02b77ac6d5?auto=format&fit=crop&w=600&q=80"
+    thumbnail: "https://images.unsplash.com/photo-1478737270239-2f02b77ac6d5?auto=format&fit=crop&w=600&q=80",
+    audioUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
   },
   {
     id: 3,
@@ -274,7 +309,8 @@ export const SAMPLE_CLASSES = [
     type: "Video",
     duration: "55m",
     author: "Tech Skyline Team",
-    thumbnail: "https://images.unsplash.com/photo-1526379623606-b3097339e75e?auto=format&fit=crop&w=600&q=80"
+    thumbnail: "https://images.unsplash.com/photo-1526379623606-b3097339e75e?auto=format&fit=crop&w=600&q=80",
+    videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
   },
   {
     id: 4,
@@ -282,7 +318,8 @@ export const SAMPLE_CLASSES = [
     type: "Audio",
     duration: "30m",
     author: "Agile Coach Dave",
-    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80"
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80",
+    audioUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
   }
 ];
 
