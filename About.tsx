@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ABOUT_US_CONTENT, ABOUT_TRAINING_TEXT } from './constants';
 import { Target, Eye, Quote, ArrowRight, Linkedin, ChevronDown, ChevronUp } from 'lucide-react';
 
-const TeamMemberCard = ({ member }: { member: any }) => {
+const TeamMemberCard: React.FC<{ member: any }> = ({ member }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
