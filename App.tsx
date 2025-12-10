@@ -32,7 +32,13 @@ import {
   Volume2,
   Maximize,
   Video as VideoIcon,
-  XCircle
+  XCircle,
+  Terminal,
+  Cpu,
+  Wifi,
+  Maximize2,
+  Minimize2,
+  Power
 } from 'lucide-react';
 import { 
   CONTACT_INFO, 
@@ -56,6 +62,11 @@ function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [itemsPerSlide, setItemsPerSlide] = useState(3);
   const [activeClass, setActiveClass] = useState<any>(null);
+  
+  // Lab Simulation State
+  const [activeLab, setActiveLab] = useState<any>(null);
+  const [labBootLines, setLabBootLines] = useState<string[]>([]);
+  const [isLabReady, setIsLabReady] = useState(false);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -85,6 +96,35 @@ function App() {
       }
     }
   };
+
+  // Lab Boot Sequence Effect
+  useEffect(() => {
+    if (activeLab) {
+      setLabBootLines([]);
+      setIsLabReady(false);
+      const bootSequence = [
+        `Connecting to ${activeLab.name} Secure Cloud Environment...`,
+        "Authenticating user credentials...",
+        "Allocating resources (4 vCPU, 16GB RAM)...",
+        "Mounting volume /data/student-workspace...",
+        "Initializing network interfaces... [OK]",
+        "Starting services... [OK]",
+        `Loading ${activeLab.name} Development Tools...`,
+        "Environment Ready."
+      ];
+
+      let delay = 0;
+      bootSequence.forEach((line, index) => {
+        delay += Math.random() * 800 + 200; // Random delay between lines
+        setTimeout(() => {
+          setLabBootLines(prev => [...prev, line]);
+          if (index === bootSequence.length - 1) {
+            setIsLabReady(true);
+          }
+        }, delay);
+      });
+    }
+  }, [activeLab]);
 
   // Responsive carousel settings
   useEffect(() => {
@@ -139,6 +179,14 @@ function App() {
       content_type: cls.type, 
       item_id: cls.id.toString(),
       item_name: cls.title
+    });
+  };
+  
+  const handleLabLaunch = (tech: any) => {
+    setActiveLab(tech);
+    trackEvent('launch_lab', { 
+      tech_id: tech.id,
+      tech_name: tech.name 
     });
   };
 
@@ -320,6 +368,74 @@ Sent from Techskyline.in`;
                 </p>
              </div>
           </div>
+        </div>
+      )}
+
+      {/* Lab Simulation Modal */}
+      {activeLab && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl animate-in fade-in duration-300">
+           <div className="w-full max-w-5xl bg-[#0d1117] rounded-xl overflow-hidden shadow-2xl border border-slate-700 flex flex-col h-[80vh]">
+              {/* Terminal Header */}
+              <div className="bg-slate-800 p-2 flex items-center justify-between border-b border-black">
+                 <div className="flex items-center gap-2">
+                    <div className="flex gap-1.5 ml-2">
+                       <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                       <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                       <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div className="ml-4 px-3 py-1 bg-black/40 rounded-md text-xs font-mono text-slate-400 flex items-center gap-2">
+                       <Terminal size={12} />
+                       techskyline-lab-server :: {activeLab.id}-env
+                    </div>
+                 </div>
+                 <div className="flex items-center gap-3 mr-2">
+                    <span className="text-[10px] text-green-400 font-mono flex items-center gap-1">
+                       <Wifi size={10} /> Connected
+                    </span>
+                    <button onClick={() => setActiveLab(null)} className="text-slate-400 hover:text-white transition-colors">
+                       <X size={18} />
+                    </button>
+                 </div>
+              </div>
+
+              {/* Terminal Body */}
+              <div className="flex-1 bg-black p-6 font-mono text-sm overflow-y-auto font-light leading-6">
+                 {labBootLines.map((line, idx) => (
+                    <div key={idx} className="text-green-500/90 mb-1">
+                       <span className="text-blue-500 mr-2">root@techskyline:~#</span>
+                       {line}
+                    </div>
+                 ))}
+                 {isLabReady && (
+                    <div className="mt-4 p-4 border border-green-500/30 bg-green-900/10 rounded-lg animate-pulse">
+                       <div className="text-green-400 font-bold mb-2">ACCESS GRANTED</div>
+                       <p className="text-slate-300">
+                          Welcome to the <strong>{activeLab.name}</strong> interactive lab environment.
+                          <br/>
+                          All tools and dependencies have been pre-loaded.
+                       </p>
+                       <button onClick={openGoogleForm} className="mt-4 bg-green-600 hover:bg-green-500 text-black font-bold py-2 px-4 rounded text-xs transition-colors">
+                          PROCEED TO LAB DASHBOARD
+                       </button>
+                    </div>
+                 )}
+                 {!isLabReady && (
+                    <div className="inline-block w-2.5 h-5 bg-green-500 animate-pulse mt-1"></div>
+                 )}
+              </div>
+
+              {/* Terminal Footer */}
+              <div className="bg-slate-800/50 p-2 border-t border-slate-700 flex justify-between items-center text-[10px] text-slate-500 font-mono">
+                 <div className="flex gap-4">
+                    <span className="flex items-center gap-1"><Cpu size={12}/> CPU: 12%</span>
+                    <span className="flex items-center gap-1"><Maximize2 size={12}/> RAM: 4.2GB / 16GB</span>
+                 </div>
+                 <div className="flex items-center gap-1">
+                    <Power size={12} className={isLabReady ? "text-green-500" : "text-yellow-500"} /> 
+                    {isLabReady ? "SYSTEM ACTIVE" : "BOOTING..."}
+                 </div>
+              </div>
+           </div>
         </div>
       )}
 
@@ -749,16 +865,31 @@ Sent from Techskyline.in`;
                   </div>
                </div>
 
-                {/* Technologies List */}
+                {/* Technologies List with Live Labs */}
                <div className="bg-slate-900/40 backdrop-blur-md p-8 rounded-3xl border border-white/10 mb-10">
                  <h4 className="font-bold text-xl text-white mb-6 flex items-center gap-3">
-                   <Zap className="text-yellow-400 fill-yellow-400" /> Technologies Covered
+                   <Zap className="text-yellow-400 fill-yellow-400" /> Technologies & Live Labs
                  </h4>
-                 <div className="flex flex-wrap gap-3">
+                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                    {INTERNSHIP_PROGRAM.technologies.map((tech, idx) => (
-                     <span key={idx} className="px-4 py-2 bg-white/5 border border-white/10 text-slate-300 rounded-xl font-medium text-sm hover:bg-cyan-600 hover:text-white hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all cursor-default">
-                       {tech}
-                     </span>
+                     <div key={idx} className="bg-slate-800/50 p-4 rounded-xl border border-white/5 flex flex-col justify-between hover:bg-slate-800 hover:border-cyan-500/30 transition-all group">
+                       <div className="mb-4">
+                          <div className="flex justify-between items-start mb-2">
+                             <h5 className="font-bold text-slate-200 group-hover:text-white transition-colors">{tech.name}</h5>
+                             <span className="px-2 py-0.5 bg-white/5 text-[10px] rounded text-slate-400 border border-white/5">{tech.type}</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-xs text-green-400">
+                             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                             Lab Environment Active
+                          </div>
+                       </div>
+                       <button 
+                         onClick={() => handleLabLaunch(tech)}
+                         className="w-full bg-cyan-600/20 hover:bg-cyan-500 hover:text-white text-cyan-400 border border-cyan-500/30 rounded-lg py-2 px-3 text-xs font-bold uppercase tracking-wide transition-all flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-cyan-500/20"
+                       >
+                         <Terminal size={14} /> Launch Live Lab
+                       </button>
+                     </div>
                    ))}
                  </div>
                </div>
