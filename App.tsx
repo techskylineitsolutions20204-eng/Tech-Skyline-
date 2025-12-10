@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Menu, 
   X, 
@@ -41,13 +41,16 @@ import {
   Power,
   Filter,
   Briefcase as BriefcaseIcon,
-  Download,
-  FileCode,
-  Trophy,
-  Activity,
+  CheckCircle,
+  BookOpen,
+  TrendingUp,
+  Target,
   PlayCircle,
+  FileCode,
   UserCheck,
   FolderOpen,
+  Download,
+  Trophy,
   Plus as PlusIcon
 } from 'lucide-react';
 import { 
@@ -70,6 +73,57 @@ import {
 import { TechSkylineLogo } from './Logo';
 import { About } from './About';
 
+// Animated Counter Component
+const CountUp = ({ end, suffix = "", duration = 2000, decimals = 0 }: { end: number | string, suffix?: string, duration?: number, decimals?: number }) => {
+  const [count, setCount] = useState(0);
+  const nodeRef = useRef(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          
+          if (typeof end === 'string') {
+             // If it's not a number (like "Global"), just show it immediately or after a delay
+             setCount(0); // Placeholder if we want to logic switch, but mostly we'll just render text
+             return;
+          }
+
+          let start = 0;
+          const increment = end / (duration / 16);
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= end) {
+              setCount(end);
+              clearInterval(timer);
+            } else {
+              setCount(start);
+            }
+          }, 16);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    
+    if (nodeRef.current) {
+      observer.observe(nodeRef.current);
+    }
+    
+    return () => observer.disconnect();
+  }, [end, duration]);
+
+  if (typeof end === 'string') return <span ref={nodeRef}>{end}</span>;
+
+  return (
+    <span ref={nodeRef}>
+      {count.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}
+      {suffix}
+    </span>
+  );
+};
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -88,6 +142,9 @@ function App() {
   const [labBootLines, setLabBootLines] = useState<string[]>([]);
   const [isLabReady, setIsLabReady] = useState(false);
   
+  // Staffing Interactive State
+  const [activeStaffingFeature, setActiveStaffingFeature] = useState(0);
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -919,19 +976,46 @@ Sent from Techskyline.in`;
               </div>
             </section>
 
-            {/* Stats Section - Translucent Cards */}
+            {/* Stats Section - Animated */}
             <section className="py-16 relative">
               <div className="container mx-auto px-4 md:px-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                  {STATS.map((stat, index) => (
-                    <div key={index} className="text-center group p-6 rounded-2xl bg-white/5 backdrop-blur-lg border border-white/10 hover:bg-white/10 hover:border-cyan-500/50 transition-all duration-300 shadow-xl">
-                      <div className="bg-gradient-to-br from-cyan-500 to-blue-600 p-3 rounded-xl w-14 h-14 flex items-center justify-center mx-auto mb-4 text-white group-hover:scale-110 transition-transform shadow-lg shadow-cyan-500/30">
-                        <stat.icon size={28} />
+                  {STATS.map((stat, index) => {
+                     // Parse value for animation
+                     let endVal = 0;
+                     let suffix = "";
+                     let decimals = 0;
+                     
+                     if (stat.value.includes("%")) {
+                        endVal = parseFloat(stat.value.replace("%", ""));
+                        suffix = "%";
+                        decimals = 1;
+                     } else if (stat.value.includes("+")) {
+                        endVal = parseInt(stat.value.replace(/,/g, "").replace("+", ""));
+                        suffix = "+";
+                     } else if (stat.value === "Global") {
+                        endVal = 0; // special case
+                        suffix = "Global";
+                     } else {
+                        endVal = parseInt(stat.value);
+                     }
+
+                     return (
+                      <div key={index} className="text-center group p-6 rounded-2xl bg-white/5 backdrop-blur-lg border border-white/10 hover:bg-white/10 hover:border-cyan-500/50 transition-all duration-300 shadow-xl">
+                        <div className="bg-gradient-to-br from-cyan-500 to-blue-600 p-3 rounded-xl w-14 h-14 flex items-center justify-center mx-auto mb-4 text-white group-hover:scale-110 transition-transform shadow-lg shadow-cyan-500/30">
+                          <stat.icon size={28} />
+                        </div>
+                        <div className="text-3xl font-black mb-1 text-white">
+                          {stat.value === "Global" ? (
+                             "Global"
+                          ) : (
+                             <CountUp end={endVal} suffix={suffix} decimals={decimals} />
+                          )}
+                        </div>
+                        <div className="text-xs text-cyan-200 font-bold uppercase tracking-wider">{stat.label}</div>
                       </div>
-                      <div className="text-3xl font-black mb-1 text-white">{stat.value}</div>
-                      <div className="text-xs text-cyan-200 font-bold uppercase tracking-wider">{stat.label}</div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </section>
@@ -1405,50 +1489,99 @@ Sent from Techskyline.in`;
               </div>
             </section>
 
-            {/* Staffing Section - Dark Theme */}
-            <section id="staffing" className="py-20 relative">
-              <div className="container mx-auto px-4 md:px-6">
-                <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-white/10">
-                  <div className="flex flex-col md:flex-row gap-16 items-center">
-                    <div className="md:w-1/2 order-2 md:order-1">
-                      <h2 className="text-sm font-bold text-cyan-400 uppercase tracking-widest mb-2">Recruitment</h2>
-                      <h3 className="text-3xl font-bold text-white mb-6">IT Staffing Solutions</h3>
-                      <p className="text-slate-300 mb-8 leading-relaxed font-light">
+            {/* Staffing Section - Redesigned Interactive */}
+            <section id="staffing" className="py-20 relative overflow-hidden">
+               {/* Decorative Background */}
+               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-slate-900 to-black opacity-80 z-0"></div>
+               <div className="absolute top-1/2 right-0 w-96 h-96 bg-cyan-600/20 rounded-full blur-3xl z-0 pointer-events-none"></div>
+
+              <div className="container mx-auto px-4 md:px-6 relative z-10">
+                <div className="flex flex-col gap-12">
+                   
+                   {/* Header & Intro */}
+                   <div className="text-center max-w-4xl mx-auto">
+                      <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-slate-800 border border-white/10 text-cyan-400 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
+                        <Users size={14} /> Recruitment
+                      </div>
+                      <h2 className="text-4xl md:text-5xl font-black text-white mb-6">IT Staffing Solutions</h2>
+                      <p className="text-xl text-slate-300 font-light leading-relaxed">
                         We enable you to achieve and optimize the most strategic and variable component to business success—right people, with right skills, competencies, and attitudes.
                       </p>
+                   </div>
+
+                   {/* Main Interactive Grid */}
+                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                       
-                      <div className="space-y-6">
-                        {STAFFING_FEATURES.map((feature, index) => (
-                          <div key={index} className="flex gap-4 group">
-                            <div className="mt-1 bg-slate-800 p-3 rounded-xl text-cyan-400 h-fit group-hover:bg-cyan-600 group-hover:text-white transition-all shadow-lg">
-                              <feature.icon size={20} />
-                            </div>
-                            <div>
-                              <h4 className="font-bold text-white text-lg group-hover:text-cyan-400 transition-colors">{feature.title}</h4>
-                              <p className="text-slate-400 text-sm mt-1 leading-relaxed">{feature.description}</p>
-                            </div>
-                          </div>
-                        ))}
+                      {/* Left Column: Feature Selection */}
+                      <div className="flex flex-col gap-4">
+                         {STAFFING_FEATURES.map((feature, index) => (
+                           <div 
+                              key={index} 
+                              className={`p-6 rounded-2xl border transition-all cursor-pointer group flex items-start gap-4 relative overflow-hidden ${
+                                 activeStaffingFeature === index 
+                                 ? 'bg-slate-800 border-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.15)]' 
+                                 : 'bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/20'
+                              }`}
+                              onClick={() => setActiveStaffingFeature(index)}
+                           >
+                              {/* Highlight Bar */}
+                              {activeStaffingFeature === index && (
+                                 <div className="absolute left-0 top-0 bottom-0 w-1 bg-cyan-500"></div>
+                              )}
+                              
+                              <div className={`p-3 rounded-xl transition-colors ${
+                                 activeStaffingFeature === index ? 'bg-cyan-600 text-white' : 'bg-slate-700 text-slate-400 group-hover:text-cyan-400'
+                              }`}>
+                                 <feature.icon size={24} />
+                              </div>
+                              <div>
+                                 <h4 className={`text-lg font-bold mb-1 ${activeStaffingFeature === index ? 'text-white' : 'text-slate-300 group-hover:text-white'}`}>
+                                    {feature.title}
+                                 </h4>
+                                 <p className={`text-sm ${activeStaffingFeature === index ? 'text-cyan-100' : 'text-slate-500'}`}>
+                                    Click to view details
+                                 </p>
+                              </div>
+                              <ChevronRight className={`ml-auto self-center transition-transform ${activeStaffingFeature === index ? 'text-cyan-400 rotate-90 lg:rotate-0' : 'text-slate-600'}`} />
+                           </div>
+                         ))}
                       </div>
-                    </div>
-                    <div className="md:w-1/2 order-1 md:order-2">
-                      <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-purple-600 rounded-2xl blur-lg opacity-40"></div>
-                        <img 
-                          src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" 
-                          alt="Professional Staffing" 
-                          className="rounded-2xl shadow-2xl relative z-10 border border-white/10"
-                        />
-                        <div className="absolute bottom-8 left-8 bg-slate-900/90 backdrop-blur-md p-6 rounded-xl shadow-2xl max-w-xs hidden sm:block border border-white/20 z-20">
-                          <div className="flex items-center gap-3 mb-2">
-                            <Users className="text-cyan-400" />
-                            <span className="font-bold text-white text-2xl">98.8%</span>
-                          </div>
-                          <p className="text-slate-400 text-sm font-medium">Client satisfaction and retention in IT contract staffing</p>
-                        </div>
+
+                      {/* Right Column: Detailed View */}
+                      <div className="bg-slate-800/80 backdrop-blur-md rounded-3xl border border-white/10 p-8 md:p-12 flex flex-col justify-center relative min-h-[400px]">
+                         {/* Dynamic Content based on Selection */}
+                         <div className="relative z-10 animate-in fade-in slide-in-from-bottom-4 duration-300" key={activeStaffingFeature}>
+                            <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center text-white shadow-xl mb-8">
+                               {React.createElement(STAFFING_FEATURES[activeStaffingFeature].icon, { size: 32 })}
+                            </div>
+                            <h3 className="text-3xl font-bold text-white mb-6">
+                               {STAFFING_FEATURES[activeStaffingFeature].title}
+                            </h3>
+                            <p className="text-lg text-slate-300 leading-relaxed mb-8 border-l-4 border-cyan-500 pl-6">
+                               {STAFFING_FEATURES[activeStaffingFeature].description}
+                            </p>
+                            
+                            {/* "Live" hiring status example */}
+                            <div className="bg-black/30 rounded-xl p-4 border border-white/5 flex items-center justify-between">
+                               <div className="flex items-center gap-3">
+                                  <div className="relative">
+                                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                                     <div className="w-3 h-3 bg-green-500 rounded-full absolute inset-0 animate-ping"></div>
+                                  </div>
+                                  <span className="text-xs font-bold text-green-400 uppercase tracking-wide">Currently Hiring</span>
+                               </div>
+                               <button onClick={() => handleNavigation('contact')} className="text-sm font-bold text-white hover:text-cyan-400 flex items-center gap-1 transition-colors">
+                                  Inquire Now <ArrowRight size={14} />
+                               </button>
+                            </div>
+                         </div>
+                         
+                         {/* Background Decoration */}
+                         <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
+                            <BriefcaseIcon size={300} className="text-white" />
+                         </div>
                       </div>
-                    </div>
-                  </div>
+                   </div>
                 </div>
               </div>
             </section>
