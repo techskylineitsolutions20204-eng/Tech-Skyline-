@@ -68,7 +68,8 @@ import {
   FEATURED_TECHNOLOGIES,
   INTERNSHIP_PROGRAM,
   SAMPLE_CLASSES,
-  CORPORATE_TRAINING
+  CORPORATE_TRAINING,
+  SOCIAL_MEDIA
 } from './constants';
 import { TechSkylineLogo } from './Logo';
 import { About } from './About';
@@ -827,7 +828,7 @@ Sent from Techskyline.in`;
           <div className="flex justify-between items-center h-24">
             <div className="flex items-center gap-3 cursor-pointer group" onClick={() => handleNavigation('home')}>
               <div className="relative w-12 h-12 overflow-hidden rounded-lg bg-gradient-to-br from-cyan-400/10 to-blue-600/10 flex items-center justify-center group-hover:shadow-cyan-500/50 transition-all duration-300 border border-white/10">
-                 <TechSkylineLogo className="w-8 h-8"/>
+                 <TechSkylineLogo className="w-8 h-8 animate-pulse"/>
               </div>
               <div className="flex flex-col">
                 <h1 className="text-2xl font-extrabold text-white tracking-tight group-hover:text-cyan-400 transition-colors">TECH SKYLINE</h1>
@@ -1669,6 +1670,11 @@ Sent from Techskyline.in`;
                      <button onClick={() => window.open(CONTACT_INFO.googleFormUrl, '_blank')} className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors">
                         <Globe size={18} />
                      </button>
+                     {SOCIAL_MEDIA.map((social, idx) => (
+                        <a key={idx} href={social.url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors text-white">
+                           <social.icon size={18} />
+                        </a>
+                     ))}
                   </div>
                 </div>
               </div>
@@ -1817,6 +1823,15 @@ Sent from Techskyline.in`;
              <TechSkylineLogo className="w-8 h-8"/>
              <span className="font-bold text-white text-lg">TECH SKYLINE</span>
            </div>
+           
+           <div className="flex justify-center gap-4 mb-6">
+              {SOCIAL_MEDIA.map((social, idx) => (
+                  <a key={idx} href={social.url} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors border border-white/5">
+                     <social.icon size={20} />
+                  </a>
+              ))}
+           </div>
+
            <p className="max-w-md mx-auto mb-8">
              {CONTACT_INFO.tagline}
            </p>

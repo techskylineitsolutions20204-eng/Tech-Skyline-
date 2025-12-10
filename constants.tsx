@@ -40,7 +40,11 @@ import {
   Heart,
   Lightbulb,
   Compass,
-  Users2
+  Users2,
+  Linkedin,
+  Twitter,
+  Facebook,
+  Youtube
 } from 'lucide-react';
 import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory, ValueItem, TeamMember } from './types';
 
@@ -56,6 +60,29 @@ export const CONTACT_INFO = {
   heroLogo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=500&q=80", // Large logo placeholder
   googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfcG6IKVRWZg0qi0V7eBRvRDozo0HRifzhEM5vEfLtFLvADbA/viewform"
 };
+
+export const SOCIAL_MEDIA = [
+  { 
+    name: "LinkedIn", 
+    url: "https://www.linkedin.com/company/techskyline-it-soluions/?viewAsMember=true", 
+    icon: Linkedin 
+  },
+  { 
+    name: "YouTube", 
+    url: "https://www.youtube.com/@FreelanceRecuriter", 
+    icon: Youtube 
+  },
+  { 
+    name: "Twitter", 
+    url: "https://twitter.com", 
+    icon: Twitter 
+  },
+  { 
+    name: "Facebook", 
+    url: "https://facebook.com", 
+    icon: Facebook 
+  }
+];
 
 export const HERO_CONTENT = {
   quote: "Technology brings everything closer and connected",
