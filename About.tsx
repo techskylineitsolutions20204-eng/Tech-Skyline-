@@ -1,6 +1,43 @@
-import React, { useEffect } from 'react';
+
+import React, { useEffect, useState } from 'react';
 import { ABOUT_US_CONTENT, ABOUT_TRAINING_TEXT } from './constants';
-import { Target, Eye, Quote, ArrowRight, Linkedin } from 'lucide-react';
+import { Target, Eye, Quote, ArrowRight, Linkedin, ChevronDown, ChevronUp } from 'lucide-react';
+
+const TeamMemberCard = ({ member }: { member: any }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="group relative flex flex-col">
+       <div className="relative overflow-hidden rounded-2xl aspect-[3/4] mb-4 bg-slate-800">
+          <img 
+             src={member.image} 
+             alt={member.name} 
+             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-80"></div>
+          <div className="absolute bottom-4 left-4 right-4">
+             <div className="bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                <h4 className="font-bold text-white text-lg">{member.name}</h4>
+                <p className="text-cyan-400 text-xs font-bold uppercase tracking-wider">{member.role}</p>
+             </div>
+          </div>
+       </div>
+       
+       <div className="px-2 flex flex-col items-start flex-grow">
+           <p className={`text-slate-400 text-sm leading-relaxed transition-all duration-300 ${isExpanded ? '' : 'line-clamp-2 overflow-hidden text-ellipsis'}`}>
+              {member.bio}
+           </p>
+           <button 
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="mt-2 text-cyan-400 text-xs font-bold uppercase tracking-wide flex items-center gap-1 hover:text-white transition-colors focus:outline-none"
+           >
+              {isExpanded ? 'Read Less' : 'Read More'}
+              {isExpanded ? <ChevronUp size={12}/> : <ChevronDown size={12}/>}
+           </button>
+       </div>
+    </div>
+  );
+};
 
 export const About = () => {
   
@@ -105,25 +142,7 @@ export const About = () => {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                {ABOUT_US_CONTENT.team.map((member, idx) => (
-                  <div key={idx} className="group relative">
-                     <div className="relative overflow-hidden rounded-2xl aspect-[3/4] mb-4 bg-slate-800">
-                        <img 
-                           src={member.image} 
-                           alt={member.name} 
-                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-80"></div>
-                        <div className="absolute bottom-4 left-4 right-4">
-                           <div className="bg-white/10 backdrop-blur-md p-3 rounded-xl border border-white/10 transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                              <h4 className="font-bold text-white text-lg">{member.name}</h4>
-                              <p className="text-cyan-400 text-xs font-bold uppercase tracking-wider">{member.role}</p>
-                           </div>
-                        </div>
-                     </div>
-                     <p className="text-slate-400 text-sm leading-relaxed px-2">
-                        {member.bio}
-                     </p>
-                  </div>
+                  <TeamMemberCard key={idx} member={member} />
                ))}
             </div>
          </div>
