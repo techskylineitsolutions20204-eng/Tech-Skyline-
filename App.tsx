@@ -71,11 +71,18 @@ function App() {
 
   // Analytics Helper Function
   const trackEvent = (eventName: string, params: Record<string, any> = {}) => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', eventName, {
-        ...params,
-        send_to: 'G-F2RRW778DV'
+    if (typeof window !== 'undefined') {
+      // Standard GTM dataLayer push
+      const dataLayer = (window as any).dataLayer || [];
+      dataLayer.push({
+        event: eventName,
+        ...params
       });
+
+      // Direct GA4 via gtag if available (fallback)
+      if ((window as any).gtag) {
+        (window as any).gtag('event', eventName, params);
+      }
     }
   };
 
@@ -190,6 +197,7 @@ function App() {
 
     trackEvent('generate_lead', { 
       method: 'WhatsApp', 
+      source: 'Contact Form',
       interest: formData.interest,
       location: formData.location
     });
@@ -217,6 +225,7 @@ ${formData.message}`;
 
     trackEvent('generate_lead', { 
       method: 'Email', 
+      source: 'Contact Form',
       interest: formData.interest,
       location: formData.location
     });
@@ -246,6 +255,13 @@ Sent from Techskyline.in`;
     const targetEmail = "techskylineitsolutions20204@gmail.com";
     const mailtoLink = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
+  };
+
+  const handleContactClick = (method: string, value: string) => {
+    trackEvent('contact_click', {
+      method: method,
+      value: value
+    });
   };
 
   return (
@@ -930,7 +946,11 @@ Sent from Techskyline.in`;
               </p>
               
               <div className="space-y-6 mb-10">
-                <a href={`tel:${CONTACT_INFO.phone}`} className="flex items-start gap-4 p-5 rounded-2xl bg-white/5 hover:bg-white/10 transition-all border border-white/5 hover:border-cyan-400/30 group">
+                <a 
+                  href={`tel:${CONTACT_INFO.phone}`} 
+                  onClick={() => handleContactClick('phone', CONTACT_INFO.phone)}
+                  className="flex items-start gap-4 p-5 rounded-2xl bg-white/5 hover:bg-white/10 transition-all border border-white/5 hover:border-cyan-400/30 group"
+                >
                   <div className="bg-slate-800 p-3 rounded-full text-cyan-400 group-hover:bg-cyan-600 group-hover:text-white transition-colors">
                     <Phone size={20} />
                   </div>
@@ -940,7 +960,13 @@ Sent from Techskyline.in`;
                   </div>
                 </a>
                 
-                <a href={`https://wa.me/${CONTACT_INFO.whatsapp.replace(/\D/g,'')}`} target="_blank" rel="noopener noreferrer" className="flex items-start gap-4 p-5 rounded-2xl bg-white/5 hover:bg-white/10 transition-all border border-white/5 hover:border-green-400/30 group">
+                <a 
+                  href={`https://wa.me/${CONTACT_INFO.whatsapp.replace(/\D/g,'')}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  onClick={() => handleContactClick('whatsapp', CONTACT_INFO.whatsapp)}
+                  className="flex items-start gap-4 p-5 rounded-2xl bg-white/5 hover:bg-white/10 transition-all border border-white/5 hover:border-green-400/30 group"
+                >
                   <div className="bg-slate-800 p-3 rounded-full text-green-400 group-hover:bg-green-600 group-hover:text-white transition-colors">
                     <MessageCircle size={20} />
                   </div>
@@ -950,7 +976,11 @@ Sent from Techskyline.in`;
                   </div>
                 </a>
                 
-                <a href={`mailto:${CONTACT_INFO.email}`} className="flex items-start gap-4 p-5 rounded-2xl bg-white/5 hover:bg-white/10 transition-all border border-white/5 hover:border-blue-400/30 group">
+                <a 
+                  href={`mailto:${CONTACT_INFO.email}`} 
+                  onClick={() => handleContactClick('email', CONTACT_INFO.email)}
+                  className="flex items-start gap-4 p-5 rounded-2xl bg-white/5 hover:bg-white/10 transition-all border border-white/5 hover:border-blue-400/30 group"
+                >
                   <div className="bg-slate-800 p-3 rounded-full text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                     <Mail size={20} />
                   </div>
