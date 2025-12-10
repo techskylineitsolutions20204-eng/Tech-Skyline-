@@ -38,7 +38,8 @@ import {
   Wifi,
   Maximize2,
   Minimize2,
-  Power
+  Power,
+  Filter
 } from 'lucide-react';
 import { 
   CONTACT_INFO, 
@@ -62,6 +63,7 @@ function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [itemsPerSlide, setItemsPerSlide] = useState(3);
   const [activeClass, setActiveClass] = useState<any>(null);
+  const [activeCourseFilter, setActiveCourseFilter] = useState("All");
   
   // Lab Simulation State
   const [activeLab, setActiveLab] = useState<any>(null);
@@ -797,9 +799,41 @@ Sent from Techskyline.in`;
              </div>
              
              <div className="lg:w-2/3">
+               <div className="flex flex-wrap gap-2 mb-6 items-center">
+                  <span className="text-sm font-bold text-slate-400 mr-2 flex items-center gap-1"><Filter size={14}/> Filter:</span>
+                  <button
+                    onClick={() => setActiveCourseFilter("All")}
+                    className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all border ${
+                      activeCourseFilter === "All" 
+                        ? "bg-purple-600 text-white border-purple-500 shadow-lg shadow-purple-500/25" 
+                        : "bg-slate-800/50 text-slate-400 border-white/5 hover:bg-slate-800 hover:text-white"
+                    }`}
+                  >
+                    All
+                  </button>
+                  {COURSE_CATEGORIES.map((cat) => (
+                    <button
+                      key={cat.name}
+                      onClick={() => setActiveCourseFilter(cat.name)}
+                      className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all border ${
+                        activeCourseFilter === cat.name 
+                          ? "bg-purple-600 text-white border-purple-500 shadow-lg shadow-purple-500/25" 
+                          : "bg-slate-800/50 text-slate-400 border-white/5 hover:bg-slate-800 hover:text-white"
+                      }`}
+                    >
+                      {cat.name.includes("Cloud") ? "Cloud & DevOps" : 
+                       cat.name.includes("AI") ? "AI & Data Science" :
+                       cat.name.includes("Enterprise") ? "Enterprise" :
+                       "Development"}
+                    </button>
+                  ))}
+               </div>
+
                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                 {COURSE_CATEGORIES.map((category, index) => (
-                   <div key={index} className="bg-slate-800/40 backdrop-blur-sm p-6 rounded-2xl border border-white/5 hover:border-purple-500/50 transition-all group hover:-translate-y-1 shadow-lg">
+                 {COURSE_CATEGORIES
+                   .filter(category => activeCourseFilter === "All" || category.name === activeCourseFilter)
+                   .map((category, index) => (
+                   <div key={index} className="bg-slate-800/40 backdrop-blur-sm p-6 rounded-2xl border border-white/5 hover:border-purple-500/50 transition-all group hover:-translate-y-1 shadow-lg animate-in fade-in zoom-in duration-300">
                      <h4 className="text-xl font-bold text-white mb-4 pb-2 border-b border-white/5 group-hover:text-purple-400 transition-colors">{category.name}</h4>
                      <ul className="space-y-3">
                        {category.courses.map((course, cIdx) => (
