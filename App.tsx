@@ -73,6 +73,7 @@ import {
 } from './constants';
 import { TechSkylineLogo } from './Logo';
 import { About } from './About';
+import { Policies } from './Policies';
 
 // Animated Counter Component
 const CountUp = ({ end, suffix = "", duration = 2000, decimals = 0 }: { end: number | string, suffix?: string, duration?: number, decimals?: number }) => {
@@ -133,7 +134,7 @@ function App() {
   const [activeCourseFilter, setActiveCourseFilter] = useState("All");
   
   // View State (Simple Router)
-  const [currentView, setCurrentView] = useState<'home' | 'about'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'about' | 'policies'>('home');
 
   // Portal State
   const [activePortalView, setActivePortalView] = useState<string | null>(null);
@@ -241,6 +242,13 @@ function App() {
       setCurrentView('about');
       window.scrollTo(0, 0);
       trackEvent('page_view', { page: 'about' });
+      return;
+    }
+
+    if (id === 'policies') {
+      setCurrentView('policies');
+      window.scrollTo(0, 0);
+      trackEvent('page_view', { page: 'policies' });
       return;
     }
 
@@ -1620,8 +1628,10 @@ Sent from Techskyline.in`;
               </div>
             </section>
         </>
-      ) : (
+      ) : currentView === 'about' ? (
         <About />
+      ) : (
+        <Policies />
       )}
 
       {/* Contact Section */}
@@ -1836,8 +1846,14 @@ Sent from Techskyline.in`;
              {CONTACT_INFO.tagline}
            </p>
            <div className="flex justify-center gap-6 mb-8">
-             {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map(item => (
-               <a key={item} href="#" className="hover:text-cyan-400 transition-colors">{item}</a>
+             {['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'Refund Policy'].map(item => (
+               <button 
+                  key={item} 
+                  onClick={() => handleNavigation('policies')}
+                  className="hover:text-cyan-400 transition-colors text-xs uppercase tracking-wider"
+               >
+                  {item}
+               </button>
              ))}
            </div>
            <p>&copy; {new Date().getFullYear()} {CONTACT_INFO.company}. All rights reserved.</p>
