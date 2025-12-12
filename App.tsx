@@ -929,19 +929,24 @@ Sent from Techskyline.in`;
                           <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-200 tracking-tighter drop-shadow-sm uppercase">
                             TECH SKYLINE
                           </h1>
-                          <p className="text-xl md:text-2xl text-slate-300 font-bold tracking-[0.4em] mt-2 border-t border-white/20 pt-2 inline-block">
-                            IT SOLUTIONS
+                          <p className="text-xl md:text-2xl text-slate-300 font-bold tracking-[0.2em] mt-2 border-t border-white/20 pt-2 inline-block">
+                            INFORMATION TECHNOLOGY CONSULTING
                           </p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Quotation */}
-                  <div className="mb-12 max-w-3xl">
-                    <Quote size={40} className="text-cyan-400 mx-auto mb-4 opacity-80" />
-                    <p className="text-2xl md:text-4xl font-light italic text-white leading-relaxed tracking-wide drop-shadow-md">
-                      "{HERO_CONTENT.quote}"
-                    </p>
+                  {/* Quotation / Subtitle Area */}
+                  <div className="mb-12 max-w-4xl">
+                    <h2 className="text-2xl md:text-4xl font-bold text-white mb-6 tracking-wide leading-tight drop-shadow-md bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                      {HERO_CONTENT.subtitle}
+                    </h2>
+                    <div className="flex items-center justify-center gap-2 opacity-80">
+                      <Quote size={20} className="text-cyan-400" />
+                      <p className="text-lg font-light italic text-slate-300">
+                        "{HERO_CONTENT.quote}"
+                      </p>
+                    </div>
                   </div>
                   
                   <p className="text-lg text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed border-l-4 border-cyan-500 pl-6 text-left bg-black/20 p-4 rounded-r-lg backdrop-blur-sm">
