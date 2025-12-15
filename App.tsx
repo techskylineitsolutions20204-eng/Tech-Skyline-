@@ -88,8 +88,7 @@ const CountUp = ({ end, suffix = "", duration = 2000, decimals = 0 }: { end: num
           hasAnimated.current = true;
           
           if (typeof end === 'string') {
-             // If it's not a number (like "Global"), just show it immediately or after a delay
-             setCount(0); // Placeholder if we want to logic switch, but mostly we'll just render text
+             setCount(0); 
              return;
           }
 
@@ -280,7 +279,12 @@ function App() {
   };
 
   const openGoogleForm = () => {
-    trackEvent('click_apply', { destination: 'google_form', label: 'Apply Now' });
+    // Tracking this click as a 'generate_lead' event since it points to the application form
+    trackEvent('generate_lead', { 
+      event_category: 'engagement',
+      event_label: 'Apply Now Google Form',
+      destination: 'google_form'
+    });
     window.open(CONTACT_INFO.googleFormUrl, '_blank');
   };
 
@@ -366,6 +370,7 @@ function App() {
     e.preventDefault();
     if (!validateForm()) return;
 
+    // Track as a valid Lead
     trackEvent('generate_lead', { 
       method: 'WhatsApp', 
       source: 'Contact Form',
@@ -394,6 +399,7 @@ ${formData.message}`;
     e.preventDefault();
     if (!validateForm()) return;
 
+    // Track as a valid Lead
     trackEvent('generate_lead', { 
       method: 'Email', 
       source: 'Contact Form',
