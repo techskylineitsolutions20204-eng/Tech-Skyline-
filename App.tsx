@@ -56,7 +56,15 @@ import {
   Mic,
   Calendar,
   Send,
-  Bot
+  Bot,
+  PieChart,
+  BarChart2,
+  List,
+  CheckSquare,
+  Clock,
+  MessageSquare,
+  Layers,
+  ArrowLeft
 } from 'lucide-react';
 import { 
   CONTACT_INFO, 
@@ -77,7 +85,9 @@ import {
   SOCIAL_MEDIA,
   WEBINARS,
   PODCASTS,
-  COMMUNITY_RESOURCES
+  COMMUNITY_RESOURCES,
+  ADMIN_DASHBOARD_DATA,
+  TECH_STACK
 } from './constants';
 import { TechSkylineLogo } from './Logo';
 import { About } from './About';
@@ -141,7 +151,7 @@ function App() {
   const [activeCourseFilter, setActiveCourseFilter] = useState("All");
   
   // View State (Simple Router)
-  const [currentView, setCurrentView] = useState<'home' | 'about' | 'policies' | 'career-upskilling' | 'cloud-certifications' | 'podcast'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'about' | 'policies' | 'career-upskilling' | 'cloud-certifications' | 'podcast' | 'admin-dashboard'>('home');
 
   // Portal State
   const [activePortalView, setActivePortalView] = useState<string | null>(null);
@@ -167,6 +177,9 @@ function App() {
     email: '',
     location: '',
     company: '',
+    role: '', // Added for Lead Scoring
+    timeline: '', // Added for Lead Scoring
+    budget: '', // Added for Lead Scoring
     subject: '',
     interest: 'Corporate Training',
     message: ''
@@ -252,36 +265,15 @@ function App() {
   const handleNavigation = (id: string) => {
     setIsMenuOpen(false);
     
-    // Explicit Landing Page Views
-    if (id === 'career-upskilling' || id === 'cloud-certifications' || id === 'podcast') {
+    // Check for specific views
+    if (['career-upskilling', 'cloud-certifications', 'podcast', 'admin-dashboard', 'about', 'policies', 'home'].includes(id)) {
       setCurrentView(id as any);
       window.scrollTo(0, 0);
       trackEvent('page_view', { page: id });
       return;
     }
 
-    if (id === 'about') {
-      setCurrentView('about');
-      window.scrollTo(0, 0);
-      trackEvent('page_view', { page: 'about' });
-      return;
-    }
-
-    if (id === 'policies') {
-      setCurrentView('policies');
-      window.scrollTo(0, 0);
-      trackEvent('page_view', { page: 'policies' });
-      return;
-    }
-
-    if (id === 'home') {
-      setCurrentView('home');
-      window.scrollTo(0, 0);
-      trackEvent('page_view', { page: 'home' });
-      return;
-    }
-
-    // For specific sections within Home
+    // Default: Home View and scroll
     if (currentView !== 'home') {
        setCurrentView('home');
        setTimeout(() => {
@@ -386,7 +378,7 @@ function App() {
     e.preventDefault();
     if (!validateForm()) return;
     trackEvent('generate_lead', { method: 'WhatsApp', source: 'Contact Form', interest: formData.interest });
-    const text = `*New Inquiry from Techskyline.in*\n\n*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Email:* ${formData.email}\n*Interest:* ${formData.interest}\n*Message:* ${formData.message}`;
+    const text = `*New Inquiry from Techskyline.in*\n\n*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Email:* ${formData.email}\n*Interest:* ${formData.interest}\n*Role:* ${formData.role}\n*Timeline:* ${formData.timeline}\n*Message:* ${formData.message}`;
     window.open(`https://wa.me/918106243684?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -395,7 +387,7 @@ function App() {
     if (!validateForm()) return;
     trackEvent('generate_lead', { method: 'Email', source: 'Contact Form', interest: formData.interest });
     const subject = `[Inquiry]: ${formData.interest} - ${formData.subject}`;
-    const body = `Name: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+    const body = `Name: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nRole: ${formData.role}\nTimeline: ${formData.timeline}\n\nMessage:\n${formData.message}`;
     window.location.href = `mailto:techskylineitsolutions20204@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
@@ -468,48 +460,31 @@ function App() {
         )}
       </div>
 
-      {/* Media Player Modal - Same as before */}
+      {/* Media Player, Student Portal, Lab Modals - Same as before... */}
+      {/* (Keeping existing modal code to ensure app functionality remains intact) */}
       {activeClass && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-300">
-           {/* ... existing modal code ... */}
            <div className="bg-slate-900 w-full max-w-4xl rounded-2xl overflow-hidden shadow-2xl border border-white/10 flex flex-col relative">
              <div className="flex justify-between items-center p-4 border-b border-white/10 bg-slate-800">
                <h3 className="text-white font-bold flex items-center gap-2">
                  {activeClass.type === 'Video' ? <VideoIcon size={20} className="text-cyan-400"/> : <Headphones size={20} className="text-purple-400"/>}
                  {activeClass.title}
                </h3>
-               <button onClick={() => setActiveClass(null)} className="text-slate-400 hover:text-white transition-colors">
-                 <XCircle size={24}/>
-               </button>
+               <button onClick={() => setActiveClass(null)} className="text-slate-400 hover:text-white transition-colors"><XCircle size={24}/></button>
              </div>
-             
              <div className="aspect-video bg-black relative flex items-center justify-center group overflow-hidden">
-               {/* Real Player */}
                {activeClass.type === 'Video' ? (
-                 <video 
-                   src={activeClass.videoUrl} 
-                   poster={activeClass.thumbnail}
-                   controls 
-                   autoPlay 
-                   className="w-full h-full object-contain"
-                 />
+                 <video src={activeClass.videoUrl} poster={activeClass.thumbnail} controls autoPlay className="w-full h-full object-contain" />
                ) : (
                  <div className="w-full h-full relative flex items-center justify-center">
                     <img src={activeClass.thumbnail} className="absolute inset-0 w-full h-full object-cover opacity-30 blur-sm" alt="Thumbnail"/>
                     <div className="z-10 bg-black/50 p-8 rounded-2xl backdrop-blur-md border border-white/10 w-3/4 max-w-md">
                        <div className="text-center mb-6">
-                          <div className="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/30 animate-pulse">
-                             <Headphones size={32} className="text-white"/>
-                          </div>
+                          <div className="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/30 animate-pulse"><Headphones size={32} className="text-white"/></div>
                           <h4 className="text-white font-bold">{activeClass.title}</h4>
                           <p className="text-purple-300 text-sm">{activeClass.author}</p>
                        </div>
-                       <audio 
-                         src={activeClass.audioUrl} 
-                         controls 
-                         autoPlay
-                         className="w-full"
-                       />
+                       <audio src={activeClass.audioUrl} controls autoPlay className="w-full" />
                     </div>
                  </div>
                )}
@@ -518,7 +493,6 @@ function App() {
         </div>
       )}
 
-      {/* Student Portal & Lab Modals - Same as before (Keeping structure intact) */}
       {activePortalView && (
         <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl animate-in fade-in duration-300">
           <div className="bg-[#0f172a] w-full max-w-6xl h-[85vh] rounded-2xl overflow-hidden shadow-2xl border border-slate-700 flex flex-col">
@@ -540,7 +514,6 @@ function App() {
       
       {activeLab && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl animate-in fade-in duration-300">
-           {/* Lab simulation UI similar to previous version */}
            <div className="w-full max-w-5xl bg-[#0d1117] rounded-xl overflow-hidden shadow-2xl border border-slate-700 flex flex-col h-[80vh]">
               <div className="bg-slate-800 p-2 flex justify-between items-center">
                  <div className="text-slate-400 text-xs font-mono ml-4">Lab Environment</div>
@@ -605,7 +578,7 @@ function App() {
         {isMenuOpen && (
           <div className="lg:hidden bg-slate-900/95 backdrop-blur-xl border-b border-white/10 absolute w-full shadow-2xl h-[calc(100vh-6rem)] overflow-y-auto">
             <div className="flex flex-col p-4 space-y-4">
-              {['Home', 'About', 'Services', 'Training', 'Corporate', 'Internships', 'Podcast', 'Career-Upskilling', 'Cloud-Certifications'].map((item) => (
+              {['Home', 'About', 'Services', 'Training', 'Corporate', 'Internships', 'Podcast'].map((item) => (
                 <button 
                   key={item}
                   onClick={() => handleNavigation(item.toLowerCase())}
@@ -625,7 +598,7 @@ function App() {
       {/* VIEW RENDERER */}
       {currentView === 'home' ? (
         <>
-            {/* ... Existing Hero & Sections ... */}
+            {/* Existing Sections... */}
              <section id="home" className="pt-32 pb-20 md:pt-48 md:pb-32 relative overflow-hidden flex items-center min-h-[90vh]">
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/30 rounded-full mix-blend-screen filter blur-3xl animate-pulse"></div>
@@ -676,6 +649,20 @@ function App() {
               </div>
             </section>
 
+            {/* Lead Magnet Strip */}
+            <section className="py-4 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-y border-yellow-500/20">
+               <div className="container mx-auto px-4 flex flex-col md:flex-row justify-center items-center gap-4 text-center md:text-left">
+                  <div className="flex items-center gap-2 text-yellow-400 font-bold">
+                     <AlertCircle size={20} />
+                     <span className="uppercase tracking-wider text-sm">Free Resource</span>
+                  </div>
+                  <p className="text-slate-200 text-sm">Download our 2025 Cloud Career Roadmap & Salary Guide.</p>
+                  <button onClick={() => handleNavigation('career-upskilling')} className="bg-yellow-500 text-black px-4 py-1.5 rounded-full text-xs font-bold hover:bg-yellow-400 transition-colors">
+                     Get It Free
+                  </button>
+               </div>
+            </section>
+
             {/* Clients Banner */}
             <section className="py-8 bg-black/30 backdrop-blur-md border-y border-white/10 overflow-hidden">
                {/* ... (Client logo carousel code same as before) ... */}
@@ -702,57 +689,10 @@ function App() {
               </div>
             </section>
 
-            {/* Lead Magnet Strip */}
-            <section className="py-4 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-y border-yellow-500/20">
-               <div className="container mx-auto px-4 flex flex-col md:flex-row justify-center items-center gap-4 text-center md:text-left">
-                  <div className="flex items-center gap-2 text-yellow-400 font-bold">
-                     <AlertCircle size={20} />
-                     <span className="uppercase tracking-wider text-sm">Free Resource</span>
-                  </div>
-                  <p className="text-slate-200 text-sm">Download our 2025 Cloud Career Roadmap & Salary Guide.</p>
-                  <button onClick={() => handleNavigation('career-upskilling')} className="bg-yellow-500 text-black px-4 py-1.5 rounded-full text-xs font-bold hover:bg-yellow-400 transition-colors">
-                     Get It Free
-                  </button>
-               </div>
-            </section>
-
-            {/* Existing Sections... (Stats, Technologies, Services, Training) */}
-            {/* Re-rendering Stats Section */}
-            <section className="py-16 relative">
-               {/* ... Stats Code ... */}
-                <div className="container mx-auto px-4 md:px-6">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                  {STATS.map((stat, index) => {
-                     let endVal = 0;
-                     let suffix = "";
-                     let decimals = 0;
-                     if (stat.value.includes("%")) { endVal = parseFloat(stat.value.replace("%", "")); suffix = "%"; decimals = 1; } 
-                     else if (stat.value.includes("+")) { endVal = parseInt(stat.value.replace(/,/g, "").replace("+", "")); suffix = "+"; } 
-                     else if (stat.value === "Global") { endVal = 0; suffix = "Global"; } 
-                     else { endVal = parseInt(stat.value); }
-
-                     return (
-                      <div key={index} className="text-center group p-6 rounded-2xl bg-white/5 backdrop-blur-lg border border-white/10 hover:bg-white/10 hover:border-cyan-500/50 transition-all duration-300 shadow-xl">
-                        <div className="bg-gradient-to-br from-cyan-500 to-blue-600 p-3 rounded-xl w-14 h-14 flex items-center justify-center mx-auto mb-4 text-white group-hover:scale-110 transition-transform shadow-lg shadow-cyan-500/30">
-                          <stat.icon size={28} />
-                        </div>
-                        <div className="text-3xl font-black mb-1 text-white">
-                          {stat.value === "Global" ? "Global" : <CountUp end={endVal} suffix={suffix} decimals={decimals} />}
-                        </div>
-                        <div className="text-xs text-cyan-200 font-bold uppercase tracking-wider">{stat.label}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </section>
-
             {/* Webinar & Community Section (New High Intent) */}
             <section className="py-20 relative bg-slate-900 border-t border-white/5">
                <div className="container mx-auto px-4 md:px-6">
                   <div className="flex flex-col lg:flex-row gap-12">
-                     
-                     {/* Webinars Column */}
                      <div className="lg:w-1/2">
                         <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                            <VideoIcon className="text-red-500" /> Upcoming Webinars
@@ -775,8 +715,6 @@ function App() {
                            ))}
                         </div>
                      </div>
-
-                     {/* GitHub / Community Column */}
                      <div className="lg:w-1/2">
                          <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                            <Github className="text-white" /> Open Source Resources
@@ -792,21 +730,18 @@ function App() {
                                  <p className="text-sm text-slate-400 mb-3">{repo.description}</p>
                                  <div className="flex gap-4 text-xs text-slate-500">
                                     <span className="flex items-center gap-1"><Star size={12}/> {repo.stars}</span>
-                                    <span className="flex items-center gap-1"><GitBranch size={12}/> {repo.forks}</span>
+                                    <span className="flex items-center gap-1"><CheckCircle size={12}/> {repo.forks}</span>
                                  </div>
                               </div>
                            ))}
                         </div>
                      </div>
-
                   </div>
                </div>
             </section>
 
-            {/* Re-include other sections (Training, Corporate, Internships, etc.) for brevity, assume they exist or wrap them */}
-            {/* ... (Including Corporate Training, Internship sections from previous code) ... */}
+            {/* Corporate Training Section with SLAs */}
             <section id="corporate" className="py-20 relative bg-slate-900 border-t border-white/5 overflow-hidden">
-               {/* Reuse Corporate Training Section Code */}
                <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-600/5 skew-x-12 pointer-events-none"></div>
                <div className="container mx-auto px-4 md:px-6 relative z-10">
                   <div className="text-center mb-16 max-w-4xl mx-auto">
@@ -815,21 +750,134 @@ function App() {
                     </div>
                     <h2 className="text-4xl md:text-5xl font-black text-white mb-6">{CORPORATE_TRAINING.title}</h2>
                     <p className="text-xl text-slate-300 font-light leading-relaxed mb-4">{CORPORATE_TRAINING.subtitle}</p>
-                    <div className="mt-8">
-                       <button onClick={() => handleNavigation('contact')} className="bg-white text-blue-900 px-8 py-3 rounded-xl font-bold hover:bg-blue-50 transition-colors">Download Brochure</button>
+                    
+                    {/* SLA Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-12">
+                       {CORPORATE_TRAINING.sla.map((item, i) => (
+                          <div key={i} className="bg-slate-800 p-6 rounded-2xl border border-white/10 text-center hover:bg-slate-750 transition-colors">
+                             <item.icon className="text-cyan-400 mx-auto mb-4" size={32} />
+                             <div className="text-3xl font-bold text-white mb-1">{item.value}</div>
+                             <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">{item.title}</div>
+                             <p className="text-xs text-slate-500">{item.desc}</p>
+                          </div>
+                       ))}
+                    </div>
+
+                    <div className="mt-8 bg-white/5 p-8 rounded-3xl border border-white/10 text-left">
+                       <h4 className="text-xl font-bold text-white mb-6 flex items-center gap-3"><Layers className="text-purple-400"/> Immediate Response Workflow</h4>
+                       <div className="flex flex-col md:flex-row justify-between items-center relative">
+                          <div className="absolute top-1/2 left-0 w-full h-0.5 bg-white/10 -z-10 hidden md:block"></div>
+                          {CORPORATE_TRAINING.workflow.map((step, i) => (
+                             <div key={i} className={`flex flex-col items-center bg-slate-900 p-4 rounded-xl border ${step.active ? 'border-green-500/50' : 'border-white/10'} w-full md:w-auto z-10 mb-4 md:mb-0`}>
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold mb-3 ${step.active ? 'bg-green-600 text-white' : 'bg-slate-800 text-slate-500'}`}>{i+1}</div>
+                                <div className="font-bold text-white text-sm mb-1">{step.title}</div>
+                                <div className="text-xs text-slate-500">{step.desc}</div>
+                             </div>
+                          ))}
+                       </div>
+                    </div>
+
+                    <div className="mt-8 text-center">
+                       <button onClick={() => handleNavigation('contact')} className="bg-white text-blue-900 px-8 py-3 rounded-xl font-bold hover:bg-blue-50 transition-colors">Request Corporate Brochure</button>
                     </div>
                   </div>
                </div>
             </section>
-            
-            {/* ... Other sections (Reviews, Contact) ... */}
         </>
+      ) : currentView === 'admin-dashboard' ? (
+         // ADMIN DASHBOARD VIEW
+         <div className="pt-32 pb-20 animate-in fade-in duration-500">
+            <div className="container mx-auto px-4 max-w-7xl">
+               <div className="flex justify-between items-center mb-8">
+                  <h1 className="text-3xl font-black text-white flex items-center gap-3">
+                     <PieChart className="text-cyan-400"/> Analytics Dashboard
+                  </h1>
+                  <button onClick={() => handleNavigation('home')} className="flex items-center gap-2 text-slate-400 hover:text-white"><ArrowLeft size={16}/> Back to Home</button>
+               </div>
+
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                  <div className="bg-slate-800 p-6 rounded-2xl border border-white/10">
+                     <div className="text-slate-400 text-xs font-bold uppercase mb-2">Total Leads (MoM)</div>
+                     <div className="text-3xl font-bold text-white">1,245</div>
+                     <div className="text-green-400 text-xs mt-1 flex items-center gap-1"><TrendingUp size={12}/> +12.5%</div>
+                  </div>
+                  <div className="bg-slate-800 p-6 rounded-2xl border border-white/10">
+                     <div className="text-slate-400 text-xs font-bold uppercase mb-2">Webinar Conversion</div>
+                     <div className="text-3xl font-bold text-white">18.4%</div>
+                     <div className="text-green-400 text-xs mt-1 flex items-center gap-1"><TrendingUp size={12}/> +2.1%</div>
+                  </div>
+                  <div className="bg-slate-800 p-6 rounded-2xl border border-white/10">
+                     <div className="text-slate-400 text-xs font-bold uppercase mb-2">Corporate Pipeline</div>
+                     <div className="text-3xl font-bold text-white">$415k</div>
+                     <div className="text-slate-500 text-xs mt-1">Weighted Value</div>
+                  </div>
+                  <div className="bg-slate-800 p-6 rounded-2xl border border-white/10">
+                     <div className="text-slate-400 text-xs font-bold uppercase mb-2">Avg. Response Time</div>
+                     <div className="text-3xl font-bold text-white">45m</div>
+                     <div className="text-green-400 text-xs mt-1">Within SLA</div>
+                  </div>
+               </div>
+
+               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                  <div className="bg-slate-800 p-8 rounded-2xl border border-white/10">
+                     <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2"><BarChart2 className="text-purple-400"/> Leads by Source Platform</h3>
+                     <div className="space-y-4">
+                        {ADMIN_DASHBOARD_DATA.sources.map((src, i) => (
+                           <div key={i}>
+                              <div className="flex justify-between text-sm mb-1">
+                                 <span className="text-slate-300">{src.platform}</span>
+                                 <span className="text-white font-bold">{src.leads}%</span>
+                              </div>
+                              <div className="w-full bg-slate-700 h-2 rounded-full overflow-hidden">
+                                 <div className={`h-full ${src.color}`} style={{ width: `${src.leads}%` }}></div>
+                              </div>
+                           </div>
+                        ))}
+                     </div>
+                  </div>
+
+                  <div className="bg-slate-800 p-8 rounded-2xl border border-white/10">
+                     <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2"><List className="text-yellow-400"/> Recent Lead Scoring</h3>
+                     <div className="overflow-x-auto">
+                        <table className="w-full text-left">
+                           <thead className="text-xs text-slate-500 uppercase border-b border-white/10">
+                              <tr>
+                                 <th className="pb-3">Name</th>
+                                 <th className="pb-3">Role</th>
+                                 <th className="pb-3">Score</th>
+                                 <th className="pb-3">Status</th>
+                              </tr>
+                           </thead>
+                           <tbody className="text-sm">
+                              {ADMIN_DASHBOARD_DATA.recentLeads.map((lead, i) => (
+                                 <tr key={i} className="border-b border-white/5 last:border-0">
+                                    <td className="py-3 text-white font-bold">{lead.name}</td>
+                                    <td className="py-3 text-slate-400">{lead.role}</td>
+                                    <td className="py-3 text-slate-300">{lead.score}</td>
+                                    <td className="py-3">
+                                       <span className={`px-2 py-1 rounded text-xs font-bold ${lead.status === 'Hot' ? 'bg-red-500/20 text-red-400' : lead.status === 'Warm' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-blue-500/20 text-blue-400'}`}>
+                                          {lead.status}
+                                       </span>
+                                    </td>
+                                 </tr>
+                              ))}
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      ) : currentView === 'about' ? (
+        <About />
+      ) : currentView === 'policies' ? (
+        <Policies />
       ) : currentView === 'career-upskilling' ? (
-         // LANDING PAGE: Career Upskilling
+         // Existing Career Upskilling Code...
          <div className="pt-32 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="container mx-auto px-4 max-w-6xl">
                <button onClick={() => handleNavigation('home')} className="mb-8 flex items-center gap-2 text-slate-400 hover:text-white transition-colors"><ArrowLeft size={16}/> Back to Home</button>
-               
+               {/* ... (Existing content) ... */}
                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                   <div>
                      <span className="text-yellow-400 font-bold tracking-widest uppercase text-sm mb-2 block">Free Resource</span>
@@ -847,12 +895,10 @@ function App() {
                         ))}
                      </ul>
                   </div>
-                  
                   <div className="bg-slate-800 p-8 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
                      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
                      <h3 className="text-2xl font-bold text-white mb-2">Get Your Free Roadmap</h3>
                      <p className="text-slate-400 mb-6 text-sm">Enter your details to receive the PDF instantly via email.</p>
-                     
                      <div className="space-y-4">
                         <input type="text" placeholder="Full Name" className="w-full bg-slate-900 border border-white/10 rounded-xl p-4 text-white focus:border-cyan-500 outline-none" />
                         <input type="email" placeholder="Work Email Address" className="w-full bg-slate-900 border border-white/10 rounded-xl p-4 text-white focus:border-cyan-500 outline-none" />
@@ -870,18 +916,16 @@ function App() {
             </div>
          </div>
       ) : currentView === 'cloud-certifications' ? (
-         // LANDING PAGE: Cloud Certifications
+         // Existing Cloud Certifications Code...
          <div className="pt-32 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="container mx-auto px-4 max-w-5xl text-center">
                <button onClick={() => handleNavigation('home')} className="mb-8 inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors"><ArrowLeft size={16}/> Back to Home</button>
-               
                <h1 className="text-4xl md:text-5xl font-black text-white mb-6">
                   Fast-Track Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Cloud Certification</span>
                </h1>
                <p className="text-xl text-slate-300 mb-12 max-w-3xl mx-auto">
                   Don't just pass the exam—master the skills. Our certification programs come with 100% passing assistance and hands-on labs.
                </p>
-
                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                   {[
                      { title: "AWS Solutions Architect", bg: "from-orange-500/20 to-yellow-500/20", border: "border-orange-500/30" },
@@ -900,7 +944,6 @@ function App() {
                      </div>
                   ))}
                </div>
-
                <div className="bg-slate-800 p-8 rounded-3xl border border-white/10 max-w-2xl mx-auto">
                   <h3 className="text-2xl font-bold text-white mb-4">Book a 15-Minute Career Clarity Call</h3>
                   <p className="text-slate-400 mb-6">Confused about which certification to pick? Talk to a senior architect for free.</p>
@@ -911,11 +954,10 @@ function App() {
             </div>
          </div>
       ) : currentView === 'podcast' ? (
-         // PODCAST PAGE
+         // Existing Podcast View...
          <div className="pt-32 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="container mx-auto px-4 max-w-6xl">
                <button onClick={() => handleNavigation('home')} className="mb-8 flex items-center gap-2 text-slate-400 hover:text-white transition-colors"><ArrowLeft size={16}/> Back to Home</button>
-               
                <div className="text-center mb-16">
                   <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-purple-900/50 border border-purple-500/30 text-purple-300 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
                      <Mic size={14} /> Listen Now
@@ -925,7 +967,6 @@ function App() {
                      Deep dives into Cloud Computing, AI trends, and Career Hacks for IT professionals.
                   </p>
                </div>
-
                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {PODCASTS.map((pod) => (
                      <div key={pod.id} className="bg-slate-800 rounded-2xl overflow-hidden border border-white/5 group hover:border-purple-500/50 transition-all">
@@ -949,27 +990,41 @@ function App() {
                </div>
             </div>
          </div>
-      ) : currentView === 'about' ? (
-        <About />
       ) : (
-        <Policies />
+        <></>
       )}
 
-      {/* Contact Section - Same as before */}
+      {/* Contact Section - Lead Scoring Enhanced Form */}
       <section id="contact" className="py-20 relative">
          <div className="container mx-auto px-4 md:px-6">
             <div className="bg-slate-900/80 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-               {/* ... Contact Content ... */}
                <div className="flex flex-col lg:flex-row">
                   <div className="lg:w-1/3 bg-gradient-to-br from-cyan-600 to-blue-700 p-10 text-white relative overflow-hidden">
-                     {/* ... (Sidebar content) ... */}
                      <h3 className="text-2xl font-bold mb-6 relative z-10">Get In Touch</h3>
-                     {/* ... */}
+                     <p className="text-blue-100 mb-8 relative z-10 leading-relaxed">
+                        Ready to transform your business or career? Fill out the details to get an immediate response.
+                     </p>
+                     
+                     <div className="space-y-6 relative z-10">
+                        <div className="flex items-start gap-4">
+                           <Phone className="mt-1 shrink-0 text-blue-200" size={20} />
+                           <div>
+                              <h4 className="font-bold text-sm">Phone</h4>
+                              <p className="text-blue-100 text-sm">{CONTACT_INFO.phone}</p>
+                           </div>
+                        </div>
+                        <div className="flex items-start gap-4">
+                           <Mail className="mt-1 shrink-0 text-blue-200" size={20} />
+                           <div>
+                              <h4 className="font-bold text-sm">Email</h4>
+                              <p className="text-blue-100 text-sm">{CONTACT_INFO.email}</p>
+                           </div>
+                        </div>
+                     </div>
                   </div>
                   <div className="lg:w-2/3 p-10">
-                     <h3 className="text-2xl font-bold text-white mb-6">Send us a Message</h3>
+                     <h3 className="text-2xl font-bold text-white mb-6">Start Conversation</h3>
                      <form className="space-y-4">
-                        {/* ... Form Inputs ... */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                            <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Name" className="bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white w-full"/>
                            <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="Phone" className="bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white w-full"/>
@@ -980,10 +1035,29 @@ function App() {
                               <option>Corporate Training</option>
                               <option>IT Staffing</option>
                               <option>Free Consultation</option>
+                              <option>Student Internship</option>
                            </select>
                         </div>
-                        <input type="text" name="subject" value={formData.subject} onChange={handleInputChange} placeholder="Subject" className="bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white w-full"/>
-                        <textarea name="message" value={formData.message} onChange={handleInputChange} rows={4} placeholder="Message" className="bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white w-full"></textarea>
+                        
+                        {/* Enhanced Fields for Lead Scoring */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                           <select name="role" value={formData.role} onChange={handleInputChange} className="bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white w-full text-sm">
+                              <option value="">Select Role</option>
+                              <option value="Student">Student / Fresher</option>
+                              <option value="Professional">Working Professional</option>
+                              <option value="Manager">Hiring Manager / HR</option>
+                              <option value="Executive">CXO / Director</option>
+                           </select>
+                           <select name="timeline" value={formData.timeline} onChange={handleInputChange} className="bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white w-full text-sm">
+                              <option value="">Timeline</option>
+                              <option value="Immediate">Immediate</option>
+                              <option value="1-3 Months">1-3 Months</option>
+                              <option value="Later">Browsing</option>
+                           </select>
+                           <input type="text" name="subject" value={formData.subject} onChange={handleInputChange} placeholder="Subject/Skill" className="bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white w-full text-sm"/>
+                        </div>
+
+                        <textarea name="message" value={formData.message} onChange={handleInputChange} rows={4} placeholder="How can we help you?" className="bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white w-full"></textarea>
                         
                         <div className="flex gap-4">
                            <button onClick={handleWhatsApp} className="flex-1 bg-green-600 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2"><MessageCircle size={18}/> WhatsApp</button>
@@ -998,30 +1072,41 @@ function App() {
 
       {/* Footer */}
       <footer className="bg-slate-950 py-12 border-t border-white/10 text-slate-400 text-sm">
-         <div className="container mx-auto px-4 text-center">
-            {/* ... Footer Content ... */}
-            <div className="flex items-center justify-center gap-2 mb-4">
-               <TechSkylineLogo className="w-8 h-8"/> <span className="text-white font-bold">TECH SKYLINE</span>
+         <div className="container mx-auto px-4">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+               <div className="flex items-center gap-2 mb-4 md:mb-0">
+                  <TechSkylineLogo className="w-8 h-8"/> <span className="text-white font-bold">TECH SKYLINE</span>
+               </div>
+               
+               {/* Tech Stack Icons */}
+               <div className="flex gap-4 flex-wrap justify-center">
+                  <span className="text-xs text-slate-500 uppercase self-center mr-2">Powered By:</span>
+                  {TECH_STACK.map((tech, i) => (
+                     <div key={i} className="bg-slate-900 px-3 py-1 rounded border border-white/5 text-xs text-slate-400 font-medium" title={tech.category}>
+                        {tech.name}
+                     </div>
+                  ))}
+               </div>
             </div>
+
             <div className="flex justify-center gap-4 mb-6">
                {SOCIAL_MEDIA.map((social, idx) => (
                   <a key={idx} href={social.url} target="_blank" className="p-2 bg-slate-900 rounded-full hover:bg-slate-800 hover:text-white transition-colors border border-white/5"><social.icon size={20}/></a>
                ))}
             </div>
-            <p className="max-w-md mx-auto mb-8">{CONTACT_INFO.tagline}</p>
+            
+            <p className="max-w-md mx-auto mb-8 text-center">{CONTACT_INFO.tagline}</p>
+            
             <div className="flex justify-center gap-6 mb-8 text-xs uppercase tracking-wide">
                <button onClick={() => handleNavigation('policies')}>Privacy Policy</button>
                <button onClick={() => handleNavigation('career-upskilling')}>Skill Roadmap</button>
-               <button onClick={() => handleNavigation('corporate')}>Corporate</button>
+               <button onClick={() => handleNavigation('admin-dashboard')} className="text-slate-600 hover:text-slate-400">Admin Demo</button>
             </div>
-            <p>&copy; {new Date().getFullYear()} {CONTACT_INFO.company}. All rights reserved.</p>
+            <p className="text-center">&copy; {new Date().getFullYear()} {CONTACT_INFO.company}. All rights reserved.</p>
          </div>
       </footer>
     </div>
   );
 }
-
-// Helper icons for local components if not imported globally
-import { ArrowLeft, Clock, GitBranch } from 'lucide-react';
 
 export default App;

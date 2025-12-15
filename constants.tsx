@@ -48,7 +48,13 @@ import {
   Github,
   Mic,
   Calendar,
-  BookMarked
+  BookMarked,
+  Clock,
+  MessageSquare,
+  PieChart,
+  BarChart2,
+  List,
+  CheckSquare
 } from 'lucide-react';
 import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory, ValueItem, TeamMember } from './types';
 
@@ -321,6 +327,18 @@ export const CORPORATE_TRAINING = {
     { category: "Enterprise Apps", items: ["SAP S/4 HANA", "Salesforce", "ServiceNow", "Workday", "Oracle Cloud", "Microsoft Dynamics 365"] },
     { category: "Cybersecurity", items: ["Ethical Hacking", "Cloud Security", "CISSP", "Network Security", "IAM", "DevSecOps", "SIEM"] },
     { category: "Modern Web", items: ["React/Node.js", "Java Spring Boot", "Python Django", ".NET Core", "Angular", "Microservices", "GraphQL"] }
+  ],
+  sla: [
+    { title: "Response Time", value: "< 2 Hours", desc: "For all corporate inquiries during business hours.", icon: Clock },
+    { title: "Proposal Delivery", value: "24 Hours", desc: "Customized training proposal with module breakdown.", icon: FileText },
+    { title: "Trainer Matching", value: "48 Hours", desc: "Profile sharing of industry-expert trainers tailored to your needs.", icon: UserCheck }
+  ],
+  workflow: [
+    { title: "Inquiry Received", desc: "Logged in CRM", active: true },
+    { title: "Needs Analysis", desc: "Call with L&D Lead", active: true },
+    { title: "Solution Design", desc: "SME Curates Syllabus", active: true },
+    { title: "Proposal Sent", desc: "Commercials & Timeline", active: false },
+    { title: "Onboarding", desc: "Kickoff & LMS Access", active: false }
   ]
 };
 
@@ -537,4 +555,42 @@ export const COMMUNITY_RESOURCES = [
     forks: 67,
     language: "Python"
   }
+];
+
+// --- ADMIN DASHBOARD & TECH STACK ---
+
+export const ADMIN_DASHBOARD_DATA = {
+  sources: [
+    { platform: "LinkedIn", leads: 45, color: "bg-blue-600" },
+    { platform: "Google Search", leads: 32, color: "bg-green-500" },
+    { platform: "GitHub", leads: 18, color: "bg-gray-700" },
+    { platform: "Webinar", leads: 28, color: "bg-red-500" },
+    { platform: "Referral", leads: 12, color: "bg-yellow-500" }
+  ],
+  conversions: [
+    { stage: "Webinar Registration", count: 150, rate: "100%" },
+    { stage: "Attended", count: 85, rate: "56%" },
+    { stage: "Booked Consultation", count: 22, rate: "26%" },
+    { stage: "Enrolled", count: 8, rate: "36%" }
+  ],
+  corporatePipeline: [
+    { stage: "Inquiry", count: 12, value: "$60k" },
+    { stage: "Proposal Sent", count: 5, value: "$125k" },
+    { stage: "Negotiation", count: 2, value: "$80k" },
+    { stage: "Closed Won", count: 3, value: "$150k" }
+  ],
+  recentLeads: [
+    { name: "John Doe", role: "CTO", company: "FinTech Corp", score: 85, status: "Hot" },
+    { name: "Sarah Lee", role: "Student", company: "MIT", score: 40, status: "Nurture" },
+    { name: "Mike Ross", role: "HR Manager", company: "Law Firm LLC", score: 72, status: "Warm" },
+  ]
+};
+
+export const TECH_STACK = [
+  { name: "HubSpot", category: "CRM & Forms" },
+  { name: "Zoom", category: "Webinars" },
+  { name: "Slack", category: "Communication" },
+  { name: "Google Analytics 4", category: "Tracking" },
+  { name: "AWS", category: "Cloud Hosting" },
+  { name: "Stripe", category: "Payments" }
 ];
