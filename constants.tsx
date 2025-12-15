@@ -61,7 +61,7 @@ import {
 } from 'lucide-react';
 import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory, ValueItem, TeamMember } from './types';
 
-// ... (CONTACT_INFO, SOCIAL_MEDIA, HERO_CONTENT, STATS, CONSULTING_SERVICES, CLIENTS, TESTIMONIALS, FEATURED_TECHNOLOGIES, INTERNSHIP_PROGRAM remain the same)
+// ... (CONTACT_INFO, SOCIAL_MEDIA remain the same)
 
 export const CONTACT_INFO = {
   contactName: "Abhinav",
@@ -93,11 +93,13 @@ export const SOCIAL_MEDIA = [
     icon: Github 
   },
   { 
-    name: "Medium", 
-    url: "https://medium.com", 
-    icon: BookMarked 
+    name: "Slack Community", 
+    url: "#slack-invite", 
+    icon: MessageSquare 
   }
 ];
+
+// ... (HERO_CONTENT, STATS, CONSULTING_SERVICES, CLIENTS, TESTIMONIALS, FEATURED_TECHNOLOGIES, INTERNSHIP_PROGRAM remain the same)
 
 export const HERO_CONTENT = {
   quote: "Technology brings everything closer and connected",
@@ -653,4 +655,14 @@ export const TECH_STACK = [
   { name: "Google Analytics 4", category: "Tracking" },
   { name: "AWS", category: "Cloud Hosting" },
   { name: "Stripe", category: "Payments" }
+];
+
+export const STRIPE_PLANS = [
+  { id: 'cloud-mastery', name: 'Cloud Mastery Bundle', price: 499, currency: 'USD' },
+  { id: 'devops-pro', name: 'DevOps Professional', price: 599, currency: 'USD' },
+  { id: 'data-science', name: 'Data Science Bootcamp', price: 699, currency: 'USD' }
+];
+
+export const ZOOM_SLOTS = [
+  "10:00 AM", "11:30 AM", "2:00 PM", "3:30 PM", "5:00 PM"
 ];
