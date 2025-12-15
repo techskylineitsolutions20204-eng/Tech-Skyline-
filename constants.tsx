@@ -44,7 +44,11 @@ import {
   Linkedin,
   Twitter,
   Facebook,
-  Youtube
+  Youtube,
+  Github,
+  Mic,
+  Calendar,
+  BookMarked
 } from 'lucide-react';
 import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory, ValueItem, TeamMember } from './types';
 
@@ -73,14 +77,14 @@ export const SOCIAL_MEDIA = [
     icon: Youtube 
   },
   { 
-    name: "Twitter", 
-    url: "https://twitter.com", 
-    icon: Twitter 
+    name: "GitHub", 
+    url: "https://github.com", 
+    icon: Github 
   },
   { 
-    name: "Facebook", 
-    url: "https://facebook.com", 
-    icon: Facebook 
+    name: "Medium", 
+    url: "https://medium.com", 
+    icon: BookMarked 
   }
 ];
 
@@ -460,3 +464,77 @@ Today, we stand at the intersection of education and enterprise. We don't just t
     }
   ]
 };
+
+// --- NEW MARKETING CONSTANTS ---
+
+export const WEBINARS = [
+  {
+    id: 1,
+    title: "Cloud Skills Hiring Trends 2025",
+    date: "Dec 15, 2024",
+    time: "10:00 AM EST",
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bbc7f?auto=format&fit=crop&w=800&q=80",
+    description: "Discover what top MNCs are looking for in cloud engineers. From AWS to Azure, we break down the most in-demand certifications.",
+    host: "Abhinav & Tech Team"
+  },
+  {
+    id: 2,
+    title: "How Corporates Can Upskill Without Attrition",
+    date: "Dec 22, 2024",
+    time: "2:00 PM EST",
+    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80",
+    description: "Strategies for L&D managers to retain talent while upgrading their tech stack.",
+    host: "James Wilson"
+  }
+];
+
+export const PODCASTS = [
+  {
+    id: 1,
+    title: "The Tech Skyline Show: Ep 01 - The Future of GenAI",
+    duration: "25 min",
+    guest: "Dr. Sarah Smith",
+    image: "https://images.unsplash.com/photo-1478737270239-2f02b77ac6d5?auto=format&fit=crop&w=600&q=80",
+    link: "#"
+  },
+  {
+    id: 2,
+    title: "Ep 02 - Migrating Legacy Monoliths to Microservices",
+    duration: "32 min",
+    guest: "James Wilson",
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
+    link: "#"
+  },
+  {
+    id: 3,
+    title: "Ep 03 - Cybersecurity in the Age of Remote Work",
+    duration: "28 min",
+    guest: "Priya Sharma",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80",
+    link: "#"
+  }
+];
+
+export const COMMUNITY_RESOURCES = [
+  {
+    title: "cloud-career-roadmap-2025",
+    description: "Complete step-by-step guide to becoming a Cloud Architect in 2025. Includes free resources and tool lists.",
+    stars: 124,
+    forks: 45,
+    language: "Markdown"
+  },
+  {
+    title: "aws-devops-learning-path",
+    description: "Zero to Hero guide for AWS DevOps. Hands-on labs, Terraform scripts, and CI/CD pipelines.",
+    stars: 89,
+    forks: 32,
+    language: "HCL"
+  },
+  {
+    title: "data-science-certification-guide",
+    description: "Curated list of best Data Science certifications, free datasets, and project ideas for beginners.",
+    stars: 210,
+    forks: 67,
+    language: "Python"
+  }
+];
