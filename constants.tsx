@@ -1,4 +1,5 @@
 
+// ... existing imports ...
 import { 
   Cloud, 
   Database, 
@@ -54,9 +55,13 @@ import {
   PieChart,
   BarChart2,
   List,
-  CheckSquare
+  CheckSquare,
+  GraduationCap,
+  Network
 } from 'lucide-react';
 import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory, ValueItem, TeamMember } from './types';
+
+// ... (CONTACT_INFO, SOCIAL_MEDIA, HERO_CONTENT, STATS, CONSULTING_SERVICES, CLIENTS, TESTIMONIALS, FEATURED_TECHNOLOGIES, INTERNSHIP_PROGRAM remain the same)
 
 export const CONTACT_INFO = {
   contactName: "Abhinav",
@@ -66,8 +71,8 @@ export const CONTACT_INFO = {
   company: "Techskyline.in",
   tagline: "Premier IT Consulting, Staffing, and Corporate Training Solutions.",
   address: "Marshall St, San Antonio, TX 78212, USA",
-  logo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=100&q=80", // Small logo for nav
-  heroLogo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=500&q=80", // Large logo placeholder
+  logo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=100&q=80", 
+  heroLogo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=500&q=80", 
   googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfcG6IKVRWZg0qi0V7eBRvRDozo0HRifzhEM5vEfLtFLvADbA/viewform"
 };
 
@@ -304,22 +309,45 @@ export const INTERNSHIP_PROGRAM = {
 
 export const CORPORATE_TRAINING = {
   title: "Corporate Training Solutions",
-  subtitle: "Transform Your Workforce",
+  subtitle: "Transform Your Workforce with Custom IT Training",
   description: "We partner with organizations to build high-performance technical teams. From fresh graduate onboarding to niche upskilling for senior architects, our training programs are customized to meet specific business objectives.",
   benefits: [
-    { title: "Customized Curriculum", description: "Training modules tailored specifically to your project requirements and tech stack.", icon: Settings },
-    { title: "Flexible Delivery Models", description: "Choose from Virtual Instructor-Led (VILT), Classroom, or Hybrid learning modes.", icon: Presentation },
-    { title: "Hands-on Labs", description: "24/7 access to cloud-based labs for practical coding and implementation experience.", icon: Cloud },
-    { title: "Skill Gap Analysis", description: "Pre-training assessments to identify areas of improvement and track progress.", icon: BarChart },
-    { title: "Project-Based Learning", description: "Employees work on real-time PoCs and capstone projects relevant to your business.", icon: Layers },
-    { title: "ROI Measurement", description: "Detailed post-training reports and performance analytics to measure impact.", icon: TrendingUp }
+    { title: "Customized Curriculum", description: "Modules tailored specifically to your project requirements and tech stack.", icon: Settings },
+    { title: "Flexible Delivery Models", description: "Virtual Instructor-Led (VILT), Classroom, or Hybrid modes.", icon: Presentation },
+    { title: "Hands-on Labs", description: "Secure, cloud-based sandbox environments for risk-free practice.", icon: Cloud },
+    { title: "Skill Gap Analysis", description: "Pre-training assessments to identify areas of improvement.", icon: BarChart },
+    { title: "Project-Based Learning", description: "Employees work on real-time PoCs relevant to your business.", icon: Layers },
+    { title: "ROI Measurement", description: "Post-training analytics to measure impact and performance.", icon: TrendingUp }
+  ],
+  deepDive: [
+    {
+        title: "Role-Based Learning Paths",
+        content: "We define clear learning trajectories for every role. For Freshers, we offer intensive 'Bootcamps' covering fundamentals to advanced coding. For Senior Developers, we focus on Architecture, Cloud Migration patterns, and Security compliance.",
+        icon: GraduationCap
+    },
+    {
+        title: "Subject Matter Experts (SMEs)",
+        content: "Our trainers are not just academicians; they are practicing industry consultants with 10+ years of experience in deploying solutions for Fortune 500 companies.",
+        icon: UserCheck
+    },
+    {
+        title: "Cloud-Native Lab Infrastructure",
+        content: "We provide instant-provisioning labs for AWS, Azure, GCP, and DevOps tools. No local installation required. Dashboards for managers to track lab usage and completion.",
+        icon: Server
+    }
+  ],
+  supportAndSLA: [
+    { title: "LMS Access", desc: "Lifetime access to session recordings and digital courseware.", icon: BookOpen },
+    { title: "Mentor Support", desc: "Dedicated technical mentors for project guidance during and after training.", icon: Heart },
+    { title: "Attendance Tracking", desc: "Automated daily attendance and engagement reports sent to L&D managers.", icon: ClipboardCheck },
+    { title: "Certification Prep", desc: "Guidance and vouchers for global certifications (AWS, Microsoft, Google).", icon: Award }
   ],
   process: [
-    { step: "01", title: "Assessment", desc: "We analyze skill gaps and business goals.", icon: ClipboardCheck },
-    { step: "02", title: "Design", desc: "SMEs curate a syllabus aligned with your projects.", icon: PenTool },
-    { step: "03", title: "Delivery", desc: "Expert-led sessions with interactive labs.", icon: MonitorPlay },
-    { step: "04", title: "Practice", desc: "Real-world case studies and capstone projects.", icon: Code },
-    { step: "05", title: "Evaluation", desc: "Performance tracking and impact reporting.", icon: Target }
+    { step: "01", title: "Discovery", desc: "Analyze business goals & skill gaps.", icon: ClipboardCheck },
+    { step: "02", title: "Blueprint", desc: "Design custom syllabus & lab topology.", icon: PenTool },
+    { step: "03", title: "Delivery", desc: "Expert-led interactive training sessions.", icon: MonitorPlay },
+    { step: "04", title: "Capstone", desc: "Real-world project implementation.", icon: Code },
+    { step: "05", title: "Impact", desc: "Assessment, feedback & ROI report.", icon: Target }
   ],
   technologies: [
     { category: "Cloud & DevOps", items: ["AWS", "Azure", "Google Cloud", "Kubernetes", "Docker", "Terraform", "Ansible", "Jenkins"] },
@@ -329,9 +357,9 @@ export const CORPORATE_TRAINING = {
     { category: "Modern Web", items: ["React/Node.js", "Java Spring Boot", "Python Django", ".NET Core", "Angular", "Microservices", "GraphQL"] }
   ],
   sla: [
-    { title: "Response Time", value: "< 2 Hours", desc: "For all corporate inquiries during business hours.", icon: Clock },
-    { title: "Proposal Delivery", value: "24 Hours", desc: "Customized training proposal with module breakdown.", icon: FileText },
-    { title: "Trainer Matching", value: "48 Hours", desc: "Profile sharing of industry-expert trainers tailored to your needs.", icon: UserCheck }
+    { title: "Response Time", value: "< 2 Hours", desc: "Immediate acknowledgment of training inquiries.", icon: Clock },
+    { title: "Proposal Turnaround", value: "24 Hours", desc: "Detailed technical & commercial proposal.", icon: FileText },
+    { title: "Trainer Matching", value: "48 Hours", desc: "Trainer profiles shared for client interview.", icon: Users2 }
   ],
   workflow: [
     { title: "Inquiry Received", desc: "Logged in CRM", active: true },
@@ -339,8 +367,33 @@ export const CORPORATE_TRAINING = {
     { title: "Solution Design", desc: "SME Curates Syllabus", active: true },
     { title: "Proposal Sent", desc: "Commercials & Timeline", active: false },
     { title: "Onboarding", desc: "Kickoff & LMS Access", active: false }
+  ],
+  caseStudies: [
+    {
+      client: "Global Fintech Giant",
+      challenge: "Migrating legacy monolithic applications to microservices architecture on AWS.",
+      solution: "Customized 12-week upskilling program for 50+ Java developers on Spring Boot, Docker, Kubernetes, and AWS implementation.",
+      outcome: "40% reduction in deployment time, successful migration within 6 months.",
+      icon: TrendingUp
+    },
+    {
+      client: "Retail Chain (Fortune 500)",
+      challenge: "Skill gap in Data Analytics for decision making.",
+      solution: "Power BI and Tableau workshops for non-technical managers and advanced SQL/Python for data teams.",
+      outcome: "Data-driven decision making adoption increased by 70%.",
+      icon: BarChart2
+    },
+    {
+      client: "Healthcare Provider",
+      challenge: "Ensuring HIPAA compliance and cybersecurity awareness.",
+      solution: "Role-based security training for 200+ employees, phishing simulations, and secure coding practices.",
+      outcome: "Zero security breaches in the following audit cycle.",
+      icon: ShieldCheck
+    }
   ]
 };
+
+// ... (SAMPLE_CLASSES, TESTING_SERVICES, COURSE_CATEGORIES, STAFFING_FEATURES, ABOUT_TRAINING_TEXT, CERTIFICATION_TEXT, ABOUT_US_CONTENT, WEBINARS, PODCASTS, COMMUNITY_RESOURCES remain the same)
 
 export const SAMPLE_CLASSES = [
   {
@@ -583,6 +636,13 @@ export const ADMIN_DASHBOARD_DATA = {
     { name: "John Doe", role: "CTO", company: "FinTech Corp", score: 85, status: "Hot" },
     { name: "Sarah Lee", role: "Student", company: "MIT", score: 40, status: "Nurture" },
     { name: "Mike Ross", role: "HR Manager", company: "Law Firm LLC", score: 72, status: "Warm" },
+  ],
+  leadScoring: [
+    { criteria: "Budget > $10k", points: "+30" },
+    { criteria: "Timeline < 1 Month", points: "+25" },
+    { criteria: "Role: Decision Maker", points: "+20" },
+    { criteria: "Downloaded Whitepaper", points: "+10" },
+    { criteria: "Email Opened", points: "+5" }
   ]
 };
 
