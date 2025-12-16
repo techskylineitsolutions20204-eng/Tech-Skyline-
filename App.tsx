@@ -72,7 +72,10 @@ import {
   CreditCard,
   Check,
   Loader,
-  Cloud
+  Cloud,
+  File,
+  Play as PlayIcon,
+  Code
 } from 'lucide-react';
 import { 
   CONTACT_INFO, 
@@ -165,6 +168,10 @@ function App() {
 
   // Portal State
   const [activePortalView, setActivePortalView] = useState<string | null>(null);
+
+  // Editor State
+  const [codeOutput, setCodeOutput] = useState<string[]>([]);
+  const [isRunningCode, setIsRunningCode] = useState(false);
 
   // Lab Simulation State
   const [activeLab, setActiveLab] = useState<any>(null);
@@ -356,12 +363,40 @@ function App() {
 
   const handlePortalClick = (resourceTitle: string) => {
     trackEvent('portal_access_request', { resource: resourceTitle });
+    
+    // Clear previous output when opening practice arena
+    if (resourceTitle.includes("Practice")) {
+      setCodeOutput([]);
+      setIsRunningCode(false);
+    }
+
     if (resourceTitle.includes("Video")) setActivePortalView("video-archive");
     else if (resourceTitle.includes("Lab")) setActivePortalView("lab-dashboard");
     else if (resourceTitle.includes("Course")) setActivePortalView("course-materials");
     else if (resourceTitle.includes("Practice")) setActivePortalView("practice-arena");
     else if (resourceTitle.includes("Portfolio")) setActivePortalView("portfolio-builder");
     else openGoogleForm();
+  };
+
+  const runCode = () => {
+    setIsRunningCode(true);
+    setCodeOutput(['> python main.py']);
+    
+    // Simulate processing delay
+    setTimeout(() => {
+      setCodeOutput(prev => [
+        ...prev, 
+        'Loading data from data.csv...',
+        'Analyzing trends...',
+        '--------------------------------',
+        'Results:',
+        'Average Price: 103.6',
+        'Growth Rate: 2.4%',
+        '--------------------------------',
+        'Process finished with exit code 0'
+      ]);
+      setIsRunningCode(false);
+    }, 1500);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -614,7 +649,7 @@ function App() {
         </div>
       )}
 
-      {/* Media Player, Student Portal, Lab Modals - Updated with AWS Branding */}
+      {/* Media Player, Student Portal, Lab Modals */}
       {/* ... (activeClass modal remains same) ... */}
       {activeClass && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-300">
@@ -652,17 +687,78 @@ function App() {
         <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl animate-in fade-in duration-300">
           <div className="bg-[#0f172a] w-full max-w-6xl h-[85vh] rounded-2xl overflow-hidden shadow-2xl border border-slate-700 flex flex-col">
               <div className="bg-slate-800/50 p-4 border-b border-white/10 flex justify-between items-center">
-                 <h3 className="text-white font-bold text-lg">Student Portal</h3>
+                 <h3 className="text-white font-bold text-lg flex items-center gap-2">
+                    {activePortalView === 'practice-arena' ? <><Code size={20} className="text-green-400"/> Python Playground</> : "Student Portal"}
+                 </h3>
                  <button onClick={() => setActivePortalView(null)} className="p-2 hover:bg-white/10 rounded-full text-slate-400"><X size={24}/></button>
               </div>
-              <div className="flex-1 flex items-center justify-center p-10 text-center">
-                 <div>
-                    <Lock size={64} className="mx-auto text-slate-600 mb-4"/>
-                    <h2 className="text-2xl font-bold text-white mb-2">Restricted Access</h2>
-                    <p className="text-slate-400 mb-6">Please log in to access this resource.</p>
-                    <button onClick={openStripe} className="bg-cyan-600 text-white px-6 py-2 rounded-lg font-bold">Enroll Now</button>
+              
+              {activePortalView === 'practice-arena' ? (
+                 <div className="flex-1 flex overflow-hidden">
+                    {/* File Sidebar */}
+                    <div className="w-48 bg-slate-900 border-r border-white/10 p-3 hidden md:block">
+                       <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 pl-2">Files</div>
+                       <div className="flex items-center gap-2 p-2 bg-slate-800 rounded-lg text-sm text-cyan-400 mb-1 cursor-pointer">
+                          <FileCode size={14}/> main.py
+                       </div>
+                       <div className="flex items-center gap-2 p-2 hover:bg-slate-800/50 rounded-lg text-sm text-slate-400 cursor-pointer">
+                          <File size={14}/> data.csv
+                       </div>
+                       <div className="flex items-center gap-2 p-2 hover:bg-slate-800/50 rounded-lg text-sm text-slate-400 cursor-pointer">
+                          <File size={14}/> utils.py
+                       </div>
+                    </div>
+
+                    {/* Main Editor Area */}
+                    <div className="flex-1 flex flex-col bg-[#1e1e1e]">
+                       <div className="flex-1 p-4 font-mono text-sm overflow-auto text-slate-300 leading-6 relative">
+                          <div className="absolute left-0 top-0 bottom-0 w-8 bg-[#1e1e1e] border-r border-white/5 text-right pr-2 text-slate-600 select-none pt-4">
+                             1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10
+                          </div>
+                          <div className="pl-8">
+                             <span className="text-purple-400">def</span> <span className="text-yellow-300">analyze_data</span>(data):<br/>
+                             &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-slate-500"># Calculate simple moving average</span><br/>
+                             &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-purple-400">return</span> <span className="text-blue-400">sum</span>(data) / <span className="text-blue-400">len</span>(data)<br/>
+                             <br/>
+                             prices = [<span className="text-orange-400">100</span>, <span className="text-orange-400">102</span>, <span className="text-orange-400">105</span>, <span className="text-orange-400">103</span>, <span className="text-orange-400">108</span>]<br/>
+                             avg = analyze_data(prices)<br/>
+                             <br/>
+                             <span className="text-blue-400">print</span>(<span className="text-green-400">f"Average Price: <span className="text-blue-300">{`{avg}`}</span>"</span>)<br/>
+                             <span className="text-blue-400">print</span>(<span className="text-green-400">"Analysis Complete."</span>)
+                          </div>
+                       </div>
+                       
+                       {/* Terminal / Output */}
+                       <div className="h-1/3 border-t border-white/10 bg-[#1e1e1e] flex flex-col">
+                          <div className="px-4 py-2 border-b border-white/5 flex justify-between items-center bg-[#252526]">
+                             <span className="text-xs font-bold text-slate-400 uppercase">Terminal</span>
+                             <button 
+                                onClick={runCode} 
+                                disabled={isRunningCode}
+                                className="bg-green-600 hover:bg-green-500 text-white px-3 py-1 rounded text-xs font-bold flex items-center gap-1 transition-colors disabled:opacity-50"
+                             >
+                                {isRunningCode ? <Loader className="animate-spin" size={12}/> : <PlayIcon size={12}/>} Run Code
+                             </button>
+                          </div>
+                          <div className="flex-1 p-3 font-mono text-xs text-slate-300 overflow-y-auto">
+                             {codeOutput.map((line, i) => (
+                                <div key={i} className="mb-1">{line}</div>
+                             ))}
+                             {isRunningCode && <div className="animate-pulse">_</div>}
+                          </div>
+                       </div>
+                    </div>
                  </div>
-              </div>
+              ) : (
+                 <div className="flex-1 flex items-center justify-center p-10 text-center">
+                    <div>
+                       <Lock size={64} className="mx-auto text-slate-600 mb-4"/>
+                       <h2 className="text-2xl font-bold text-white mb-2">Restricted Access</h2>
+                       <p className="text-slate-400 mb-6">Please log in to access this resource.</p>
+                       <button onClick={openStripe} className="bg-cyan-600 text-white px-6 py-2 rounded-lg font-bold">Enroll Now</button>
+                    </div>
+                 </div>
+              )}
           </div>
         </div>
       )}
