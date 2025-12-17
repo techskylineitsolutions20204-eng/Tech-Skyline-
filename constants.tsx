@@ -99,8 +99,6 @@ export const SOCIAL_MEDIA = [
   }
 ];
 
-// ... (HERO_CONTENT, STATS, CONSULTING_SERVICES, CLIENTS, TESTIMONIALS, FEATURED_TECHNOLOGIES, INTERNSHIP_PROGRAM remain the same)
-
 export const HERO_CONTENT = {
   quote: "Technology brings everything closer and connected",
   subtitle: "GET YOUR BUSINESS & IT STRATEGIES ALIGN TOGETHER",
@@ -395,8 +393,6 @@ export const CORPORATE_TRAINING = {
   ]
 };
 
-// ... (SAMPLE_CLASSES, TESTING_SERVICES, COURSE_CATEGORIES, STAFFING_FEATURES, ABOUT_TRAINING_TEXT, CERTIFICATION_TEXT, ABOUT_US_CONTENT, WEBINARS, PODCASTS, COMMUNITY_RESOURCES remain the same)
-
 export const SAMPLE_CLASSES = [
   {
     id: 1,
@@ -538,7 +534,7 @@ Today, we stand at the intersection of education and enterprise. We don't just t
   ]
 };
 
-// --- NEW MARKETING CONSTANTS ---
+// ... (WEBINARS, PODCASTS, COMMUNITY_RESOURCES, ADMIN_DASHBOARD_DATA, TECH_STACK, STRIPE_PLANS, ZOOM_SLOTS remain the same)
 
 export const WEBINARS = [
   {
@@ -612,8 +608,6 @@ export const COMMUNITY_RESOURCES = [
   }
 ];
 
-// --- ADMIN DASHBOARD & TECH STACK ---
-
 export const ADMIN_DASHBOARD_DATA = {
   sources: [
     { platform: "LinkedIn", leads: 45, color: "bg-blue-600" },
@@ -666,3 +660,541 @@ export const STRIPE_PLANS = [
 export const ZOOM_SLOTS = [
   "10:00 AM", "11:30 AM", "2:00 PM", "3:30 PM", "5:00 PM"
 ];
+
+// --- EXTENDED DATA FOR COURSE DETAILS ---
+export const DETAILED_COURSE_DATA: Record<string, any> = {
+  // --- Cloud, DevOps & Security ---
+  "AWS & Cloud": {
+    title: "AWS Certified Solutions Architect",
+    description: "Master the world's leading cloud platform. This comprehensive course takes you from cloud basics to designing complex, scalable, and secure applications on Amazon Web Services. You will gain hands-on experience with core AWS services and prepare for the SAA-C03 certification exam.",
+    whoShouldLearn: ["System Administrators", "Software Developers", "Network Engineers", "IT Managers", "Solutions Architects"],
+    keyPoints: [
+      "Deep dive into IAM, EC2, S3, RDS, and VPC.",
+      "Designing resilient and high-performing architectures.",
+      "Cost optimization strategies.",
+      "Security best practices and compliance.",
+      "Real-world case studies and labs."
+    ],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Cloud Computing & AWS Global Infrastructure" },
+      { module: "Module 2", topic: "Identity and Access Management (IAM) & Security Groups" },
+      { module: "Module 3", topic: "Compute: EC2, Lambda, and Elastic Beanstalk" },
+      { module: "Module 4", topic: "Storage: S3, EBS, EFS, and Glacier" },
+      { module: "Module 5", topic: "Networking: VPC, Route 53, CloudFront" },
+      { module: "Module 6", topic: "Databases: RDS, DynamoDB, Aurora, Redshift" },
+      { module: "Module 7", topic: "High Availability & Fault Tolerance (ELB & ASG)" },
+      { module: "Module 8", topic: "Application Services: SQS, SNS, SWF" },
+      { module: "Module 9", topic: "AWS Security & Encryption" },
+      { module: "Module 10", topic: "Exam Preparation & Mock Tests" }
+    ]
+  },
+  "Azure DevOps": {
+    title: "Microsoft Azure DevOps Engineer",
+    description: "Bridge the gap between development and operations. Learn to implement DevOps practices using Azure DevOps services, including CI/CD pipelines, version control, and agile planning tools.",
+    whoShouldLearn: ["DevOps Engineers", "Build & Release Engineers", "Cloud Architects", "Developers"],
+    keyPoints: [
+      "Implementing CI/CD pipelines with Azure Pipelines.",
+      "Infrastructure as Code (IaC) with ARM templates and Terraform.",
+      "Managing source control with Azure Repos.",
+      "Containerization with Docker and Kubernetes (AKS).",
+      "Monitoring and feedback loops."
+    ],
+    outline: [
+      { module: "Module 1", topic: "Introduction to DevOps Principles & Azure Ecosystem" },
+      { module: "Module 2", topic: "Source Control Management (Git & Azure Repos)" },
+      { module: "Module 3", topic: "Continuous Integration (CI) with Azure Pipelines" },
+      { module: "Module 4", topic: "Continuous Deployment (CD) Strategies" },
+      { module: "Module 5", topic: "Dependency Management & Artifacts" },
+      { module: "Module 6", topic: "Infrastructure as Code (IaC) & Configuration Management" },
+      { module: "Module 7", topic: "Monitoring & Logging with Azure Monitor" }
+    ]
+  },
+  "Red Hat Linux": {
+    title: "Red Hat Enterprise Linux (RHEL) Administration",
+    description: "Become a proficient Linux System Administrator. This course covers the core skills required to administer Red Hat Enterprise Linux systems, from installation to command-line proficiency and security.",
+    whoShouldLearn: ["System Administrators", "Linux Engineers", "Network Administrators"],
+    keyPoints: ["Command Line expertise", "User & Group Management", "File System Permissions", "Process Management", "Security & SELinux"],
+    outline: [
+      { module: "Module 1", topic: "Getting Started with Red Hat Enterprise Linux" },
+      { module: "Module 2", topic: "Accessing the Command Line" },
+      { module: "Module 3", topic: "Managing Files from the Command Line" },
+      { module: "Module 4", topic: "Creating, Viewing, and Editing Text Files" },
+      { module: "Module 5", topic: "Managing Local Linux Users and Groups" },
+      { module: "Module 6", topic: "Controlling Access to Files (Permissions & ACLs)" },
+      { module: "Module 7", topic: "Managing Processes & Services" },
+      { module: "Module 8", topic: "Configuring & Securing SSH" }
+    ]
+  },
+  "Cloud Security": {
+    title: "Certified Cloud Security Professional (CCSP)",
+    description: "Secure your cloud infrastructure. This course delves into cloud architecture, data security, platform and infrastructure security, application security, and legal/compliance issues.",
+    whoShouldLearn: ["Security Architects", "Security Administrators", "Systems Engineers", "Enterprise Architects"],
+    keyPoints: ["Cloud Data Security", "Cloud Platform & Infrastructure Security", "Cloud Application Security", "Operations Security", "Legal, Risk, and Compliance"],
+    outline: [
+      { module: "Module 1", topic: "Cloud Concepts, Architecture and Design" },
+      { module: "Module 2", topic: "Cloud Data Security" },
+      { module: "Module 3", topic: "Cloud Platform & Infrastructure Security" },
+      { module: "Module 4", topic: "Cloud Application Security" },
+      { module: "Module 5", topic: "Cloud Security Operations" },
+      { module: "Module 6", topic: "Legal, Risk and Compliance" }
+    ]
+  },
+  "Cybersecurity": {
+    title: "Advanced Cybersecurity & Ethical Hacking",
+    description: "Defend against modern cyber threats. Learn the techniques used by hackers to penetrate systems and how to secure them. Covers network security, cryptography, and vulnerability assessment.",
+    whoShouldLearn: ["Security Analysts", "Network Administrators", "System Administrators", "Ethical Hackers"],
+    keyPoints: ["Penetration Testing methodologies", "Network Defense", "Cryptography basics", "Incident Response", "Compliance standards (GDPR, HIPAA)"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Ethical Hacking" },
+      { module: "Module 2", topic: "Footprinting and Reconnaissance" },
+      { module: "Module 3", topic: "Scanning Networks" },
+      { module: "Module 4", topic: "Enumeration" },
+      { module: "Module 5", topic: "Vulnerability Analysis" },
+      { module: "Module 6", topic: "System Hacking" },
+      { module: "Module 7", topic: "Malware Threats" },
+      { module: "Module 8", topic: "Sniffing & Social Engineering" }
+    ]
+  },
+  "CCNA": {
+    title: "Cisco Certified Network Associate (CCNA 200-301)",
+    description: "Build a solid foundation in networking. This course covers network fundamentals, network access, IP connectivity, IP services, security fundamentals, and automation and programmability.",
+    whoShouldLearn: ["Network Support Engineers", "Network Administrators", "Help Desk Technicians"],
+    keyPoints: ["Network Fundamentals", "Network Access", "IP Connectivity", "IP Services", "Security Fundamentals", "Automation and Programmability"],
+    outline: [
+      { module: "Module 1", topic: "Network Fundamentals (Routers, Switches, Cabling)" },
+      { module: "Module 2", topic: "Network Access (VLANs, Trunking, STP)" },
+      { module: "Module 3", topic: "IP Connectivity (OSPF, Routing Tables)" },
+      { module: "Module 4", topic: "IP Services (DHCP, DNS, NAT, NTP)" },
+      { module: "Module 5", topic: "Security Fundamentals (VPNs, ACLs, Port Security)" },
+      { module: "Module 6", topic: "Automation and Programmability (SDN, APIs, Chef, Puppet)" }
+    ]
+  },
+  "CCNP": {
+    title: "Cisco Certified Network Professional (CCNP Enterprise)",
+    description: "Advance your networking career. Focuses on implementing and operating Cisco Enterprise Network Core Technologies (ENCOR 350-401).",
+    whoShouldLearn: ["Network Engineers", "System Engineers", "Network Administrators"],
+    keyPoints: ["Dual Stack (IPv4 & IPv6) Architecture", "Virtualization", "Infrastructure", "Network Assurance", "Security", "Automation"],
+    outline: [
+      { module: "Module 1", topic: "Architecture (Enterprise Design, WLAN, SD-WAN)" },
+      { module: "Module 2", topic: "Virtualization (VRF, GRE, Hypervisors)" },
+      { module: "Module 3", topic: "Infrastructure (Layer 2, Layer 3, Wireless)" },
+      { module: "Module 4", topic: "Network Assurance (Diagnose, Ping, Traceroute, SNMP)" },
+      { module: "Module 5", topic: "Security (ACLs, AAA, REST API Security)" },
+      { module: "Module 6", topic: "Automation (Python, JSON, EEM)" }
+    ]
+  },
+  "DevOps": {
+    title: "DevOps Master Program",
+    description: "Master the culture and tools of DevOps. Learn Jenkins, Docker, Kubernetes, Ansible, Terraform, and monitoring tools to automate the software delivery lifecycle.",
+    whoShouldLearn: ["System Administrators", "Developers", "Operations Staff"],
+    keyPoints: ["CI/CD Pipelines", "Containerization", "Orchestration", "Configuration Management", "Infrastructure as Code"],
+    outline: [
+      { module: "Module 1", topic: "DevOps Overview & Linux Basics" },
+      { module: "Module 2", topic: "Version Control with Git" },
+      { module: "Module 3", topic: "Build Automation with Maven/Gradle" },
+      { module: "Module 4", topic: "CI with Jenkins" },
+      { module: "Module 5", topic: "Configuration Management with Ansible" },
+      { module: "Module 6", topic: "Containerization with Docker & Kubernetes" },
+      { module: "Module 7", topic: "Infrastructure as Code with Terraform" },
+      { module: "Module 8", topic: "Monitoring with Prometheus & Grafana" }
+    ]
+  },
+
+  // --- AI & Data Science ---
+  "Generative AI": {
+    title: "Generative AI: LLMs & Prompt Engineering",
+    description: "Unlock the power of Generative AI. Learn how Large Language Models (LLMs) work, how to engineer effective prompts, and how to build applications using OpenAI API and LangChain.",
+    whoShouldLearn: ["Developers", "Data Scientists", "Product Managers", "Content Creators"],
+    keyPoints: ["Understanding Transformers & LLMs", "Prompt Engineering Techniques", "Fine-tuning models", "Building RAG applications", "AI Ethics & Safety"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Generative AI & LLMs" },
+      { module: "Module 2", topic: "Prompt Engineering Best Practices" },
+      { module: "Module 3", topic: "Using OpenAI API & Embeddings" },
+      { module: "Module 4", topic: "Building Applications with LangChain" },
+      { module: "Module 5", topic: "Retrieval Augmented Generation (RAG)" },
+      { module: "Module 6", topic: "Fine-Tuning & Custom Models" }
+    ]
+  },
+  "AI with Data Science": {
+    title: "Artificial Intelligence & Data Science Masterclass",
+    description: "A complete journey from data analysis to building intelligent agents. Covers Statistics, Machine Learning, Deep Learning, and NLP.",
+    whoShouldLearn: ["Aspiring Data Scientists", "Analysts", "Developers"],
+    keyPoints: ["Statistics & Probability", "Machine Learning Algorithms", "Deep Learning with TensorFlow/Keras", "Natural Language Processing (NLP)", "Computer Vision"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to AI & Data Science" },
+      { module: "Module 2", topic: "Statistical Analysis & Hypothesis Testing" },
+      { module: "Module 3", topic: "Supervised Learning (Regression, Classification)" },
+      { module: "Module 4", topic: "Unsupervised Learning (Clustering)" },
+      { module: "Module 5", topic: "Deep Learning Neural Networks" },
+      { module: "Module 6", topic: "Natural Language Processing (NLP)" }
+    ]
+  },
+  "AI with Python": {
+    title: "Applied AI with Python",
+    description: "Learn to implement AI algorithms using Python. Focuses on libraries like Scikit-learn, TensorFlow, and PyTorch for solving real-world problems.",
+    whoShouldLearn: ["Python Developers", "Students", "Researchers"],
+    keyPoints: ["Python for AI", "NumPy & Pandas", "Data Visualization", "Building AI Models", "Model Deployment"],
+    outline: [
+      { module: "Module 1", topic: "Python Advanced Concepts for AI" },
+      { module: "Module 2", topic: "Data Manipulation with Pandas" },
+      { module: "Module 3", topic: "Machine Learning with Scikit-Learn" },
+      { module: "Module 4", topic: "Deep Learning with TensorFlow" },
+      { module: "Module 5", topic: "Building a Chatbot" },
+      { module: "Module 6", topic: "Deployment with Flask/Streamlit" }
+    ]
+  },
+  "Power BI": {
+    title: "Microsoft Power BI Data Analyst",
+    description: "Turn unrelated sources of data into coherent, visually immersive, and interactive insights. Master Power Query, DAX, and report creation.",
+    whoShouldLearn: ["Business Analysts", "Data Analysts", "BI Professionals", "Managers"],
+    keyPoints: ["Data Connectivity & Transformation", "Data Modeling", "DAX Formulas", "Visualizations & Dashboards", "Power BI Service"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Power BI Desktop" },
+      { module: "Module 2", topic: "Connecting to Data Sources & Power Query" },
+      { module: "Module 3", topic: "Data Modeling & Relationships" },
+      { module: "Module 4", topic: "DAX Functions & Measures" },
+      { module: "Module 5", topic: "Creating Visualizations & Reports" },
+      { module: "Module 6", topic: "Sharing & Collaboration in Power BI Service" }
+    ]
+  },
+  "Tableau": {
+    title: "Tableau Desktop Specialist",
+    description: "Visualize your data like a pro. Learn to create interactive dashboards, connect to various data sources, and share insights across your organization.",
+    whoShouldLearn: ["Data Analysts", "Business Intelligence Professionals", "Reporting Analysts"],
+    keyPoints: ["Connecting to Data", "Visual Analytics", "Dashboards & Stories", "Calculations", "Mapping"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Tableau & Interface" },
+      { module: "Module 2", topic: "Connecting to & Preparing Data" },
+      { module: "Module 3", topic: "Building Basic Charts (Bar, Line, Pie)" },
+      { module: "Module 4", topic: "Advanced Charts (Scatter, Map, Dual Axis)" },
+      { module: "Module 5", topic: "Calculated Fields & Parameters" },
+      { module: "Module 6", topic: "Creating Dashboards & Stories" }
+    ]
+  },
+  "Looker & Looker Testing": {
+    title: "Looker Business Analyst & Testing",
+    description: "Master Google Cloud's Looker platform for data exploration and visualization. Also covers testing methodologies for BI reports.",
+    whoShouldLearn: ["BI Developers", "Data Analysts", "QA Engineers"],
+    keyPoints: ["LookML Basics", "Explores & Views", "Dashboard Creation", "Report Testing Strategies", "Data Validation"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Looker Platform" },
+      { module: "Module 2", topic: "LookML Fundamentals" },
+      { module: "Module 3", topic: "Creating Looks & Dashboards" },
+      { module: "Module 4", topic: "Advanced LookML Concepts" },
+      { module: "Module 5", topic: "BI Testing Methodologies" },
+      { module: "Module 6", topic: "Automating Looker Tests" }
+    ]
+  },
+  "CDM/SAS/Clinical SAS": {
+    title: "Clinical Data Management & SAS Programming",
+    description: "Specialized training for the pharmaceutical industry. Learn Clinical Data Management processes and SAS programming for clinical trials analysis.",
+    whoShouldLearn: ["Life Science Graduates", "Clinical Research Associates", "Statisticians"],
+    keyPoints: ["Clinical Trial Process", "Base SAS & Advanced SAS", "CDISC Standards (SDTM, ADaM)", "TLF Generation", "Regulatory Submission"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Clinical Research & CDM" },
+      { module: "Module 2", topic: "Base SAS Programming" },
+      { module: "Module 3", topic: "Advanced SAS (Macros, SQL)" },
+      { module: "Module 4", topic: "CDISC Standards: SDTM Implementation" },
+      { module: "Module 5", topic: "CDISC Standards: ADaM Implementation" },
+      { module: "Module 6", topic: "Generating Tables, Listings, and Figures (TLFs)" }
+    ]
+  },
+
+  // --- Enterprise & Management ---
+  "SAP S4 HANA": {
+    title: "SAP S/4 HANA Finance & Logistics",
+    description: "Learn the next generation of SAP Business Suite. This course covers the key modules of S/4 HANA, focusing on financial accounting, controlling, and logistics processes.",
+    whoShouldLearn: ["SAP Consultants", "Finance Professionals", "Accountants", "Business Process Owners"],
+    keyPoints: ["Universal Journal", "New Asset Accounting", "Fiori UX", "Business Partners", "Material Ledger"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to SAP S/4 HANA & Fiori" },
+      { module: "Module 2", topic: "Enterprise Structure & Global Settings" },
+      { module: "Module 3", topic: "General Ledger Accounting (New GL)" },
+      { module: "Module 4", topic: "Accounts Payable & Receivable" },
+      { module: "Module 5", topic: "Asset Accounting" },
+      { module: "Module 6", topic: "Controlling & Cost Center Accounting" }
+    ]
+  },
+  "SAP FICO": {
+    title: "SAP FICO (Financial Accounting & Controlling)",
+    description: "Become an expert in SAP Financial Accounting and Controlling. Learn to configure and manage financial data for reporting and decision making.",
+    whoShouldLearn: ["Finance Executives", "Accountants", "Aspiring SAP Consultants"],
+    keyPoints: ["General Ledger", "AP/AR", "Asset Accounting", "Cost Element Accounting", "Internal Orders"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to ERP & SAP" },
+      { module: "Module 2", topic: "Enterprise Structure Definition" },
+      { module: "Module 3", topic: "General Ledger (GL) Configuration" },
+      { module: "Module 4", topic: "Accounts Payable (AP) & Accounts Receivable (AR)" },
+      { module: "Module 5", topic: "Bank Accounting & Asset Accounting" },
+      { module: "Module 6", topic: "Controlling (Cost Center, Profit Center)" }
+    ]
+  },
+  "SAP Ariba": {
+    title: "SAP Ariba Procurement",
+    description: "Streamline procurement processes with SAP Ariba. Learn upstream and downstream modules including Sourcing, Contracts, Buying, and Invoicing.",
+    whoShouldLearn: ["Procurement Professionals", "Supply Chain Managers", "SAP Consultants"],
+    keyPoints: ["Strategic Sourcing", "Contract Management", "Procure-to-Pay (P2P)", "Supplier Management", "Ariba Network"],
+    outline: [
+      { module: "Module 1", topic: "Overview of SAP Ariba & Ariba Network" },
+      { module: "Module 2", topic: "Supplier Performance Management (SPM)" },
+      { module: "Module 3", topic: "Sourcing & Contract Management" },
+      { module: "Module 4", topic: "Procure-to-Pay (P2P) Process" },
+      { module: "Module 5", topic: "Catalogs & Ariba Buying" },
+      { module: "Module 6", topic: "Invoicing & Integration" }
+    ]
+  },
+  "SAP ABAP on HANA": {
+    title: "SAP ABAP on HANA",
+    description: "Upgrade your ABAP skills for the HANA database. Learn code pushdown techniques, CDS views, AMDP, and how to optimize ABAP code for HANA.",
+    whoShouldLearn: ["ABAP Developers", "SAP Technical Consultants"],
+    keyPoints: ["HANA Architecture", "New Open SQL", "Core Data Services (CDS)", "ABAP Managed Database Procedures (AMDP)", "Code Inspector"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to SAP HANA & In-Memory Computing" },
+      { module: "Module 2", topic: "ABAP Development Tools (ADT) in Eclipse" },
+      { module: "Module 3", topic: "Advanced Open SQL" },
+      { module: "Module 4", topic: "Core Data Services (CDS) Views" },
+      { module: "Module 5", topic: "ABAP Managed Database Procedures (AMDP)" },
+      { module: "Module 6", topic: "Performance Tuning & ALV on HANA" }
+    ]
+  },
+  "Oracle Unifier": {
+    title: "Oracle Primavera Unifier",
+    description: "Manage capital projects and facilities. Learn to configure and use Unifier for project controls, cost management, and business process automation.",
+    whoShouldLearn: ["Project Control Engineers", "Construction Managers", "System Administrators"],
+    keyPoints: ["uDesigner Configuration", "Business Process Design", "Cost Sheet Management", "Workflow Setup", "Reports & Dashboards"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Primavera Unifier" },
+      { module: "Module 2", topic: "Navigation & User Administration" },
+      { module: "Module 3", topic: "Company & Project Workspace Setup" },
+      { module: "Module 4", topic: "uDesigner & Business Process Creation" },
+      { module: "Module 5", topic: "Cost Manager & Cash Flow" },
+      { module: "Module 6", topic: "Schedule Manager & Integration" }
+    ]
+  },
+  "Oracle Primavera P6": {
+    title: "Oracle Primavera P6 EPPM",
+    description: "The gold standard in project management software. Learn to plan, schedule, and control large-scale programs and individual projects.",
+    whoShouldLearn: ["Project Managers", "Planners/Schedulers", "Civil Engineers"],
+    keyPoints: ["EPS & OBS Setup", "WBS & Activity Creation", "Resource Loading", "Baselines", "Progress Updating & Reporting"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Project Management & P6" },
+      { module: "Module 2", topic: "Creating EPS, OBS, and Projects" },
+      { module: "Module 3", topic: "Defining WBS & Activities" },
+      { module: "Module 4", topic: "Scheduling & Critical Path Method (CPM)" },
+      { module: "Module 5", topic: "Resource & Cost Management" },
+      { module: "Module 6", topic: "Baselines, Tracking & Reporting" }
+    ]
+  },
+  "Workday": {
+    title: "Workday HCM & Finance",
+    description: "Master Workday's unified suite. Learn Core HCM, business process configuration, security, reporting, and basic financial concepts.",
+    whoShouldLearn: ["HR Professionals", "ERP Consultants", "System Analysts"],
+    keyPoints: ["Supervisory Organizations", "Staffing Models", "Compensation", "Business Processes", "Report Writer"],
+    outline: [
+      { module: "Module 1", topic: "Workday Core Concepts & Navigation" },
+      { module: "Module 2", topic: "Organizations & Staffing Models" },
+      { module: "Module 3", topic: "Job Profiles & Compensation" },
+      { module: "Module 4", topic: "Security Groups & Roles" },
+      { module: "Module 5", topic: "Business Process Configuration" },
+      { module: "Module 6", topic: "Reporting & Calculated Fields" }
+    ]
+  },
+  "PMP": {
+    title: "Project Management Professional (PMP) Prep",
+    description: "Prepare for the global standard in project management certification. Covers the PMBOK Guide 7th Edition and Agile Practice Guide.",
+    whoShouldLearn: ["Project Managers", "Team Leads", "Project Coordinators"],
+    keyPoints: ["Project Integration", "Scope, Schedule, Cost", "Agile & Hybrid Methodologies", "Risk Management", "Stakeholder Engagement"],
+    outline: [
+      { module: "Module 1", topic: "Creating a High-Performance Team" },
+      { module: "Module 2", topic: "Starting the Project" },
+      { module: "Module 3", topic: "Doing the Work (Waterfall & Agile)" },
+      { module: "Module 4", topic: "Keeping the Team on Track" },
+      { module: "Module 5", topic: "Keeping the Business in Mind" },
+      { module: "Module 6", topic: "Exam Simulation & Tips" }
+    ]
+  },
+  "Product Management": {
+    title: "Product Management Bootcamp",
+    description: "Learn to build products customers love. Covers the full product lifecycle from ideation and user research to roadmap planning and launch.",
+    whoShouldLearn: ["Aspiring Product Managers", "Entrepreneurs", "Business Analysts"],
+    keyPoints: ["Market Research", "User Personas", "MVP Definition", "Agile/Scrum for PMs", "Go-to-Market Strategy"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Product Management" },
+      { module: "Module 2", topic: "Identifying User Needs & Market Research" },
+      { module: "Module 3", topic: "Product Strategy & Roadmapping" },
+      { module: "Module 4", topic: "Defining MVP & Requirements" },
+      { module: "Module 5", topic: "Agile Development & Working with Engineering" },
+      { module: "Module 6", topic: "Product Launch & Metrics" }
+    ]
+  },
+  "Sage Intacct": {
+    title: "Sage Intacct Financial Management",
+    description: "Master the cloud financial management platform. Learn general ledger, accounts payable/receivable, cash management, and reporting.",
+    whoShouldLearn: ["Accountants", "Financial Controllers", "CFOs"],
+    keyPoints: ["Multi-Entity Management", "Core Financials", "Dimensional Reporting", "Dashboards", "Purchasing & Order Entry"],
+    outline: [
+      { module: "Module 1", topic: "Introduction & Administration" },
+      { module: "Module 2", topic: "General Ledger & Dimensions" },
+      { module: "Module 3", topic: "Accounts Payable & Receivable" },
+      { module: "Module 4", topic: "Cash Management" },
+      { module: "Module 5", topic: "Purchasing & Order Entry" },
+      { module: "Module 6", topic: "Financial Reporting & Dashboards" }
+    ]
+  },
+  "Pega": {
+    title: "Pega Certified System Architect (PCSA)",
+    description: "Learn to build enterprise applications using Pega's low-code platform. Covers case management, data modeling, UI design, and integration.",
+    whoShouldLearn: ["Developers", "Business Analysts", "System Architects"],
+    keyPoints: ["Case Lifecycle Management", "Data Modeling", "User Interface Design", "Report Definition", "SLA & Routing"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Pega Platform" },
+      { module: "Module 2", topic: "Case Management & Lifecycle" },
+      { module: "Module 3", topic: "Data Modeling" },
+      { module: "Module 4", topic: "User Interface Configuration" },
+      { module: "Module 5", topic: "Business Logic & Validation" },
+      { module: "Module 6", topic: "Application Integration & Reporting" }
+    ]
+  },
+  "Salesforce Admin/Developer": {
+    title: "Salesforce Administrator & Developer",
+    description: "Comprehensive training on the world's #1 CRM. Start with Admin concepts (configuration, security) and move to Development (Apex, Visualforce, LWC).",
+    whoShouldLearn: ["Administrators", "Developers", "Sales Operations"],
+    keyPoints: ["Standard & Custom Objects", "Security Model", "Process Automation (Flows)", "Apex Programming", "Lightning Web Components"],
+    outline: [
+      { module: "Module 1", topic: "CRM Fundamentals & Salesforce Setup" },
+      { module: "Module 2", topic: "Data Modeling & Management" },
+      { module: "Module 3", topic: "Security & Access Control" },
+      { module: "Module 4", topic: "Process Automation (Flow Builder)" },
+      { module: "Module 5", topic: "Introduction to Apex & Triggers" },
+      { module: "Module 6", topic: "Lightning Web Components (LWC)" }
+    ]
+  },
+
+  // --- Development & Specialized ---
+  "Python Full-Stack": {
+    title: "Full Stack Development with Python (Django/Flask)",
+    description: "Become a versatile developer. Learn to build robust backend APIs with Python and dynamic frontends with modern JavaScript frameworks.",
+    whoShouldLearn: ["Aspiring Developers", "Frontend Developers", "Backend Developers", "Students"],
+    keyPoints: ["Python Syntax & OOPS", "Django/Flask Frameworks", "REST API Development", "Database Management (SQL)", "Frontend Basics (HTML/CSS/JS)"],
+    outline: [
+      { module: "Module 1", topic: "Python Core & Advanced Concepts" },
+      { module: "Module 2", topic: "Web Fundamentals (HTML, CSS, JS)" },
+      { module: "Module 3", topic: "Backend Development with Django" },
+      { module: "Module 4", topic: "RESTful APIs with Django REST Framework" },
+      { module: "Module 5", topic: "Database Design & SQL" },
+      { module: "Module 6", topic: "Deployment & CI/CD" }
+    ]
+  },
+  "Java/J2EE": {
+    title: "Java Full Stack Developer",
+    description: "Comprehensive training in Java development. Covers Core Java, J2EE, Spring Boot, Hibernate, and frontend integration with Angular/React.",
+    whoShouldLearn: ["Computer Science Graduates", "Software Engineers"],
+    keyPoints: ["Core Java & Collections", "Spring Framework & Spring Boot", "Hibernate/JPA", "Microservices Architecture", "RESTful Web Services"],
+    outline: [
+      { module: "Module 1", topic: "Core Java & OOPS Concepts" },
+      { module: "Module 2", topic: "Advanced Java (Collections, Streams, Multithreading)" },
+      { module: "Module 3", topic: "J2EE, Servlets & JSP" },
+      { module: "Module 4", topic: "Spring Framework & Spring Boot" },
+      { module: "Module 5", topic: "Hibernate & JPA" },
+      { module: "Module 6", topic: "Microservices with Spring Cloud" }
+    ]
+  },
+  "Full-stack Development": {
+    title: "MERN Stack Developer",
+    description: "Master the JavaScript stack. Learn MongoDB, Express.js, React.js, and Node.js to build modern single-page applications.",
+    whoShouldLearn: ["Web Developers", "Students", "Designers"],
+    keyPoints: ["React Hooks & Redux", "Node.js Runtime", "Express Middleware", "NoSQL Database (MongoDB)", "JWT Authentication"],
+    outline: [
+      { module: "Module 1", topic: "JavaScript ES6+ Fundamentals" },
+      { module: "Module 2", topic: "Frontend with React.js" },
+      { module: "Module 3", topic: "State Management (Redux/Context API)" },
+      { module: "Module 4", topic: "Backend with Node.js & Express" },
+      { module: "Module 5", topic: "Database with MongoDB" },
+      { module: "Module 6", topic: "Full Stack Integration & Deployment" }
+    ]
+  },
+  "iOS Automation": {
+    title: "Mobile App Testing & Automation (iOS/Android)",
+    description: "Learn to automate mobile application testing using Appium and XCUITest. Covers testing strategies for iOS and Android.",
+    whoShouldLearn: ["QA Engineers", "Mobile Developers"],
+    keyPoints: ["Appium Architecture", "Locators Strategies", "TestNG Framework", "XCUITest for iOS", "Real Device Testing"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Mobile Testing" },
+      { module: "Module 2", topic: "Appium Architecture & Setup" },
+      { module: "Module 3", topic: "Locating Elements & Gestures" },
+      { module: "Module 4", topic: "Building a Framework with TestNG" },
+      { module: "Module 5", topic: "iOS Specific Automation (XCUITest)" },
+      { module: "Module 6", topic: "CI/CD Integration for Mobile" }
+    ]
+  },
+  "RPA": {
+    title: "Robotic Process Automation (UiPath/Automation Anywhere)",
+    description: "Automate repetitive tasks. Learn to build software bots using leading RPA tools like UiPath or Automation Anywhere.",
+    whoShouldLearn: ["Business Process Analysts", "Developers", "Operations Managers"],
+    keyPoints: ["RPA Lifecycle", "Workflow Design", "Selectors & UI Interaction", "Data Manipulation", "Orchestrator/Control Room"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to RPA" },
+      { module: "Module 2", topic: "UiPath Studio/AA Client Setup" },
+      { module: "Module 3", topic: "Variables, Arguments & Control Flow" },
+      { module: "Module 4", topic: "Data Scraping & UI Automation" },
+      { module: "Module 5", topic: "Excel & Email Automation" },
+      { module: "Module 6", topic: "Orchestrator & Deployment" }
+    ]
+  },
+  "IoT": {
+    title: "Internet of Things (IoT) Solutions Architect",
+    description: "Connect the physical world to the digital. Learn about sensors, microcontrollers (Arduino/Raspberry Pi), communication protocols, and cloud IoT platforms.",
+    whoShouldLearn: ["Electronics Engineers", "Software Developers", "Solution Architects"],
+    keyPoints: ["IoT Architecture", "Sensors & Actuators", "Protocols (MQTT, CoAP)", "Edge Computing", "Cloud IoT Core (AWS/Azure)"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to IoT Ecosystem" },
+      { module: "Module 2", topic: "Embedded Systems (Arduino/Raspberry Pi)" },
+      { module: "Module 3", topic: "Sensors, Actuators & Interfacing" },
+      { module: "Module 4", topic: "IoT Communication Protocols (MQTT, HTTP)" },
+      { module: "Module 5", topic: "Cloud IoT Platforms" },
+      { module: "Module 6", topic: "IoT Security & Edge Computing" }
+    ]
+  },
+  "Embedded Systems": {
+    title: "Embedded Systems Design",
+    description: "Design and program embedded systems. Covers microcontroller architecture, C programming for embedded systems, and RTOS.",
+    whoShouldLearn: ["Electronics Engineers", "Firmware Developers"],
+    keyPoints: ["Microcontroller Arch (ARM/AVR)", "Embedded C Programming", "Peripherals (ADC, UART, I2C, SPI)", "RTOS Fundamentals", "Hardware Debugging"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Embedded Systems" },
+      { module: "Module 2", topic: "C Programming for Embedded Systems" },
+      { module: "Module 3", topic: "Microcontroller Architecture" },
+      { module: "Module 4", topic: "Interfacing Peripherals" },
+      { module: "Module 5", topic: "Communication Protocols" },
+      { module: "Module 6", topic: "Real-Time Operating Systems (RTOS)" }
+    ]
+  },
+  "Murex/MXML": {
+    title: "Murex MX.3 Functional & Technical",
+    description: "Specialized training for the Murex trading platform. Covers front-office, back-office, risk management, and MXML exchange workflows.",
+    whoShouldLearn: ["Financial Software Developers", "Business Analysts", "Support Analysts"],
+    keyPoints: ["Murex Architecture", "Trade Lifecycle", "MXML Exchange", "Datamart & Reporting", "Workflows"],
+    outline: [
+      { module: "Module 1", topic: "Introduction to Capital Markets & Murex" },
+      { module: "Module 2", topic: "Front Office (Pricing, Booking)" },
+      { module: "Module 3", topic: "Back Office (Validation, Settlement)" },
+      { module: "Module 4", topic: "MXML Exchange & Integration" },
+      { module: "Module 5", topic: "Reporting & Datamart" },
+      { module: "Module 6", topic: "Environment Management" }
+    ]
+  },
+  "Emerson DeltaV Automation": {
+    title: "Emerson DeltaV Distributed Control System (DCS)",
+    description: "Master industrial automation. Learn configuration, maintenance, and operation of the DeltaV DCS used in process industries.",
+    whoShouldLearn: ["Automation Engineers", "Control System Technicians", "Process Engineers"],
+    keyPoints: ["Hardware Configuration", "Control Modules", "Graphics Configuration", "Alarms & History", "System Maintenance"],
+    outline: [
+      { module: "Module 1", topic: "Overview of Process Control & DeltaV" },
+      { module: "Module 2", topic: "DeltaV Explorer & Hardware Setup" },
+      { module: "Module 3", topic: "Control Studio & Module Configuration" },
+      { module: "Module 4", topic: "DeltaV Operate (HMI) Design" },
+      { module: "Module 5", topic: "Alarm Management & Historian" },
+      { module: "Module 6", topic: "Diagnostics & Troubleshooting" }
+    ]
+  }
+};
