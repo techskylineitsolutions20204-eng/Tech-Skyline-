@@ -1,5 +1,3 @@
-
-// ... existing imports ...
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Menu, 
@@ -53,7 +51,9 @@ import {
   ClipboardCheck,
   Target,
   Heart,
-  RefreshCcw
+  RefreshCcw,
+  Sparkles,
+  Binary
 } from 'lucide-react';
 import { 
   CONTACT_INFO, 
@@ -600,6 +600,92 @@ function App() {
                        </button>
                     </div>
                 </div>
+            </section>
+
+            {/* Dedicated AI Corporate Training Solutions Section */}
+            <section className="py-24 relative overflow-hidden bg-slate-950 border-b border-white/5">
+               <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,_rgba(6,182,212,0.1),transparent_50%)]"></div>
+               <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_80%,_rgba(59,130,246,0.1),transparent_50%)]"></div>
+               
+               <div className="container mx-auto px-4 md:px-6 relative z-10">
+                  <div className="text-center mb-20">
+                     <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 rounded-full text-xs font-black uppercase tracking-widest mb-6">
+                        <Sparkles size={14} className="animate-pulse" /> The Age of Intelligence
+                     </div>
+                     <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+                        AI Corporate Training Solutions
+                     </h2>
+                     <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+                        Modular, scalable, and business-aligned programs designed to transform your workforce for the AI-first economy.
+                     </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                     {/* 1. AI Quotient Assessment */}
+                     <div className="bg-slate-900/50 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white/5 hover:border-cyan-500/50 transition-all group flex flex-col h-full shadow-2xl relative overflow-hidden">
+                        <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl group-hover:bg-cyan-500/20 transition-all"></div>
+                        <div className="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-cyan-400 mb-8 group-hover:bg-cyan-500 group-hover:text-white transition-all shadow-lg border border-white/5">
+                           <Binary size={32} />
+                        </div>
+                        <h4 className="text-2xl font-bold text-white mb-4">AI Quotient Assessment</h4>
+                        <p className="text-slate-400 text-sm mb-8 leading-relaxed flex-grow">
+                           Measure enterprise AI readiness with role-based assessments. Identify critical skill gaps and benchmark your team's capabilities.
+                        </p>
+                        <div className="pt-6 border-t border-white/5 mt-auto">
+                           <div className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-1">Business Impact</div>
+                           <p className="text-white text-xs font-bold">Data-Driven Workforce Strategy</p>
+                        </div>
+                     </div>
+
+                     {/* 2. AI Infinity */}
+                     <div className="bg-slate-900/50 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white/5 hover:border-blue-500/50 transition-all group flex flex-col h-full shadow-2xl relative overflow-hidden">
+                        <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-all"></div>
+                        <div className="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-blue-400 mb-8 group-hover:bg-blue-500 group-hover:text-white transition-all shadow-lg border border-white/5">
+                           <Globe size={32} />
+                        </div>
+                        <h4 className="text-2xl font-bold text-white mb-4">AI Infinity</h4>
+                        <p className="text-slate-400 text-sm mb-8 leading-relaxed flex-grow">
+                           Company-wide AI literacy program providing foundational training for all employees to build awareness and foster a culture of innovation.
+                        </p>
+                        <div className="pt-6 border-t border-white/5 mt-auto">
+                           <div className="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Business Impact</div>
+                           <p className="text-white text-xs font-bold">Organization-Wide AI Literacy</p>
+                        </div>
+                     </div>
+
+                     {/* 3. AI Skills Academy */}
+                     <div className="bg-slate-900/50 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white/5 hover:border-purple-500/50 transition-all group flex flex-col h-full shadow-2xl relative overflow-hidden">
+                        <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl group-hover:bg-purple-500/20 transition-all"></div>
+                        <div className="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-purple-400 mb-8 group-hover:bg-purple-500 group-hover:text-white transition-all shadow-lg border border-white/5">
+                           <Brain size={32} />
+                        </div>
+                        <h4 className="text-2xl font-bold text-white mb-4">AI Skills Academy</h4>
+                        <p className="text-slate-400 text-sm mb-8 leading-relaxed flex-grow">
+                           Customized deep-dive upskilling with modular programs ranging from 6 to 180 hours, tailored to specific technical goals.
+                        </p>
+                        <div className="pt-6 border-t border-white/5 mt-auto">
+                           <div className="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-1">Business Impact</div>
+                           <p className="text-white text-xs font-bold">Accelerated Technical Maturity</p>
+                        </div>
+                     </div>
+
+                     {/* 4. Certification Programs */}
+                     <div className="bg-slate-900/50 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white/5 hover:border-cyan-400/50 transition-all group flex flex-col h-full shadow-2xl relative overflow-hidden">
+                        <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-400/10 rounded-full blur-3xl group-hover:bg-cyan-400/20 transition-all"></div>
+                        <div className="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-cyan-300 mb-8 group-hover:bg-cyan-400 group-hover:text-white transition-all shadow-lg border border-white/5">
+                           <Award size={32} />
+                        </div>
+                        <h4 className="text-2xl font-bold text-white mb-4">Certification Programs</h4>
+                        <p className="text-slate-400 text-sm mb-8 leading-relaxed flex-grow">
+                           Executive-friendly, industry-recognized certification programs for mid-to-senior professionals to lead AI transformation effectively.
+                        </p>
+                        <div className="pt-6 border-t border-white/5 mt-auto">
+                           <div className="text-[10px] font-black text-cyan-300 uppercase tracking-widest mb-1">Business Impact</div>
+                           <p className="text-white text-xs font-bold">Future-Ready Leadership</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </section>
 
             {/* Internships */}
