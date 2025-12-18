@@ -1,6 +1,6 @@
 
 // ... existing imports ...
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Menu, 
   X, 
@@ -43,7 +43,17 @@ import {
   Power,
   Filter,
   Briefcase as BriefcaseIcon,
-  Brain
+  Brain,
+  ShieldCheck,
+  Trophy,
+  Smile,
+  Timer,
+  Search,
+  Check,
+  ClipboardCheck,
+  Target,
+  Heart,
+  RefreshCcw
 } from 'lucide-react';
 import { 
   CONTACT_INFO, 
@@ -53,6 +63,7 @@ import {
   TESTING_SERVICES, 
   COURSE_CATEGORIES, 
   STAFFING_FEATURES,
+  STAFFING_CONTENT,
   ABOUT_TRAINING_TEXT,
   CERTIFICATION_TEXT,
   CLIENTS,
@@ -72,11 +83,12 @@ import { AIWorkforce } from './AIWorkforce';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [itemsPerSlide, setItemsPerSlide] = useState(3);
   const [activeClass, setActiveClass] = useState<any>(null);
   const [activeCourseFilter, setActiveCourseFilter] = useState("All");
   const [view, setView] = useState('home'); // 'home', 'about', 'policies', 'corporate-360', 'ai-workforce'
+  
+  const scrollRef = useRef<HTMLDivElement>(null);
   
   // Lab Simulation State
   const [activeLab, setActiveLab] = useState<any>(null);
@@ -137,16 +149,16 @@ function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => 
-      prev >= FEATURED_TECHNOLOGIES.length - itemsPerSlide ? 0 : prev + 1
-    );
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+    }
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => 
-      prev === 0 ? FEATURED_TECHNOLOGIES.length - itemsPerSlide : prev - 1
-    );
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+    }
   };
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -155,7 +167,6 @@ function App() {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      trackEvent('section_view', { section_name: id });
     }
   };
 
@@ -448,6 +459,67 @@ function App() {
               </div>
             </section>
 
+            {/* Refined Horizontal Carousel for Featured Technologies */}
+            <section className="py-20 relative overflow-hidden bg-slate-900/30">
+               <div className="container mx-auto px-4 md:px-6 relative z-10">
+                  <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                     <div>
+                        <h2 className="text-sm font-bold text-cyan-400 uppercase tracking-widest mb-2">Expertise</h2>
+                        <h3 className="text-3xl md:text-4xl font-bold text-white">Featured Technologies</h3>
+                        <p className="text-slate-400 mt-2 max-w-xl">Explore our specialized tracks in high-demand IT domains. Swipe or use buttons to browse.</p>
+                     </div>
+                     <div className="flex gap-4">
+                        <button 
+                           onClick={scrollLeft}
+                           className="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white hover:bg-cyan-500 hover:border-cyan-500 transition-all shadow-lg"
+                           aria-label="Scroll Left"
+                        >
+                           <ChevronLeft size={24} />
+                        </button>
+                        <button 
+                           onClick={scrollRight}
+                           className="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white hover:bg-cyan-500 hover:border-cyan-500 transition-all shadow-lg"
+                           aria-label="Scroll Right"
+                        >
+                           <ChevronRight size={24} />
+                        </button>
+                     </div>
+                  </div>
+
+                  {/* Horizontal Scroll Container */}
+                  <div 
+                     ref={scrollRef}
+                     className="flex gap-8 overflow-x-auto pb-10 no-scrollbar snap-x snap-mandatory"
+                  >
+                     {FEATURED_TECHNOLOGIES.map((tech, index) => (
+                        <div 
+                           key={index} 
+                           className="flex-shrink-0 w-[280px] sm:w-[350px] snap-center group"
+                        >
+                           <div className="relative h-[400px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-slate-800 transition-transform duration-500 group-hover:scale-[0.98]">
+                              <img 
+                                 src={tech.image} 
+                                 alt={tech.title} 
+                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/20 to-transparent opacity-90"></div>
+                              <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                                 <h4 className="text-2xl font-black text-white mb-2 leading-tight drop-shadow-md">{tech.title}</h4>
+                                 <p className="text-cyan-400 text-sm font-bold uppercase tracking-widest mb-4 opacity-0 group-hover:opacity-100 transition-opacity">{tech.description}</p>
+                                 <button 
+                                    onClick={() => scrollToSection('contact')}
+                                    className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold py-2 px-4 rounded-lg hover:bg-cyan-500 transition-colors uppercase tracking-wider"
+                                 >
+                                    View Syllabus
+                                 </button>
+                              </div>
+                           </div>
+                        </div>
+                     ))}
+                  </div>
+               </div>
+            </section>
+
             {/* Services */}
             <section id="services" className="py-20 bg-black/20 backdrop-blur-sm">
               <div className="container mx-auto px-4 md:px-6">
@@ -550,6 +622,87 @@ function App() {
                     <button onClick={openGoogleForm} className="bg-white text-slate-900 px-8 py-3 rounded-xl font-bold hover:bg-cyan-400 transition-all shadow-xl">Join Now</button>
                 </div>
               </div>
+            </section>
+
+            {/* Staffing Section - Re-enhanced with 'Why Choose' */}
+            <section id="staffing" className="py-20 relative bg-slate-900 overflow-hidden">
+               <div className="container mx-auto px-4 md:px-6 relative z-10">
+                  <div className="flex flex-col lg:flex-row gap-16 items-center mb-20">
+                     <div className="lg:w-1/2">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-full text-xs font-black uppercase tracking-widest mb-6">
+                           <BriefcaseIcon size={14} /> Recruitment Excellence
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+                           {STAFFING_CONTENT.title}
+                        </h2>
+                        <p className="text-xl text-slate-300 font-light mb-10 leading-relaxed">
+                           {STAFFING_CONTENT.subtitle}
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                           {STAFFING_CONTENT.features.map((feature, idx) => (
+                              <div key={idx} className="flex flex-col p-6 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors group">
+                                 <div className="w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center text-cyan-400 mb-4 group-hover:bg-cyan-500 group-hover:text-white transition-all shadow-lg">
+                                    <feature.icon size={24} />
+                                 </div>
+                                 <h4 className="font-bold text-white mb-2">{feature.title}</h4>
+                                 <p className="text-xs text-slate-400 leading-relaxed">{feature.description}</p>
+                              </div>
+                           ))}
+                        </div>
+                     </div>
+                     <div className="lg:w-1/2">
+                        <div className="relative group">
+                           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/30 to-purple-600/30 rounded-[3rem] blur-2xl opacity-40"></div>
+                           <img 
+                              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80" 
+                              alt="Staffing Expertise" 
+                              className="relative rounded-[3rem] shadow-2xl border border-white/10 grayscale group-hover:grayscale-0 transition-all duration-700"
+                           />
+                           <div className="absolute -bottom-10 -left-10 bg-slate-800/90 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-2xl z-20 max-w-xs">
+                              <Trophy className="text-yellow-500 mb-4" size={32} />
+                              <div className="text-4xl font-black text-white mb-1">98.8%</div>
+                              <div className="text-xs text-slate-400 font-bold uppercase tracking-widest">Client Retention Rate</div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  {/* Why Choose Our Staffing Services - Dedicated Sub-section */}
+                  <div className="bg-white/5 rounded-[4rem] p-12 md:p-20 border border-white/10 backdrop-blur-sm">
+                     <div className="text-center mb-16">
+                        <h3 className="text-3xl md:text-4xl font-black text-white mb-4">
+                           {STAFFING_CONTENT.whyChoose.title}
+                        </h3>
+                        <p className="text-slate-400 max-w-2xl mx-auto">
+                           Beyond just filling seats, we provide the technical intelligence required to scale high-performing IT departments.
+                        </p>
+                     </div>
+
+                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                        {STAFFING_CONTENT.whyChoose.differentiators.map((diff, i) => (
+                           <div key={i} className="flex flex-col h-full bg-slate-950 p-8 rounded-[2rem] border border-white/5 hover:border-cyan-500/30 transition-all group">
+                              <div className="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center text-cyan-400 mb-6 shadow-inner group-hover:scale-110 transition-transform">
+                                 <diff.icon size={28} />
+                              </div>
+                              <h4 className="text-lg font-bold text-white mb-3">{diff.title}</h4>
+                              <p className="text-sm text-slate-400 leading-relaxed">{diff.description}</p>
+                           </div>
+                        ))}
+                     </div>
+
+                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-12 border-t border-white/5">
+                        {STAFFING_CONTENT.whyChoose.metrics.map((metric, i) => (
+                           <div key={i} className="text-center group">
+                              <div className="text-cyan-400 mb-2 flex justify-center group-hover:scale-110 transition-transform">
+                                 <metric.icon size={32} strokeWidth={1.5} />
+                              </div>
+                              <div className="text-3xl font-black text-white mb-1">{metric.value}</div>
+                              <div className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{metric.label}</div>
+                           </div>
+                        ))}
+                     </div>
+                  </div>
+               </div>
             </section>
 
             {/* Contact */}

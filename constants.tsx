@@ -71,7 +71,12 @@ import {
   Binary,
   Workflow,
   ShieldAlert,
-  BarChart3
+  BarChart3,
+  Timer,
+  Search,
+  UserPlus,
+  UserMinus,
+  Verified
 } from 'lucide-react';
 import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory, ValueItem, TeamMember } from './types';
 
@@ -86,6 +91,49 @@ export const CONTACT_INFO = {
   logo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=100&q=80", 
   heroLogo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=500&q=80", 
   googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfcG6IKVRWZg0qi0V7eBRvRDozo0HRifzhEM5vEfLtFLvADbA/viewform"
+};
+
+export const STAFFING_CONTENT = {
+  title: "IT Staffing Solutions",
+  subtitle: "Connecting High-Performance Talent with Visionary Companies",
+  description: "We enable you to achieve and optimize the most strategic and variable component to business success—right people, with right skills, competencies, and attitudes.",
+  features: [
+    { title: "Contract Staffing", description: "Specialized technology staffing services for short-term projects and peak capacity needs.", icon: Timer },
+    { title: "Permanent Placement", description: "Finding long-term talent by understanding career aspirations and organizational culture.", icon: Users2 },
+    { title: "Executive Search", description: "Discreet and targeted search for C-suite and senior leadership roles.", icon: Search }
+  ],
+  whyChoose: {
+    title: "Why Choose Tech Skyline Staffing?",
+    description: "Beyond just filling seats, we provide the technical intelligence required to scale high-performing IT departments.",
+    differentiators: [
+      {
+        title: "Rigid Multi-Tier Screening",
+        description: "Our proprietary 5-step technical vetting ensures only the top 3% of applicants reach your interview stage.",
+        icon: ClipboardCheck
+      },
+      {
+        title: "Domain-Centric Sourcing",
+        description: "Recruiters specialized in high-demand domains: SAP S/4HANA, GenAI, Cloud Infrastructure, and Data Engineering.",
+        icon: Target
+      },
+      {
+        title: "Rapid Deployment",
+        description: "Average turnaround time of 15 days for critical roles, leveraging our vast pre-vetted talent pool.",
+        icon: Zap
+      },
+      {
+        title: "Cultural Alignment",
+        description: "We evaluate more than just code. We ensure every candidate aligns with your team's communication and work style.",
+        icon: Heart
+      }
+    ],
+    metrics: [
+      { label: "Client Satisfaction", value: "98.8%", icon: Smile },
+      { label: "Talent Pool size", value: "50K+", icon: Users },
+      { label: "Repeat Business", value: "90%", icon: RefreshCcw },
+      { label: "Placement Success", value: "96%", icon: Trophy }
+    ]
+  }
 };
 
 export const AI_WORKFORCE_CONTENT = {
@@ -182,7 +230,6 @@ export const AI_WORKFORCE_CONTENT = {
   ]
 };
 
-// ... (remaining existing exports like SOCIAL_MEDIA, HERO_CONTENT, etc. follow)
 export const SOCIAL_MEDIA = [
   { name: "LinkedIn", url: "https://www.linkedin.com/company/techskyline-it-soluions/?viewAsMember=true", icon: Linkedin },
   { name: "YouTube", url: "https://www.youtube.com/@FreelanceRecuriter", icon: Youtube },
@@ -354,7 +401,9 @@ export const FEATURED_TECHNOLOGIES: TechCategory[] = [
   { title: "SAP S/4 HANA", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80", description: "Enterprise Resource Planning" },
   { title: "Data Science & AI", image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=600&q=80", description: "Machine Learning, Python" },
   { title: "Cyber Security", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80", description: "Network Defense, Ethical Hacking" },
-  { title: "DevOps & Cloud", image: "https://images.unsplash.com/photo-1667372393119-c85c020799a3?auto=format&fit=crop&w=600&q=80", description: "CI/CD, AWS, Azure, Docker" }
+  { title: "DevOps & Cloud", image: "https://images.unsplash.com/photo-1667372393119-c85c020799a3?auto=format&fit=crop&w=600&q=80", description: "CI/CD, AWS, Azure, Docker" },
+  { title: "Full Stack Web", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80", description: "React, Node.js, MongoDB, Express" },
+  { title: "Cloud Security", image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80", description: "Zero Trust, Identity, Threat Detection" }
 ];
 
 export const INTERNSHIP_PROGRAM = {
