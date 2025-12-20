@@ -1,5 +1,8 @@
 {
-  "name": "Techskyline.in",
-  "description": "Premier IT Consulting, Staffing, and Corporate Training Solutions provider.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "name": "",
+  "description": ""
 }

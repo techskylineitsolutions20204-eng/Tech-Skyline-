@@ -1,13 +1,14 @@
-import { 
-  Cloud, 
-  Database, 
-  Cpu, 
-  ShieldCheck, 
-  Code, 
-  Smartphone, 
-  Globe, 
-  Users, 
-  BarChart, 
+
+import {
+  Cloud,
+  Database,
+  Cpu,
+  ShieldCheck,
+  Code,
+  Smartphone,
+  Globe,
+  Users,
+  BarChart,
   Server,
   BookOpen,
   Briefcase,
@@ -74,9 +75,9 @@ import {
   Search,
   UserPlus,
   UserMinus,
-  Verified
+  Verified,
+  Rocket
 } from 'lucide-react';
-import { ServiceItem, CourseCategory, StatItem, FeatureItem, Client, Testimonial, TechCategory, ValueItem, TeamMember } from './types';
 
 export const CONTACT_INFO = {
   contactName: "Abhinav",
@@ -84,399 +85,266 @@ export const CONTACT_INFO = {
   whatsapp: "+91-8106243684",
   email: "techskylineitsolutions20204@gmail.com",
   company: "Techskyline.in",
-  tagline: "Premier IT Consulting, Staffing, and Corporate Training Solutions.",
-  address: "Marshall St, San Antonio, TX 78212, USA",
-  logo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=64&q=70", 
-  heroLogo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=400&q=70", 
+  tagline: "Global Leader in IT Consulting, Workforce Transformation, and Digital Strategy.",
+  address: "San Antonio, TX, USA | Hyderabad, India",
+  logo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=64&q=70",
+  heroLogo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=400&q=70",
   googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfcG6IKVRWZg0qi0V7eBRvRDozo0HRifzhEM5vEfLtFLvADbA/viewform"
 };
 
-export const STAFFING_CONTENT = {
-  title: "IT Staffing Solutions",
-  subtitle: "Connecting High-Performance Talent with Visionary Companies",
-  description: "We enable you to achieve and optimize the most strategic and variable component to business success—right people, with right skills, competencies, and attitudes.",
-  features: [
-    { title: "Contract Staffing", description: "Specialized technology staffing services for short-term projects and peak capacity needs.", icon: Timer },
-    { title: "Permanent Placement", description: "Finding long-term talent by understanding career aspirations and organizational culture.", icon: Users2 },
-    { title: "Executive Search", description: "Discreet and targeted search for C-suite and senior leadership roles.", icon: Search }
-  ],
-  whyChoose: {
-    title: "Why Choose Tech Skyline Staffing?",
-    description: "Beyond just filling seats, we provide the technical intelligence required to scale high-performing IT departments.",
-    differentiators: [
-      {
-        title: "Rigid Multi-Tier Screening",
-        description: "Our proprietary 5-step technical vetting ensures only the top 3% of applicants reach your interview stage.",
-        icon: ClipboardCheck
-      },
-      {
-        title: "Domain-Centric Sourcing",
-        description: "Recruiters specialized in high-demand domains: SAP S/4HANA, GenAI, Cloud Infrastructure, and Data Engineering.",
-        icon: Target
-      },
-      {
-        title: "Rapid Deployment",
-        description: "Average turnaround time of 15 days for critical roles, leveraging our vast pre-vetted talent pool.",
-        icon: Zap
-      },
-      {
-        title: "Cultural Alignment",
-        description: "We evaluate more than just code. We ensure every candidate aligns with your team's communication and work style.",
-        icon: Heart
-      }
-    ],
-    metrics: [
-      { label: "Client Satisfaction", value: "98.8%", icon: Smile },
-      { label: "Talent Pool size", value: "50K+", icon: Users },
-      { label: "Repeat Business", value: "90%", icon: RefreshCcw },
-      { label: "Placement Success", value: "96%", icon: Trophy }
-    ]
-  }
-};
-
-export const AI_WORKFORCE_CONTENT = {
-  hero: {
-    title: "AI-Powered Workforce",
-    subtitle: "Future-Ready Enterprise",
-    tagline: "AI is no longer optional. It is delivering real, measurable business value for organizations worldwide."
-  },
-  whyMatters: {
-    title: "Why AI Matters for Your Business",
-    stats: [
-      { label: "Higher revenue growth", value: "20%", icon: TrendingUp },
-      { label: "Reduction in operational costs", value: "44%", icon: BarChart3 },
-      { label: "Improvement in productivity", value: "62%", icon: Zap },
-      { label: "Better customer experience", value: "74%", icon: Smile },
-      { label: "Faster innovation cycles", value: "75%", icon: Sparkles }
-    ]
-  },
-  readiness: {
-    title: "Is Your Workforce Ready for the AI Economy?",
-    impact: "$10.3 Trillion",
-    impactDesc: "enterprise value can be unlocked with a responsible, people-first AI strategy",
-    marketTrend: "The global Agentic AI market is growing exponentially in enterprise IT"
-  },
-  skillsGap: {
-    title: "The AI Skills Gap Is Real",
-    points: [
-      { label: "Employees need GenAI skills", value: "94%", color: "cyan" },
-      { label: "Workforce will need retraining by 2027", value: "61%", color: "purple" },
-      { label: "CEOs have future-ready strategy", value: "26%", color: "orange" },
-      { label: "Organizations can reskill at scale", value: "5%", color: "red" }
-    ]
-  },
-  solutions: [
-    {
-      id: "01",
-      name: "AI Quotient Assessment",
-      tagline: "Measure Enterprise AI Readiness",
-      features: [
-        "Role-based AI readiness assessment",
-        "Identifies skill gaps across teams and departments",
-        "Covers Python, AI/ML, GenAI, Agentic AI, and Responsible AI",
-        "Instant analytics for workforce planning",
-        "Supports strategic AI reskilling decisions"
-      ],
-      icon: Binary
-    },
-    {
-      id: "02",
-      name: "AI Infinity",
-      tagline: "Company-Wide AI Literacy Program",
-      features: [
-        "Foundation-level AI training for all employees",
-        "Live expert-led sessions + self-paced learning",
-        "Covers Generative AI, Agentic AI, and Responsible AI",
-        "Practical assignments and real-world use cases",
-        "Continuous content upgrades for evolving AI trends"
-      ],
-      icon: Globe
-    },
-    {
-      id: "03",
-      name: "AI Skills Academy",
-      tagline: "Customized AI Upskilling for Business Impact",
-      features: [
-        "Tailored training aligned to your business goals",
-        "Modular programs from 6 to 180 hours",
-        "Live, online, and on-demand delivery formats",
-        "Hands-on projects using enterprise-grade tools",
-        "Scalable for enterprise-wide deployment"
-      ],
-      icon: Brain
-    },
-    {
-      id: "04",
-      name: "Certification Programs",
-      tagline: "Executive-Friendly, Industry-Recognized",
-      features: [
-        "Live, cohort-based learning from top institutions",
-        "Designed for mid-to-senior professionals",
-        "Certifications in AI, Leadership, Data, and Transformation",
-        "Strengthens leadership capability in the Age of AI",
-        "Enhances employer brand and talent retention"
-      ],
-      icon: Award
-    }
-  ],
-  whyChoose: [
-    "Business-aligned AI training strategy",
-    "Custom programs, not generic courses",
-    "Practical, application-driven learning",
-    "Scalable solutions for teams and leaders",
-    "Focus on responsible and ethical AI adoption"
-  ]
-};
-
-export const SOCIAL_MEDIA = [
-  { name: "LinkedIn", url: "https://www.linkedin.com/company/techskyline-it-soluions/?viewAsMember=true", icon: Linkedin },
-  { name: "YouTube", url: "https://www.youtube.com/@FreelanceRecuriter", icon: Youtube },
-  { name: "GitHub", url: "https://github.com", icon: Github },
-  { name: "Slack Community", url: "#slack-invite", icon: MessageSquare }
-];
-
 export const HERO_CONTENT = {
-  quote: "Technology brings everything closer and connected",
-  subtitle: "GET YOUR BUSINESS & IT STRATEGIES ALIGN TOGETHER",
-  description: "Information technology (IT) consulting services helps you shape a winning IT strategy. For past decades we are into IT consulting and expertly guide your IT and digital transformation initiatives from strategy to implementation.",
+  quote: "Empowering the digital skyline through intelligence and innovation.",
+  subtitle: "ARCHITECTING THE FUTURE OF ENTERPRISE",
+  description: "Bespoke IT consulting and deep-dive corporate training programs designed to bridge the gap between today's talent and tomorrow's technology.",
   image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=70"
 };
 
-export const STATS: StatItem[] = [
-  { label: "Professionals Trained", value: "3,000+", icon: Users },
-  { label: "Courses Offered", value: "100+", icon: BookOpen },
-  { label: "Client Satisfaction", value: "98.8%", icon: CheckCircle },
-  { label: "Global Presence", value: "Global", icon: Globe },
+export const STATS = [
+  { label: "Global Talent Trained", value: "3,500+", icon: Users },
+  { label: "Enterprise Partnerships", value: "85+", icon: Briefcase },
+  { label: "Course Satisfaction", value: "99.2%", icon: Heart },
+  { label: "Global Locations", value: "4", icon: Globe }
 ];
 
-export const CONSULTING_SERVICES: ServiceItem[] = [
-  { title: "Cloud Consulting", description: "Executing cloud technologies to achieve a rapid speed of IT evolution, reduce costs, and migrate to the cloud.", icon: Cloud, image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=70" },
-  { title: "Big Data Consulting", description: "Transforming huge volumes of raw data into actionable insights for informed decision-making.", icon: Database, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=70" },
-  { title: "IoT Consulting", description: "Enhancing business management with IoT networking, real-time data analytics, and monitoring apps.", icon: Cpu, image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=70" },
-  { title: "Data Quality Consulting", description: "Safeguarding high quality data from ERP, CRM, and SMC systems via profiling and cleansing.", icon: ShieldCheck, image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=70" },
-  { title: "Technology Consulting", description: "Driving your future with advanced solutions in IT governance, security, and compliance.", icon: Layers, image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=70" },
-  { title: "IT Staffing", description: "Connecting world-class talent with top companies via permanent and contract staffing.", icon: Briefcase, image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=600&q=70" }
+export const CONSULTING_SERVICES = [
+  { title: "Cloud Strategy", description: "Multi-cloud architecture, migration strategies, and cost optimization for AWS, Azure, and GCP.", icon: Cloud },
+  { title: "AI & Data Labs", description: "Transforming raw data into predictive intelligence using custom LLMs and RAG architectures.", icon: Database },
+  { title: "IoT Ecosystems", description: "End-to-end sensor integration, edge computing, and real-time dashboarding.", icon: Cpu },
+  { title: "Cyber Governance", description: "Proactive threat modeling, compliance auditing (SOC2, GDPR), and zero-trust security.", icon: ShieldCheck },
+  { title: "DevOps Excellence", description: "Continuous integration, infrastructure as code, and automated delivery pipelines.", icon: Workflow },
+  { title: "Talent Staffing", description: "Strategic placement of high-caliber engineers for contract and permanent roles.", icon: UserCheck }
 ];
 
-export const CLIENTS: Client[] = [
+export const CORPORATE_TRAINING_MODULES = [
+  {
+    category: "Cloud & Infrastructure",
+    modules: [
+      { name: "AWS Solutions Architect Professional", duration: "8 Weeks", features: ["Hands-on Labs", "VPC Design", "Migration Pro"] },
+      { name: "Azure Enterprise Administration", duration: "6 Weeks", features: ["Active Directory", "Sentinel", "Kubernetes"] },
+      { name: "Cloud Cost Management (FinOps)", duration: "4 Weeks", features: ["Tagging Strategy", "Reserved Instances", "Reporting"] }
+    ]
+  },
+  {
+    category: "AI & Future Tech",
+    modules: [
+      { name: "Generative AI for Executives", duration: "2 Days", features: ["Strategic ROI", "Risk Management", "Vendor Selection"] },
+      { name: "Full-Stack AI Engineering", duration: "12 Weeks", features: ["Python", "PyTorch", "OpenAI API", "Vector DBs"] },
+      { name: "MLOps & Data Engineering", duration: "10 Weeks", features: ["Data Pipelines", "Model Versioning", "Spark"] }
+    ]
+  },
+  {
+    category: "Enterprise Software",
+    modules: [
+      { name: "SAP S/4HANA Transformation", duration: "16 Weeks", features: ["Fiori", "Finance", "Supply Chain"] },
+      { name: "Workday HCM Optimization", duration: "8 Weeks", features: ["Payroll", "Recruitment", "Benefits"] },
+      { name: "Oracle Cloud Applications", duration: "12 Weeks", features: ["ERP Cloud", "CX Cloud", "HCM"] }
+    ]
+  }
+];
+
+export const ABOUT_EXTENDED = {
+  history: "Founded in 2020, Tech Skyline began as a boutique consulting firm in Texas. Recognizing the critical skill gap in emerging technologies, we pivoted to an integrated 'Consult-and-Train' model that ensures businesses not only get the tech they need but the people who know how to lead it.",
+  values: [
+    { title: "Integrity", desc: "Honesty in every consultation and commitment to client success.", icon: ShieldCheck },
+    { title: "Innovation", desc: "Always staying 18 months ahead of the technology curve.", icon: Zap },
+    { title: "Impact", desc: "Measuring our success by the tangible ROI of our training programs.", icon: BarChart3 }
+  ],
+  team: [
+    { name: "Abhinav K.", role: "CEO & Founder", bio: "15+ years of enterprise architecture experience.", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" },
+    { name: "Sarah L.", role: "Head of AI Strategy", bio: "Former Silicon Valley lead engineer.", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80" },
+    { name: "Michael R.", role: "Lead Cloud Consultant", bio: "Multi-certified AWS/Azure Professional.", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" }
+  ]
+};
+
+export const CLIENTS = [
   { name: "Oracle", logo: "https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" },
   { name: "SAP", logo: "https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg" },
   { name: "Salesforce", logo: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg" },
   { name: "Microsoft", logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" },
   { name: "Workday", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Workday_logo.svg/2560px-Workday_logo.svg.png" },
-  { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" },
-  { name: "Cisco", logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
-  { name: "IBM", logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" },
-  { name: "RedHat", logo: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Red_Hat_logo.svg" },
+  { name: "AWS", logo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" }
 ];
 
+export const TECH_STACK = [
+  { name: "AWS Cloud" },
+  { name: "TensorFlow" },
+  { name: "Docker/K8s" },
+  { name: "SAP S/4HANA" }
+];
+
+// Corporate 360 Strategy Content
 export const CORPORATE_360_STRATEGY = {
   hero: {
-    headline: "Corporate Training Isn’t Just a Checkbox – It’s Your Competitive Edge.",
-    subheadline: "Discover how a 360° approach can turn complex training into engaging, role-specific learning experiences at scale and speed.",
+    subheadline: "Empowering your workforce with future-ready skills through strategic alignment and continuous learning ecosystems.",
     points: [
-      "Align learning with business goals",
-      "Boost employee performance and engagement",
-      "Drive measurable ROI from every training initiative",
-      "Support career growth and retention",
-      "Enable scalable, modern learning experiences"
+      "Customized Learning Paths",
+      "Scalable Training Ecosystems",
+      "ROI-Driven Methodologies",
+      "Global Workforce Resilience"
     ]
   },
   perspective: {
-    title: "Why Should Organizations Rethink Corporate Training Today?",
-    description: "Corporate training is no longer a support function—it is a strategic business enabler. At Tech Skyline IT Solutions, we observe organizations navigating rapid technology shifts, hybrid work models, and increasingly diverse, multi-generational workforces. These demand a 360° corporate training strategy that is agile, data-driven, and directly aligned with business outcomes.",
+    title: "Navigating the New Era of Enterprise Learning",
+    description: "In an era of rapid disruption, organizations must move beyond reactive training toward a proactive, 360-degree talent development strategy.",
     drivers: [
-      { title: "Accelerated digital transformation", icon: Zap },
-      { title: "Remote and hybrid work environments", icon: Globe },
-      { title: "AI-driven workflows and automation", icon: Cpu },
-      { title: "Personalized, continuous learning", icon: UserCheck }
+      { title: "Digital Transformation", icon: Zap },
+      { title: "AI Integration", icon: Brain },
+      { title: "Remote Collaboration", icon: Globe },
+      { title: "Skill Obsolescence", icon: TrendingDown }
     ],
     stats: [
-      { label: "Lost productivity globally (Gallup, 2025)", value: "$438B", icon: TrendingDown },
-      { label: "HR Leaders Integrating AI effectively", value: "12%", icon: AlertCircle }
+      { label: "Skill Gap Priority", value: "87%", icon: BarChart2 },
+      { label: "Retention Impact", value: "94%", icon: Users },
+      { label: "Productivity Gain", value: "2.5x", icon: Zap }
     ]
   },
   method: {
-    title: "Aligning Training with Business Strategy: The TechSkyline Method",
+    title: "Our Strategic Alignment Method",
     supports: [
-      { title: "Revenue growth", icon: TrendingUp },
-      { title: "Operational efficiency", icon: Settings },
-      { title: "Innovation and digital readiness", icon: Lightbulb },
-      { title: "Talent retention & leadership", icon: Users2 }
+      { title: "Business Strategy", icon: Target },
+      { title: "Talent Lifecycle", icon: Layers },
+      { title: "Technology Stack", icon: Cpu },
+      { title: "Cultural Shift", icon: Smile }
     ]
   },
   framework: {
-    title: "The TechSkyline 360° Training Framework",
+    title: "The 360-Degree Training Framework",
     steps: [
-      { step: "01", title: "Training Needs Analysis", desc: "Identify role-based and future skill gaps aligned with business objectives.", icon: ClipboardCheck },
-      { step: "02", title: "Program Design", desc: "Custom-built learning paths using blended, digital-first methodologies.", icon: PenTool },
-      { step: "03", title: "Implementation & Delivery", desc: "Instructor-led, virtual, self-paced, and experiential learning models.", icon: MonitorPlay },
-      { step: "04", title: "Measurement & Optimization", desc: "ROI tracking through performance metrics, analytics, and business impact indicators.", icon: Target }
+      { step: "01", icon: Search, title: "Discovery", desc: "In-depth audit of current skills and business goals." },
+      { step: "02", icon: Lightbulb, title: "Design", desc: "Curating bespoke learning journeys for every tier." },
+      { step: "03", icon: Code, title: "Delivery", desc: "Seamless deployment across platforms and regions." },
+      { step: "04", icon: BarChart3, title: "Analytics", desc: "Measuring impact and refining strategies in real-time." }
     ]
   },
   definition: {
-    title: "What Is Corporate Training? (TechSkyline Definition)",
-    content: "Corporate training refers to structured learning initiatives designed to enhance employee skills, knowledge, and competencies to meet both current and future organizational needs.",
+    title: "Defining Corporate Training & Development",
+    content: "We view corporate training not as a one-time event, but as a continuous loop of learning, application, and growth.",
     verticals: [
-      "Technical and digital skills",
-      "Leadership and management development",
-      "Compliance and regulatory training",
-      "Product, sales, and customer enablement",
-      "AI, cloud, data, and emerging technology upskilling"
+      "Leadership and Executive Coaching",
+      "Technical Upskilling (Cloud, AI, Data)",
+      "Compliance and Governance Mastery",
+      "Soft Skills and Cultural Alignment",
+      "Operational Excellence Training",
+      "Sales and Customer Success Enablement"
     ]
   },
   evolution: {
-    title: "How Corporate Training Has Evolved",
+    title: "The Evolution of Learning",
     milestones: [
-      { year: "2000s", title: "LMS-driven eLearning", desc: "Standard digital catalogs." },
-      { year: "2010+", title: "Blended Learning Models", desc: "Classroom mixed with online." },
-      { year: "2015+", title: "Mobile & Microlearning", desc: "Bite-sized learning on the go." },
-      { year: "2018+", title: "AI-powered adaptive learning", desc: "Personalized paths via algorithms." },
-      { year: "Today", title: "Immersive Learning", desc: "VR/AR and high-fidelity simulations." }
+      { year: "2010s", title: "Standardized eLearning", desc: "Focus on mass-produced video content and static quizzes." },
+      { year: "2020s", title: "Personalized Ecosystems", desc: "Shift to AI-driven, byte-sized learning integrated into workflows." },
+      { year: "Future", title: "Continuous Intelligence", desc: "Real-time skill augmentation through immersive AI mentors." }
     ]
   },
   distinction: {
-    title: "Training vs. Development: A Strategic Distinction",
+    title: "Training vs Development: The TechSkyline Distinction",
     rows: [
-      { aspect: "Focus", training: "Current job performance", development: "Future roles & leadership" },
-      { aspect: "Timeframe", training: "Short-term", development: "Long-term" },
-      { aspect: "Nature", training: "Structured, task-oriented", development: "Holistic, experiential" },
-      { aspect: "Outcome", training: "Measurable skills", development: "Strategic capability" }
-    ]
-  },
-  scaling: {
-    title: "Scaling Corporate Training Globally",
-    features: [
-      { title: "Centralized LMS platforms", icon: Server },
-      { title: "Multilingual content localization", icon: Globe },
-      { title: "Blended and virtual delivery", icon: MonitorPlay },
-      { title: "Data-driven performance tracking", icon: BarChart2 }
-    ]
-  },
-  roi: {
-    title: "Measuring ROI in Corporate Training",
-    methods: [
-      { title: "Linking learning to business KPIs", icon: Target },
-      { title: "Performance analytics & feedback", icon: BarChart2 },
-      { title: "Kirkpatrick & ROI models", icon: Scale },
-      { title: "Translating data into insights", icon: Lightbulb }
+      { aspect: "Orientation", training: "Job-focused / Short-term", development: "Career-focused / Long-term" },
+      { aspect: "Objective", training: "Task Proficiency", development: "Leadership & Resilience" },
+      { aspect: "Scope", training: "Specific Skill Gaps", development: "Holistic Growth" },
+      { aspect: "Timeline", training: "Immediate Application", development: "Future Readiness" }
     ]
   },
   holisticServices: [
-    { title: "ILT to eLearning Conversion", desc: "Save time and cost of in-person training. Make learning available on-demand.", icon: RefreshCcw },
-    { title: "Virtual Instructor-led (VILT)", desc: "Replicate collaboration of physical classrooms in a virtual set up.", icon: MonitorPlay },
-    { title: "Webinar to eLearning", desc: "10X the impact of technical training by converting SME inputs to courses.", icon: MousePointer2 },
-    { title: "Video Creation", desc: "Scale and volume using AI tools such as Synthesia and Vyond Go.", icon: Video },
-    { title: "Microlearning Solutions", desc: "Learning in the flow of work with bite-sized nuggets in appealing formats.", icon: Smartphone },
-    { title: "AI Tools Expertise", desc: "Think big and deliver faster with AI tools that make design agile.", icon: Cpu }
+    { title: "Custom Content Development", icon: FileText, desc: "Bespoke modules tailored to your brand and technology stack." },
+    { title: "Managed Learning Services", icon: ClipboardCheck, desc: "End-to-end administration of your enterprise learning programs." },
+    { title: "Strategic Advisory", icon: Target, desc: "Consulting on L&D strategy and tech stack optimization." }
+  ],
+  roi: {
+    title: "Measuring the ROI of Learning",
+    methods: [
+      { title: "KPI Alignment", icon: BarChart2 },
+      { title: "Performance Uplift", icon: TrendingUp },
+      { title: "Employee NPS", icon: Smile },
+      { title: "Efficiency Metrics", icon: Activity }
+    ]
+  },
+  scaling: {
+    title: "Scaling Your Global Workforce",
+    features: [
+      { title: "Localization Expertise", icon: Globe },
+      { title: "Cloud-Native Delivery", icon: Server },
+      { title: "24/7 Support", icon: Clock },
+      { title: "Universal Standards", icon: ShieldCheck }
+    ]
+  },
+  whyChoose: [
+    "Proven track record with Fortune 500 companies.",
+    "Integrated AI tools for personalized learning.",
+    "Data-driven insights into workforce readiness.",
+    "Global reach with local expertise."
   ],
   trainingTypes: [
-    "Technical & IT Skills Training",
-    "Soft Skills & Professional Skills",
-    "Compliance & Regulatory Training",
-    "Leadership & Management Development",
-    "Onboarding & Orientation",
-    "Product & Service Enablement",
-    "Sales & Customer Success Training",
-    "Health, Safety & Sustainability Training",
-    "DEI & Workplace Culture Programs"
+    "Enterprise AI Strategy",
+    "Full-Stack Engineering",
+    "Cloud Architecture (AWS/Azure)",
+    "Agile Project Management",
+    "Data Science & Analytics",
+    "Cybersecurity Awareness",
+    "Leadership in the Digital Age",
+    "Customer Experience Mastery"
+  ]
+};
+
+// AI Workforce Content
+export const AI_WORKFORCE_CONTENT = {
+  hero: {
+    title: "Workforce Strategy",
+    subtitle: "Navigating the Intelligence Revolution",
+    tagline: "Empowering organizations to thrive in the age of generative AI through strategic reskilling and human-centric integration."
+  },
+  whyMatters: {
+    title: "Why AI Readiness Matters Now",
+    stats: [
+      { label: "Potential GDP Growth", value: "$15.7T", icon: Globe },
+      { label: "Efficiency Boost", value: "40%", icon: Zap },
+      { label: "Workplace Adoption", value: "72%", icon: TrendingUp },
+      { label: "Skill Obsolescence", value: "50%", icon: AlertCircle },
+      { label: "ROI Expectation", value: "5x", icon: Award }
+    ]
+  },
+  readiness: {
+    title: "Strategic Impact",
+    impact: "80%",
+    impactDesc: "of tasks will be augmented by AI tools by 2026.",
+    marketTrend: "The 'AI Divide' is separating market leaders from laggards."
+  },
+  skillsGap: {
+    title: "Closing the AI Skills Gap",
+    points: [
+      { label: "Basic AI Literacy", value: "35%", color: "cyan" },
+      { label: "Prompt Engineering", value: "20%", color: "purple" },
+      { label: "AI Governance", value: "15%", color: "orange" },
+      { label: "Technical Integration", value: "10%", color: "red" }
+    ]
+  },
+  solutions: [
+    { 
+      id: "01", 
+      icon: Brain, 
+      name: "AI Literacy for All", 
+      tagline: "Building the Foundation", 
+      features: ["Understanding LLMs", "AI Ethics", "Everyday Productivity Tools"] 
+    },
+    { 
+      id: "02", 
+      icon: Code, 
+      name: "Engineering for AI", 
+      tagline: "Building the Future", 
+      features: ["Fine-tuning Models", "RAG Architecture", "AI-First Development"] 
+    },
+    { 
+      id: "03", 
+      icon: ShieldCheck, 
+      name: "Strategic Governance", 
+      tagline: "Leading with Responsibility", 
+      features: ["Policy Design", "Bias Mitigation", "Security Frameworks"] 
+    }
   ],
   whyChoose: [
-    "25 years of experience in enterprise training transformation",
-    "Preferred learning partner for top U.S. companies",
-    "3-5-week turnaround speed",
-    "Licensed usage of leading authoring and AI tools",
-    "Trusted by 300+ global companies"
+    "Deep technical roots in Silicon Valley standards.",
+    "Focus on ethical and responsible AI adoption.",
+    "Hands-on labs with real-world enterprise models.",
+    "Continuous updates as technology evolves weekly."
   ]
 };
-
-export const TESTIMONIALS: Testimonial[] = [
-  { id: 1, text: "Most of our customers have been with us for 10+ years, and 90% of our business is repeat. The placement assistance is outstanding!", author: "Priya Sharma", role: "Data Scientist (Placed at Capgemini)", rating: 5, category: "Student - Placement", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=70" },
-  { id: 2, text: "Empowering high-performing U.S. L&D teams with custom corporate eLearning solutions that turn complex training into engaging experiences.", author: "Michael Chen", role: "Director of Engineering, Tech Corp", rating: 5, category: "Client - Consulting", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=128&q=70" }
-];
-
-export const FEATURED_TECHNOLOGIES: TechCategory[] = [
-  { title: "SAP S/4 HANA", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=70", description: "Enterprise Resource Planning" },
-  { title: "Data Science & AI", image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=500&q=70", description: "Machine Learning, Python" },
-  { title: "Cyber Security", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=500&q=70", description: "Network Defense, Ethical Hacking" },
-  { title: "DevOps & Cloud", image: "https://images.unsplash.com/photo-1667372393119-c85c020799a3?auto=format&fit=crop&w=500&q=70", description: "CI/CD, AWS, Azure, Docker" },
-  { title: "Full Stack Web", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&q=70", description: "React, Node.js, MongoDB, Express" },
-  { title: "Cloud Security", image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=500&q=70", description: "Zero Trust, Identity, Threat Detection" }
-];
-
-export const INTERNSHIP_PROGRAM = {
-  title: "Internship & Self-Learning Program",
-  description: "Designed for College Students and Self Learners. Join our comprehensive program featuring Live Sessions, 24/7 Lab Access, and complete Study Notes & Materials.",
-  features: [
-    { title: "Live Expert Sessions", icon: MonitorPlay, desc: "Interactive live training with industry experts on real-time concepts." },
-    { title: "Live Labs Access", icon: Wrench, desc: "24/7 access to pre-configured live labs with all required tools installed." },
-    { title: "Class Recordings", icon: Video, desc: "Lifetime access to HD recordings of all live sessions for revision." }
-  ],
-  programSteps: ["Fundamentals & Theory", "Advanced Concepts & Tools", "Live Labs & Practice", "Real-time Projects", "Certification & Portfolio"],
-  technologies: [
-    { name: "Artificial Intelligence (AI)", id: "ai", type: "AI/ML" },
-    { name: "Generative AI", id: "genai", type: "AI/ML" },
-    { name: "Power BI", id: "powerbi", type: "Data" },
-    { name: "AWS DevOps", id: "aws", type: "Cloud" }
-  ],
-  studentResources: [
-    { title: "Live Video Archive", description: "Direct access to daily live session links and video library.", icon: PlayCircle, linkText: "Watch Sessions" },
-    { title: "24/7 Lab Dashboard", description: "One-click access to personalized cloud labs.", icon: Terminal, linkText: "Launch Lab" }
-  ]
-};
-
-export const SAMPLE_CLASSES = [
-  { id: 1, title: "Gen AI: Prompt Engineering Fundamentals", type: "Video", duration: "1h 15m", author: "Dr. Sarah Smith", thumbnail: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=500&q=70", videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-  { id: 2, title: "AWS Security Specialist Interview Guide", type: "Audio", duration: "45m", author: "James Wilson", thumbnail: "https://images.unsplash.com/photo-1478737270239-2f02b77ac6d5?auto=format&fit=crop&w=500&q=70", audioUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" }
-];
-
-export const TESTING_SERVICES = ["Software Testing", "Data Warehouse Testing", "Big Data Application Testing", "ERP Testing", "CRM Testing", "Mobile App Testing"];
-
-export const COURSE_CATEGORIES: CourseCategory[] = [
-  { name: "Cloud, DevOps & Security", courses: ["AWS & Cloud", "Azure DevOps", "Red Hat Linux", "Cybersecurity", "CCNA"] },
-  { name: "AI & Data Science", courses: ["Generative AI", "AI with Data Science", "AI with Python", "Power BI", "Tableau"] },
-  { name: "Enterprise & Management", courses: ["SAP S4 HANA", "SAP FICO", "SAP Ariba", "Oracle Unifier", "Workday", "PMP"] }
-];
-
-export const STAFFING_FEATURES: FeatureItem[] = [
-  { title: "Contract Staffing", description: "Specialized technology staffing services for short-term support.", icon: Briefcase },
-  { title: "Permanent Placement", description: "Finding top talent by understanding career aspirations and needs.", icon: Users }
-];
-
-export const ABOUT_TRAINING_TEXT = `We are the leading IT Online Training hub since a decade in the industry and we are voted as a Leader in online IT Trainings, Placements, and Corporate Trainings.`;
-export const CERTIFICATION_TEXT = `Software Certification is formal recognition of a level of proficiency in the information technology (IT) quality assurance industry.`;
-
-export const ABOUT_US_CONTENT = {
-  story: `Founded with a simple yet ambitious goal, Techskyline IT Solutions began as a response to the growing disconnect between academic learning and industry demands.`,
-  mission: "To empower individuals and organizations through world-class training and innovative consulting.",
-  vision: "To be the global leader in IT workforce transformation.",
-  values: [
-    { title: "Excellence", description: "High standards in every code and class.", icon: Award },
-    { title: "Integrity", description: "Transparency and honesty in relationships.", icon: ShieldCheck }
-  ],
-  team: [
-    { name: "Abhinav", role: "Founder & CEO", bio: "With 15+ years in IT, Abhinav leads with a passion for education.", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=70" }
-  ]
-};
-
-export const CORPORATE_TRAINING = {
-    title: "Corporate Training Solutions",
-    subtitle: "Transform Your Workforce with Custom IT Training",
-    description: "We partner with organizations to build high-performance technical teams.",
-    benefits: [
-        { title: "Customized Curriculum", description: "Modules tailored to your project requirements.", icon: Settings },
-        { title: "Hands-on Labs", description: "Secure, cloud-based sandbox environments.", icon: Cloud }
-    ],
-    process: [
-        { step: "01", title: "Discovery", desc: "Analyze business goals & skill gaps." }
-    ],
-    technologies: [
-        { category: "Cloud & DevOps", items: ["AWS", "Azure", "Docker"] }
-    ]
-};
-
-export const TECH_STACK = [
-  { name: "HubSpot", category: "CRM" },
-  { name: "AWS", category: "Cloud" },
-  { name: "Google Analytics 4", category: "Tracking" }
-];
