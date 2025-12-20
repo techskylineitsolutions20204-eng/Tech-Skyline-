@@ -6,12 +6,14 @@
     <meta name="google-site-verification" content="pI-9rrEJ5sagMjxP2F9xZd6U8G7b5WnBp5DD41XIW04" />
     <meta name="description" content="Techskyline.in - Premier IT Consulting, Staffing, and Corporate Training Solutions. Expert guidance in digital transformation, cloud consulting, and AI upskilling." />
     
+    <!-- External Doc Log: https://chatgpt.com/backend-api/estuary/content?id=10c36fd01a98934%23file_00000000dd047206aa74fb76472cee8f%23md&ts=490622&p=fs&cid=1&sig=83f4f0e1f416f2d6fea78eea566dd9ad41d7edab9e8fa42b6913b958170d0dd9 -->
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://techskyline.in/" />
     <meta property="og:title" content="Techskyline.in - IT Consulting, Staffing & Training" />
     <meta property="og:description" content="Elevate your business with expert IT strategies and high-performance workforce solutions." />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=75" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -22,21 +24,22 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
 
-    <!-- Performance: Preconnect to external origins to reduce DNS latency -->
+    <!-- Performance: Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="preconnect" href="https://aistudiocdn.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
 
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <script crossorigin="anonymous">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-K8DLKZLP');</script>
 
-    <!-- Google Analytics - Loaded with Defer/Async where possible -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F2RRW778DV"></script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F2RRW778DV" crossorigin="anonymous"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -45,14 +48,14 @@
       gtag('config', 'GT-NGJTPZK8');
     </script>
 
-    <!-- Contentsquare - Deferred parsing to improve initial rendering speed -->
-    <script src="https://t.contentsquare.net/uxa/594f121436b9c.js" defer></script>
+    <!-- Contentsquare - Deferred to reduce blocking and fixed with crossorigin -->
+    <script src="https://t.contentsquare.net/uxa/594f121436b9c.js" defer crossorigin="anonymous"></script>
 
     <link rel="icon" type="image/svg+xml" href="https://lucide.dev/logo.light.svg" />
     <title>Techskyline.in - IT Consulting, Staffing & Training</title>
     
-    <!-- Tailwind - Using the CDN minified version -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind - Fixed "Script error" with crossorigin -->
+    <script src="https://cdn.tailwindcss.com" crossorigin="anonymous"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -69,13 +72,14 @@
       }
     </script>
     
-    <!-- Fonts - Loaded with swap to prevent SPOF and blocking -->
+    <!-- Fonts - Async loading -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     
     <style>
       body { font-family: 'Inter', sans-serif; }
       .no-scrollbar::-webkit-scrollbar { display: none; }
       .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      img { content-visibility: auto; }
     </style>
 
     <script type="importmap">
@@ -90,7 +94,7 @@
     </script>
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) - Added sandbox for security -->
+    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8DLKZLP"
     height="0" width="0" style="display:none;visibility:hidden" sandbox="allow-scripts"></iframe></noscript>
     <div id="root"></div>

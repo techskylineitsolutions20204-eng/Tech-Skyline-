@@ -2,9 +2,9 @@ import React, { useId } from 'react';
 
 export const TechSkylineLogo = ({ className = "", size = "normal" }: { className?: string, size?: "small" | "normal" | "large" }) => {
   const isLarge = size === "large";
-  const id = useId().replace(/:/g, ""); // Ensure safe characters for CSS/SVG IDs
-  const gradId = `skylineGrad-${id}`;
-  const glowId = `glow-${id}`;
+  const idSuffix = useId().replace(/:/g, ""); // Clean ID for SVG references
+  const gradientId = `ts-grad-${idSuffix}`;
+  const filterId = `ts-glow-${idSuffix}`;
   
   return (
     <div className={`relative flex items-center justify-center ${className}`}>
@@ -15,19 +15,19 @@ export const TechSkylineLogo = ({ className = "", size = "normal" }: { className
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          <linearGradient id={gradId} x1="0" y1="100" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+          <linearGradient id={gradientId} x1="0" y1="100" x2="100" y2="0" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#22d3ee" />
             <stop offset="100%" stopColor="#3b82f6" />
           </linearGradient>
-          <filter id={glowId} x="-20%" y="-20%" width="140%" height="140%">
+          <filter id={filterId} x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="2" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
         </defs>
         
-        <path d="M15 45V90H35V45L25 35L15 45Z" fill={`url(#${gradId})`} opacity="0.8" />
-        <path d="M40 20V90H60V20L50 10L40 20Z" fill={`url(#${gradId})`} />
-        <path d="M65 35V90H85V35L75 25L65 35Z" fill={`url(#${gradId})`} opacity="0.9" />
+        <path d="M15 45V90H35V45L25 35L15 45Z" fill={`url(#${gradientId})`} opacity="0.8" />
+        <path d="M40 20V90H60V20L50 10L40 20Z" fill={`url(#${gradientId})`} />
+        <path d="M65 35V90H85V35L75 25L65 35Z" fill={`url(#${gradientId})`} opacity="0.9" />
         
         <circle cx="25" cy="55" r={isLarge ? 3 : 4} fill="white" />
         <circle cx="50" cy="30" r={isLarge ? 3 : 4} fill="white" />
