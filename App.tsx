@@ -86,11 +86,10 @@ function App() {
   const [itemsPerSlide, setItemsPerSlide] = useState(3);
   const [activeClass, setActiveClass] = useState<any>(null);
   const [activeCourseFilter, setActiveCourseFilter] = useState("All");
-  const [view, setView] = useState('home'); // 'home', 'about', 'policies', 'corporate-360', 'ai-workforce'
+  const [view, setView] = useState('home'); 
   
   const scrollRef = useRef<HTMLDivElement>(null);
   
-  // Lab Simulation State
   const [activeLab, setActiveLab] = useState<any>(null);
   const [labBootLines, setLabBootLines] = useState<string[]>([]);
   const [isLabReady, setIsLabReady] = useState(false);
@@ -245,7 +244,7 @@ function App() {
                  {activeClass.type === 'Video' ? <VideoIcon size={20} className="text-cyan-400"/> : <Headphones size={20} className="text-purple-400"/>}
                  {activeClass.title}
                </h3>
-               <button onClick={() => setActiveClass(null)} className="text-slate-400 hover:text-white transition-colors">
+               <button onClick={() => setActiveClass(null)} className="text-slate-400 hover:text-white transition-colors" aria-label="Close modal">
                  <XCircle size={24}/>
                </button>
              </div>
@@ -254,7 +253,7 @@ function App() {
                  <video src={activeClass.videoUrl} poster={activeClass.thumbnail} controls autoPlay className="w-full h-full object-contain"/>
                ) : (
                  <div className="w-full h-full relative flex items-center justify-center">
-                    <img src={activeClass.thumbnail} className="absolute inset-0 w-full h-full object-cover opacity-30 blur-sm" alt="Thumbnail"/>
+                    <img src={activeClass.thumbnail} className="absolute inset-0 w-full h-full object-cover opacity-30 blur-sm" alt="Thumbnail" loading="lazy" />
                     <div className="z-10 bg-black/50 p-8 rounded-2xl backdrop-blur-md border border-white/10 w-3/4 max-w-md text-center">
                        <div className="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-purple-500/30 animate-pulse">
                           <Headphones size={32} className="text-white"/>
@@ -279,7 +278,7 @@ function App() {
                     <div className="flex gap-1.5 ml-2"><div className="w-3 h-3 rounded-full bg-red-500"></div><div className="w-3 h-3 rounded-full bg-yellow-500"></div><div className="w-3 h-3 rounded-full bg-green-500"></div></div>
                     <div className="ml-4 px-3 py-1 bg-black/40 rounded-md text-xs font-mono text-slate-400 flex items-center gap-2"><Terminal size={12} /> techskyline-lab-server</div>
                  </div>
-                 <button onClick={() => setActiveLab(null)} className="text-slate-400 hover:text-white transition-colors mr-2"><X size={18} /></button>
+                 <button onClick={() => setActiveLab(null)} className="text-slate-400 hover:text-white transition-colors mr-2" aria-label="Close lab"><X size={18} /></button>
               </div>
               <div className="flex-1 bg-black p-6 font-mono text-sm overflow-y-auto font-light leading-6">
                  {labBootLines.map((line, idx) => (
@@ -303,7 +302,7 @@ function App() {
             <div className="flex items-center gap-3 cursor-pointer group" onClick={() => handleNavigation('home')}>
               <TechSkylineLogo className="w-12 h-12 text-cyan-400 drop-shadow-lg" />
               <div className="flex flex-col">
-                <h1 className="text-2xl font-extrabold text-white tracking-tight group-hover:text-cyan-400 transition-colors">TECH SKYLINE</h1>
+                <h1 className="text-2xl font-extrabold text-white tracking-tight group-hover:text-cyan-400 transition-colors uppercase">TECH SKYLINE</h1>
                 <p className="text-[10px] text-cyan-400 font-bold tracking-[0.2em] mt-0.5 uppercase">IT Solutions</p>
               </div>
             </div>
@@ -335,7 +334,7 @@ function App() {
             </div>
 
             <div className="lg:hidden">
-              <button onClick={toggleMenu} className="text-white hover:text-cyan-400 transition-colors">
+              <button onClick={toggleMenu} className="text-white hover:text-cyan-400 transition-colors" aria-label="Toggle menu">
                 {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
               </button>
             </div>
@@ -392,7 +391,7 @@ function App() {
                   <div className="mb-10 relative group">
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-600 blur-2xl opacity-20 transition-opacity rounded-full"></div>
                     <div className="relative bg-black/40 backdrop-blur-sm p-6 rounded-3xl border border-white/10 shadow-2xl">
-                      <img src={CONTACT_INFO.heroLogo} alt="Tech Skyline" className="h-32 md:h-48 w-auto object-contain"/>
+                      <img src={CONTACT_INFO.heroLogo} alt="Tech Skyline Hero Logo" className="h-32 md:h-48 w-auto object-contain" loading="lazy" />
                       <div className="mt-4 text-center">
                           <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-200 tracking-tighter uppercase">TECH SKYLINE</h1>
                           <p className="text-xl md:text-2xl text-slate-300 font-bold tracking-[0.4em] mt-2 border-t border-white/20 pt-2 inline-block uppercase">IT SOLUTIONS</p>
@@ -427,14 +426,14 @@ function App() {
                   <div className="flex justify-around items-center w-1/2 px-4 gap-8">
                     {CLIENTS.map((client, index) => (
                       <div key={index} className="flex items-center justify-center grayscale brightness-200 transition-all opacity-50 hover:opacity-100 hover:scale-110">
-                        <img src={client.logo} alt={client.name} className="h-10 w-auto object-contain max-w-[120px]" />
+                        <img src={client.logo} alt={client.name} className="h-10 w-auto object-contain max-w-[120px]" loading="lazy" />
                       </div>
                     ))}
                   </div>
                   <div className="flex justify-around items-center w-1/2 px-4 gap-8">
                     {CLIENTS.map((client, index) => (
                       <div key={index} className="flex items-center justify-center grayscale brightness-200 transition-all opacity-50 hover:opacity-100 hover:scale-110">
-                        <img src={client.logo} alt={client.name} className="h-10 w-auto object-contain max-w-[120px]" />
+                        <img src={client.logo} alt={client.name} className="h-10 w-auto object-contain max-w-[120px]" loading="lazy" />
                       </div>
                     ))}
                   </div>
@@ -459,12 +458,12 @@ function App() {
               </div>
             </section>
 
-            {/* Refined Horizontal Carousel for Featured Technologies */}
+            {/* Horizontal Carousel for Featured Technologies */}
             <section className="py-20 relative overflow-hidden bg-slate-900/30">
                <div className="container mx-auto px-4 md:px-6 relative z-10">
                   <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                      <div>
-                        <h2 className="text-sm font-bold text-cyan-400 uppercase tracking-widest mb-2">Expertise</h2>
+                        <h2 className="text-sm font-bold text-cyan-400 uppercase tracking-widest mb-2 uppercase">Expertise</h2>
                         <h3 className="text-3xl md:text-4xl font-bold text-white">Featured Technologies</h3>
                         <p className="text-slate-400 mt-2 max-w-xl">Explore our specialized tracks in high-demand IT domains. Swipe or use buttons to browse.</p>
                      </div>
@@ -486,7 +485,6 @@ function App() {
                      </div>
                   </div>
 
-                  {/* Horizontal Scroll Container */}
                   <div 
                      ref={scrollRef}
                      className="flex gap-8 overflow-x-auto pb-10 no-scrollbar snap-x snap-mandatory"
@@ -501,10 +499,11 @@ function App() {
                                  src={tech.image} 
                                  alt={tech.title} 
                                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                 loading="lazy"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/20 to-transparent opacity-90"></div>
                               <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                                 <h4 className="text-2xl font-black text-white mb-2 leading-tight drop-shadow-md">{tech.title}</h4>
+                                 <h4 className="text-2xl font-black text-white mb-2 leading-tight drop-shadow-md uppercase">{tech.title}</h4>
                                  <p className="text-cyan-400 text-sm font-bold uppercase tracking-widest mb-4 opacity-0 group-hover:opacity-100 transition-opacity">{tech.description}</p>
                                  <button 
                                     onClick={() => scrollToSection('contact')}
@@ -531,7 +530,7 @@ function App() {
                   {CONSULTING_SERVICES.map((service, index) => (
                     <div key={index} className="bg-white/5 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 group">
                       <div className="h-48 overflow-hidden relative">
-                        <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-110"/>
+                        <img src={service.image} alt={service.title} className="w-full h-full object-cover transition-transform duration-700 grayscale group-hover:grayscale-0 group-hover:scale-110" loading="lazy" />
                       </div>
                       <div className="p-8">
                         <div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center text-white mb-6 -mt-16 relative z-10 border-4 border-slate-800">
@@ -555,7 +554,7 @@ function App() {
                     <h2 className="text-sm font-bold text-purple-400 uppercase tracking-widest mb-2">Education</h2>
                     <h3 className="text-3xl font-bold mb-6 text-white">Comprehensive IT Training</h3>
                     <div className="bg-gradient-to-br from-purple-900/50 to-indigo-900/50 p-6 rounded-2xl border border-white/10 mb-8 shadow-lg">
-                      <h4 className="font-bold flex items-center gap-2 mb-4 text-white"><Award className="text-yellow-400" size={20} /> Certification Support</h4>
+                      <h4 className="font-bold flex items-center gap-2 mb-4 text-white uppercase"><Award className="text-yellow-400" size={20} /> Certification Support</h4>
                       <p className="text-sm text-slate-300 mb-4 leading-relaxed">{CERTIFICATION_TEXT}</p>
                       <button onClick={() => scrollToSection('contact')} className="text-cyan-400 text-sm font-bold hover:text-cyan-300 flex items-center gap-1">Get Certified Now <ArrowRight size={14} /></button>
                     </div>
@@ -564,7 +563,7 @@ function App() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {COURSE_CATEGORIES.map((category, index) => (
                         <div key={index} className="bg-slate-800/40 p-6 rounded-2xl border border-white/5 hover:border-purple-500/50 transition-all group">
-                          <h4 className="text-xl font-bold text-white mb-4 pb-2 border-b border-white/5 group-hover:text-purple-400 transition-colors">{category.name}</h4>
+                          <h4 className="text-xl font-bold text-white mb-4 pb-2 border-b border-white/5 group-hover:text-purple-400 transition-colors uppercase">{category.name}</h4>
                           <ul className="space-y-3">
                             {category.courses.map((course, cIdx) => (
                               <li key={cIdx} className="flex items-center text-slate-300 text-sm"><span className="w-1.5 h-1.5 bg-purple-500 rounded-full mr-3"></span>{course}</li>
@@ -581,20 +580,20 @@ function App() {
             {/* Corporate Summary Link */}
             <section className="py-20 bg-slate-900/50 border-y border-white/5">
                 <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl font-black text-white mb-6">Elevate Your Team's Performance</h2>
+                    <h2 className="text-3xl font-black text-white mb-6 uppercase">Elevate Your Team's Performance</h2>
                     <p className="text-slate-400 max-w-2xl mx-auto mb-10">
                         Our 360° corporate training approach transforms learning from a checkbox into a competitive lever for your entire organization.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-6">
                        <button 
                            onClick={() => handleNavigation('corporate')}
-                           className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-black rounded-2xl border border-white/10 flex items-center justify-center gap-2 transition-transform hover:-translate-y-1"
+                           className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-black rounded-2xl border border-white/10 flex items-center justify-center gap-2 transition-transform hover:-translate-y-1 uppercase"
                        >
                            Explore 360° Corporate Strategy <ArrowRight size={20} />
                        </button>
                        <button 
                            onClick={() => handleNavigation('ai-workforce')}
-                           className="px-8 py-4 bg-cyan-600 hover:bg-cyan-500 text-white font-black rounded-2xl shadow-xl shadow-cyan-500/20 flex items-center justify-center gap-2 transition-transform hover:-translate-y-1"
+                           className="px-8 py-4 bg-cyan-600 hover:bg-cyan-500 text-white font-black rounded-2xl shadow-xl shadow-cyan-500/20 flex items-center justify-center gap-2 transition-transform hover:-translate-y-1 uppercase"
                        >
                            <Brain size={20} /> Build AI-Powered Workforce <ArrowRight size={20} />
                        </button>
@@ -612,7 +611,7 @@ function App() {
                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 rounded-full text-xs font-black uppercase tracking-widest mb-6">
                         <Sparkles size={14} className="animate-pulse" /> The Age of Intelligence
                      </div>
-                     <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+                     <h2 className="text-4xl md:text-5xl font-black text-white mb-6 uppercase">
                         AI Corporate Training Solutions
                      </h2>
                      <p className="text-slate-400 max-w-2xl mx-auto text-lg">
@@ -621,67 +620,63 @@ function App() {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                     {/* 1. AI Quotient Assessment */}
                      <div className="bg-slate-900/50 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white/5 hover:border-cyan-500/50 transition-all group flex flex-col h-full shadow-2xl relative overflow-hidden">
                         <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl group-hover:bg-cyan-500/20 transition-all"></div>
                         <div className="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-cyan-400 mb-8 group-hover:bg-cyan-500 group-hover:text-white transition-all shadow-lg border border-white/5">
                            <Binary size={32} />
                         </div>
-                        <h4 className="text-2xl font-bold text-white mb-4">AI Quotient Assessment</h4>
+                        <h4 className="text-2xl font-bold text-white mb-4 uppercase">AI Quotient Assessment</h4>
                         <p className="text-slate-400 text-sm mb-8 leading-relaxed flex-grow">
                            Measure enterprise AI readiness with role-based assessments. Identify critical skill gaps and benchmark your team's capabilities.
                         </p>
                         <div className="pt-6 border-t border-white/5 mt-auto">
                            <div className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-1">Business Impact</div>
-                           <p className="text-white text-xs font-bold">Data-Driven Workforce Strategy</p>
+                           <p className="text-white text-xs font-bold uppercase">Data-Driven Workforce Strategy</p>
                         </div>
                      </div>
 
-                     {/* 2. AI Infinity */}
                      <div className="bg-slate-900/50 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white/5 hover:border-blue-500/50 transition-all group flex flex-col h-full shadow-2xl relative overflow-hidden">
                         <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-all"></div>
                         <div className="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-blue-400 mb-8 group-hover:bg-blue-500 group-hover:text-white transition-all shadow-lg border border-white/5">
                            <Globe size={32} />
                         </div>
-                        <h4 className="text-2xl font-bold text-white mb-4">AI Infinity</h4>
+                        <h4 className="text-2xl font-bold text-white mb-4 uppercase">AI Infinity</h4>
                         <p className="text-slate-400 text-sm mb-8 leading-relaxed flex-grow">
                            Company-wide AI literacy program providing foundational training for all employees to build awareness and foster a culture of innovation.
                         </p>
                         <div className="pt-6 border-t border-white/5 mt-auto">
                            <div className="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Business Impact</div>
-                           <p className="text-white text-xs font-bold">Organization-Wide AI Literacy</p>
+                           <p className="text-white text-xs font-bold uppercase">Organization-Wide AI Literacy</p>
                         </div>
                      </div>
 
-                     {/* 3. AI Skills Academy */}
                      <div className="bg-slate-900/50 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white/5 hover:border-purple-500/50 transition-all group flex flex-col h-full shadow-2xl relative overflow-hidden">
                         <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl group-hover:bg-purple-500/20 transition-all"></div>
                         <div className="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-purple-400 mb-8 group-hover:bg-purple-500 group-hover:text-white transition-all shadow-lg border border-white/5">
                            <Brain size={32} />
                         </div>
-                        <h4 className="text-2xl font-bold text-white mb-4">AI Skills Academy</h4>
+                        <h4 className="text-2xl font-bold text-white mb-4 uppercase">AI Skills Academy</h4>
                         <p className="text-slate-400 text-sm mb-8 leading-relaxed flex-grow">
-                           Customized deep-dive upskilling with modular programs ranging from 6 to 180 hours, tailored to specific technical goals.
+                           Customized upskilling deep-dives with modular programs ranging from 6 to 180 hours, tailored to specific technical goals.
                         </p>
                         <div className="pt-6 border-t border-white/5 mt-auto">
                            <div className="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-1">Business Impact</div>
-                           <p className="text-white text-xs font-bold">Accelerated Technical Maturity</p>
+                           <p className="text-white text-xs font-bold uppercase">Accelerated Technical Maturity</p>
                         </div>
                      </div>
 
-                     {/* 4. Certification Programs */}
                      <div className="bg-slate-900/50 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white/5 hover:border-cyan-400/50 transition-all group flex flex-col h-full shadow-2xl relative overflow-hidden">
                         <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-400/10 rounded-full blur-3xl group-hover:bg-cyan-400/20 transition-all"></div>
                         <div className="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-cyan-300 mb-8 group-hover:bg-cyan-400 group-hover:text-white transition-all shadow-lg border border-white/5">
                            <Award size={32} />
                         </div>
-                        <h4 className="text-2xl font-bold text-white mb-4">Certification Programs</h4>
+                        <h4 className="text-2xl font-bold text-white mb-4 uppercase">Certification Programs</h4>
                         <p className="text-slate-400 text-sm mb-8 leading-relaxed flex-grow">
                            Executive-friendly, industry-recognized certification programs for mid-to-senior professionals to lead AI transformation effectively.
                         </p>
                         <div className="pt-6 border-t border-white/5 mt-auto">
                            <div className="text-[10px] font-black text-cyan-300 uppercase tracking-widest mb-1">Business Impact</div>
-                           <p className="text-white text-xs font-bold">Future-Ready Leadership</p>
+                           <p className="text-white text-xs font-bold uppercase">Future-Ready Leadership</p>
                         </div>
                      </div>
                   </div>
@@ -692,45 +687,45 @@ function App() {
             <section id="internships" className="py-20 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm">
               <div className="container mx-auto px-4 md:px-6">
                 <div className="text-center mb-12">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full text-xs font-bold uppercase tracking-wider mb-6"><Laptop size={14} /> For Students</div>
-                  <h2 className="text-3xl md:text-5xl font-black text-white mb-6">{INTERNSHIP_PROGRAM.title}</h2>
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full text-xs font-bold uppercase tracking-wider mb-6 uppercase"><Laptop size={14} /> For Students</div>
+                  <h2 className="text-3xl md:text-5xl font-black text-white mb-6 uppercase">{INTERNSHIP_PROGRAM.title}</h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
                     {INTERNSHIP_PROGRAM.technologies.map((tech, idx) => (
                         <div key={idx} className="bg-slate-800/50 p-4 rounded-xl border border-white/5 hover:border-cyan-500/30 transition-all flex flex-col justify-between group">
-                            <h5 className="font-bold text-slate-200 mb-4">{tech.name}</h5>
-                            <button onClick={() => handleLabLaunch(tech)} className="w-full bg-cyan-600/20 text-cyan-400 py-2 rounded-lg text-xs font-bold border border-cyan-500/20 hover:bg-cyan-600 hover:text-white transition-all"><Terminal size={14} className="inline mr-1"/> Launch Lab</button>
+                            <h5 className="font-bold text-slate-200 mb-4 uppercase">{tech.name}</h5>
+                            <button onClick={() => handleLabLaunch(tech)} className="w-full bg-cyan-600/20 text-cyan-400 py-2 rounded-lg text-xs font-bold border border-cyan-500/20 hover:bg-cyan-600 hover:text-white transition-all uppercase"><Terminal size={14} className="inline mr-1"/> Launch Lab</button>
                         </div>
                     ))}
                 </div>
                 <div className="bg-gradient-to-r from-slate-900 to-indigo-900 p-8 rounded-3xl border border-white/10 flex flex-col md:flex-row items-center justify-between gap-8">
-                    <div><h4 className="text-2xl font-bold text-white mb-2">Unlock Student Portal Access</h4><p className="text-slate-400">Get lifetime recordings and pre-configured labs.</p></div>
-                    <button onClick={openGoogleForm} className="bg-white text-slate-900 px-8 py-3 rounded-xl font-bold hover:bg-cyan-400 transition-all shadow-xl">Join Now</button>
+                    <div><h4 className="text-2xl font-bold text-white mb-2 uppercase">Unlock Student Portal Access</h4><p className="text-slate-400">Get lifetime recordings and pre-configured labs.</p></div>
+                    <button onClick={openGoogleForm} className="bg-white text-slate-900 px-8 py-3 rounded-xl font-bold hover:bg-cyan-400 transition-all shadow-xl uppercase">Join Now</button>
                 </div>
               </div>
             </section>
 
-            {/* Staffing Section - Re-enhanced with 'Why Choose' */}
+            {/* Staffing Section */}
             <section id="staffing" className="py-20 relative bg-slate-900 overflow-hidden">
                <div className="container mx-auto px-4 md:px-6 relative z-10">
                   <div className="flex flex-col lg:flex-row gap-16 items-center mb-20">
                      <div className="lg:w-1/2">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-full text-xs font-black uppercase tracking-widest mb-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-full text-xs font-black uppercase tracking-widest mb-6 uppercase">
                            <BriefcaseIcon size={14} /> Recruitment Excellence
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+                        <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight uppercase">
                            {STAFFING_CONTENT.title}
                         </h2>
-                        <p className="text-xl text-slate-300 font-light mb-10 leading-relaxed">
+                        <p className="text-xl text-slate-300 font-light mb-10 leading-relaxed uppercase">
                            {STAFFING_CONTENT.subtitle}
                         </p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                            {STAFFING_CONTENT.features.map((feature, idx) => (
                               <div key={idx} className="flex flex-col p-6 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors group">
-                                 <div className="w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center text-cyan-400 mb-4 group-hover:bg-cyan-500 group-hover:text-white transition-all shadow-lg">
+                                 <div className="w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center text-cyan-400 mb-4 group-hover:bg-cyan-500 group-hover:text-white transition-all shadow-lg uppercase">
                                     <feature.icon size={24} />
                                  </div>
-                                 <h4 className="font-bold text-white mb-2">{feature.title}</h4>
+                                 <h4 className="font-bold text-white mb-2 uppercase">{feature.title}</h4>
                                  <p className="text-xs text-slate-400 leading-relaxed">{feature.description}</p>
                               </div>
                            ))}
@@ -740,26 +735,26 @@ function App() {
                         <div className="relative group">
                            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/30 to-purple-600/30 rounded-[3rem] blur-2xl opacity-40"></div>
                            <img 
-                              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80" 
+                              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=75" 
                               alt="Staffing Expertise" 
                               className="relative rounded-[3rem] shadow-2xl border border-white/10 grayscale group-hover:grayscale-0 transition-all duration-700"
+                              loading="lazy"
                            />
                            <div className="absolute -bottom-10 -left-10 bg-slate-800/90 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-2xl z-20 max-w-xs">
                               <Trophy className="text-yellow-500 mb-4" size={32} />
-                              <div className="text-4xl font-black text-white mb-1">98.8%</div>
-                              <div className="text-xs text-slate-400 font-bold uppercase tracking-widest">Client Retention Rate</div>
+                              <div className="text-4xl font-black text-white mb-1 uppercase">98.8%</div>
+                              <div className="text-xs text-slate-400 font-bold uppercase tracking-widest uppercase">Client Retention Rate</div>
                            </div>
                         </div>
                      </div>
                   </div>
 
-                  {/* Why Choose Our Staffing Services - Dedicated Sub-section */}
                   <div className="bg-white/5 rounded-[4rem] p-12 md:p-20 border border-white/10 backdrop-blur-sm">
                      <div className="text-center mb-16">
-                        <h3 className="text-3xl md:text-4xl font-black text-white mb-4">
+                        <h3 className="text-3xl md:text-4xl font-black text-white mb-4 uppercase">
                            {STAFFING_CONTENT.whyChoose.title}
                         </h3>
-                        <p className="text-slate-400 max-w-2xl mx-auto">
+                        <p className="text-slate-400 max-w-2xl mx-auto uppercase">
                            Beyond just filling seats, we provide the technical intelligence required to scale high-performing IT departments.
                         </p>
                      </div>
@@ -767,10 +762,10 @@ function App() {
                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
                         {STAFFING_CONTENT.whyChoose.differentiators.map((diff, i) => (
                            <div key={i} className="flex flex-col h-full bg-slate-950 p-8 rounded-[2rem] border border-white/5 hover:border-cyan-500/30 transition-all group">
-                              <div className="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center text-cyan-400 mb-6 shadow-inner group-hover:scale-110 transition-transform">
+                              <div className="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center text-cyan-400 mb-6 shadow-inner group-hover:scale-110 transition-transform uppercase">
                                  <diff.icon size={28} />
                               </div>
-                              <h4 className="text-lg font-bold text-white mb-3">{diff.title}</h4>
+                              <h4 className="text-lg font-bold text-white mb-3 uppercase">{diff.title}</h4>
                               <p className="text-sm text-slate-400 leading-relaxed">{diff.description}</p>
                            </div>
                         ))}
@@ -782,8 +777,8 @@ function App() {
                               <div className="text-cyan-400 mb-2 flex justify-center group-hover:scale-110 transition-transform">
                                  <metric.icon size={32} strokeWidth={1.5} />
                               </div>
-                              <div className="text-3xl font-black text-white mb-1">{metric.value}</div>
-                              <div className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">{metric.label}</div>
+                              <div className="text-3xl font-black text-white mb-1 uppercase">{metric.value}</div>
+                              <div className="text-[10px] text-slate-500 font-bold uppercase tracking-widest uppercase uppercase">{metric.label}</div>
                            </div>
                         ))}
                      </div>
@@ -796,25 +791,37 @@ function App() {
               <div className="container mx-auto px-4 md:px-6">
                 <div className="bg-slate-900/80 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
                   <div className="flex flex-col lg:flex-row">
-                    <div className="lg:w-1/3 bg-gradient-to-br from-cyan-600 to-blue-700 p-10 text-white relative">
-                      <h3 className="text-2xl font-bold mb-6">Get In Touch</h3>
+                    <div className="lg:w-1/3 bg-gradient-to-br from-cyan-600 to-blue-700 p-10 text-white relative uppercase">
+                      <h3 className="text-2xl font-bold mb-6 uppercase">Get In Touch</h3>
                       <div className="space-y-6">
-                        <div className="flex items-start gap-4"><Phone size={20} /><div><h4 className="font-bold text-sm">Phone</h4><p className="text-blue-100 text-sm">{CONTACT_INFO.phone}</p></div></div>
-                        <div className="flex items-start gap-4"><Mail size={20} /><div><h4 className="font-bold text-sm">Email</h4><p className="text-blue-100 text-sm">{CONTACT_INFO.email}</p></div></div>
+                        <div className="flex items-start gap-4 uppercase"><Phone size={20} /><div><h4 className="font-bold text-sm uppercase">Phone</h4><p className="text-blue-100 text-sm uppercase">{CONTACT_INFO.phone}</p></div></div>
+                        <div className="flex items-start gap-4 uppercase"><Mail size={20} /><div><h4 className="font-bold text-sm uppercase">Email</h4><p className="text-blue-100 text-sm uppercase">{CONTACT_INFO.email}</p></div></div>
                       </div>
                     </div>
                     <div className="lg:w-2/3 p-10">
-                      <h3 className="text-2xl font-bold text-white mb-6">Start Your Journey</h3>
+                      <h3 className="text-2xl font-bold text-white mb-6 uppercase">Start Your Journey</h3>
                       <form className="space-y-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <input type="text" name="name" value={formData.name} onChange={handleInputChange} className="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-cyan-500 outline-none" placeholder="Your Name" />
-                          <input type="email" name="email" value={formData.email} onChange={handleInputChange} className="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-cyan-500 outline-none" placeholder="Email Address" />
+                          <div className="space-y-1">
+                            <label htmlFor="contact-name" className="text-xs font-bold text-slate-400 uppercase">Full Name</label>
+                            <input id="contact-name" type="text" name="name" value={formData.name} onChange={handleInputChange} className="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-cyan-500 outline-none" placeholder="Your Name" />
+                          </div>
+                          <div className="space-y-1">
+                            <label htmlFor="contact-email" className="text-xs font-bold text-slate-400 uppercase">Email Address</label>
+                            <input id="contact-email" type="email" name="email" value={formData.email} onChange={handleInputChange} className="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-cyan-500 outline-none" placeholder="Email Address" />
+                          </div>
                         </div>
-                        <input type="text" name="subject" value={formData.subject} onChange={handleInputChange} className="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-cyan-500 outline-none" placeholder="Subject" />
-                        <textarea name="message" value={formData.message} onChange={handleInputChange} rows={4} className="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-cyan-500 outline-none resize-none" placeholder="How can we help?"></textarea>
+                        <div className="space-y-1">
+                          <label htmlFor="contact-subject" className="text-xs font-bold text-slate-400 uppercase">Subject</label>
+                          <input id="contact-subject" type="text" name="subject" value={formData.subject} onChange={handleInputChange} className="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-cyan-500 outline-none" placeholder="Subject" />
+                        </div>
+                        <div className="space-y-1">
+                          <label htmlFor="contact-message" className="text-xs font-bold text-slate-400 uppercase">Message</label>
+                          <textarea id="contact-message" name="message" value={formData.message} onChange={handleInputChange} rows={4} className="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-cyan-500 outline-none resize-none" placeholder="How can we help?"></textarea>
+                        </div>
                         <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                          <button onClick={handleWhatsApp} className="flex-1 bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg"><MessageCircle size={20} /> WhatsApp</button>
-                          <button onClick={handleEmail} className="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg"><Mail size={20} /> Email</button>
+                          <button onClick={handleWhatsApp} className="flex-1 bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg uppercase"><MessageCircle size={20} /> WhatsApp</button>
+                          <button onClick={handleEmail} className="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg uppercase"><Mail size={20} /> Email</button>
                         </div>
                       </form>
                     </div>
@@ -836,7 +843,7 @@ function App() {
                <div className="flex gap-4 flex-wrap justify-center">
                   <span className="text-xs text-slate-500 uppercase self-center mr-2">Powered By:</span>
                   {TECH_STACK.map((tech, i) => (
-                     <div key={i} className="bg-slate-900 px-3 py-1 rounded border border-white/5 text-xs text-slate-400">{tech.name}</div>
+                     <div key={i} className="bg-slate-900 px-3 py-1 rounded border border-white/5 text-xs text-slate-400 uppercase">{tech.name}</div>
                   ))}
                </div>
             </div>
@@ -845,14 +852,14 @@ function App() {
                   <a key={idx} href={social.url} target="_blank" rel="noreferrer" className="p-2 bg-slate-900 rounded-full hover:bg-slate-800 hover:text-white transition-colors border border-white/5"><social.icon size={20}/></a>
                ))}
             </div>
-            <p className="max-w-md mx-auto mb-8 text-center">{CONTACT_INFO.tagline}</p>
+            <p className="max-w-md mx-auto mb-8 text-center uppercase">{CONTACT_INFO.tagline}</p>
             <div className="flex justify-center gap-6 mb-8 text-xs uppercase tracking-wide items-center">
-               <button onClick={() => handleNavigation('contact')} className="text-cyan-400 hover:text-white font-bold transition-colors">Contact Us</button>
-               <button onClick={() => handleNavigation('policies')}>Privacy Policy</button>
-               <button onClick={() => handleNavigation('corporate')} className="hover:text-white transition-colors">360° Strategy</button>
-               <button onClick={() => handleNavigation('ai-workforce')} className="text-cyan-400 font-bold hover:text-white transition-colors">AI Training</button>
+               <button onClick={() => handleNavigation('contact')} className="text-cyan-400 hover:text-white font-bold transition-colors uppercase">Contact Us</button>
+               <button onClick={() => handleNavigation('policies')} className="uppercase">Privacy Policy</button>
+               <button onClick={() => handleNavigation('corporate')} className="hover:text-white transition-colors uppercase">360° Strategy</button>
+               <button onClick={() => handleNavigation('ai-workforce')} className="text-cyan-400 font-bold hover:text-white transition-colors uppercase">AI Training</button>
             </div>
-            <p className="text-center">&copy; {new Date().getFullYear()} {CONTACT_INFO.company}. All rights reserved.</p>
+            <p className="text-center uppercase">&copy; {new Date().getFullYear()} {CONTACT_INFO.company}. All rights reserved.</p>
          </div>
       </footer>
     </div>

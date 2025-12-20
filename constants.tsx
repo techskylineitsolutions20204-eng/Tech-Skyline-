@@ -1,5 +1,3 @@
-
-// ... existing imports ...
 import { 
   Cloud, 
   Database, 
@@ -88,8 +86,8 @@ export const CONTACT_INFO = {
   company: "Techskyline.in",
   tagline: "Premier IT Consulting, Staffing, and Corporate Training Solutions.",
   address: "Marshall St, San Antonio, TX 78212, USA",
-  logo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=100&q=80", 
-  heroLogo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=500&q=80", 
+  logo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=64&q=75", 
+  heroLogo: "https://images.unsplash.com/photo-1614741118868-b4ab0a27ffe2?auto=format&fit=crop&w=400&q=75", 
   googleFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfcG6IKVRWZg0qi0V7eBRvRDozo0HRifzhEM5vEfLtFLvADbA/viewform"
 };
 
@@ -241,7 +239,7 @@ export const HERO_CONTENT = {
   quote: "Technology brings everything closer and connected",
   subtitle: "GET YOUR BUSINESS & IT STRATEGIES ALIGN TOGETHER",
   description: "Information technology (IT) consulting services helps you shape a winning IT strategy. For past decades we are into IT consulting and expertly guide your IT and digital transformation initiatives from strategy to implementation.",
-  image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80"
+  image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=75"
 };
 
 export const STATS: StatItem[] = [
@@ -252,12 +250,12 @@ export const STATS: StatItem[] = [
 ];
 
 export const CONSULTING_SERVICES: ServiceItem[] = [
-  { title: "Cloud Consulting", description: "Executing cloud technologies to achieve a rapid speed of IT evolution, reduce costs, and migrate to the cloud.", icon: Cloud, image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" },
-  { title: "Big Data Consulting", description: "Transforming huge volumes of raw data into actionable insights for informed decision-making.", icon: Database, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" },
-  { title: "IoT Consulting", description: "Enhancing business management with IoT networking, real-time data analytics, and monitoring apps.", icon: Cpu, image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" },
-  { title: "Data Quality Consulting", description: "Safeguarding high quality data from ERP, CRM, and SMC systems via profiling and cleansing.", icon: ShieldCheck, image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" },
-  { title: "Technology Consulting", description: "Driving your future with advanced solutions in IT governance, security, and compliance.", icon: Layers, image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" },
-  { title: "IT Staffing", description: "Connecting world-class talent with top companies via permanent and contract staffing.", icon: Briefcase, image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80" }
+  { title: "Cloud Consulting", description: "Executing cloud technologies to achieve a rapid speed of IT evolution, reduce costs, and migrate to the cloud.", icon: Cloud, image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=75" },
+  { title: "Big Data Consulting", description: "Transforming huge volumes of raw data into actionable insights for informed decision-making.", icon: Database, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=75" },
+  { title: "IoT Consulting", description: "Enhancing business management with IoT networking, real-time data analytics, and monitoring apps.", icon: Cpu, image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=75" },
+  { title: "Data Quality Consulting", description: "Safeguarding high quality data from ERP, CRM, and SMC systems via profiling and cleansing.", icon: ShieldCheck, image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=75" },
+  { title: "Technology Consulting", description: "Driving your future with advanced solutions in IT governance, security, and compliance.", icon: Layers, image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=75" },
+  { title: "IT Staffing", description: "Connecting world-class talent with top companies via permanent and contract staffing.", icon: Briefcase, image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=600&q=75" }
 ];
 
 export const CLIENTS: Client[] = [
@@ -393,17 +391,17 @@ export const CORPORATE_360_STRATEGY = {
 };
 
 export const TESTIMONIALS: Testimonial[] = [
-  { id: 1, text: "Most of our customers have been with us for 10+ years, and 90% of our business is repeat. The placement assistance is outstanding!", author: "Priya Sharma", role: "Data Scientist (Placed at Capgemini)", rating: 5, category: "Student - Placement", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" },
-  { id: 2, text: "Empowering high-performing U.S. L&D teams with custom corporate eLearning solutions that turn complex training into engaging experiences.", author: "Michael Chen", role: "Director of Engineering, Tech Corp", rating: 5, category: "Client - Consulting", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80" }
+  { id: 1, text: "Most of our customers have been with us for 10+ years, and 90% of our business is repeat. The placement assistance is outstanding!", author: "Priya Sharma", role: "Data Scientist (Placed at Capgemini)", rating: 5, category: "Student - Placement", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=128&q=75" },
+  { id: 2, text: "Empowering high-performing U.S. L&D teams with custom corporate eLearning solutions that turn complex training into engaging experiences.", author: "Michael Chen", role: "Director of Engineering, Tech Corp", rating: 5, category: "Client - Consulting", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=128&q=75" }
 ];
 
 export const FEATURED_TECHNOLOGIES: TechCategory[] = [
-  { title: "SAP S/4 HANA", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80", description: "Enterprise Resource Planning" },
-  { title: "Data Science & AI", image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=600&q=80", description: "Machine Learning, Python" },
-  { title: "Cyber Security", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80", description: "Network Defense, Ethical Hacking" },
-  { title: "DevOps & Cloud", image: "https://images.unsplash.com/photo-1667372393119-c85c020799a3?auto=format&fit=crop&w=600&q=80", description: "CI/CD, AWS, Azure, Docker" },
-  { title: "Full Stack Web", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80", description: "React, Node.js, MongoDB, Express" },
-  { title: "Cloud Security", image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80", description: "Zero Trust, Identity, Threat Detection" }
+  { title: "SAP S/4 HANA", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=75", description: "Enterprise Resource Planning" },
+  { title: "Data Science & AI", image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?auto=format&fit=crop&w=500&q=75", description: "Machine Learning, Python" },
+  { title: "Cyber Security", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=500&q=75", description: "Network Defense, Ethical Hacking" },
+  { title: "DevOps & Cloud", image: "https://images.unsplash.com/photo-1667372393119-c85c020799a3?auto=format&fit=crop&w=500&q=75", description: "CI/CD, AWS, Azure, Docker" },
+  { title: "Full Stack Web", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&q=75", description: "React, Node.js, MongoDB, Express" },
+  { title: "Cloud Security", image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=500&q=75", description: "Zero Trust, Identity, Threat Detection" }
 ];
 
 export const INTERNSHIP_PROGRAM = {
@@ -428,8 +426,8 @@ export const INTERNSHIP_PROGRAM = {
 };
 
 export const SAMPLE_CLASSES = [
-  { id: 1, title: "Gen AI: Prompt Engineering Fundamentals", type: "Video", duration: "1h 15m", author: "Dr. Sarah Smith", thumbnail: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80", videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-  { id: 2, title: "AWS Security Specialist Interview Guide", type: "Audio", duration: "45m", author: "James Wilson", thumbnail: "https://images.unsplash.com/photo-1478737270239-2f02b77ac6d5?auto=format&fit=crop&w=600&q=80", audioUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" }
+  { id: 1, title: "Gen AI: Prompt Engineering Fundamentals", type: "Video", duration: "1h 15m", author: "Dr. Sarah Smith", thumbnail: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=500&q=75", videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+  { id: 2, title: "AWS Security Specialist Interview Guide", type: "Audio", duration: "45m", author: "James Wilson", thumbnail: "https://images.unsplash.com/photo-1478737270239-2f02b77ac6d5?auto=format&fit=crop&w=500&q=75", audioUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" }
 ];
 
 export const TESTING_SERVICES = ["Software Testing", "Data Warehouse Testing", "Big Data Application Testing", "ERP Testing", "CRM Testing", "Mobile App Testing"];
@@ -457,7 +455,7 @@ export const ABOUT_US_CONTENT = {
     { title: "Integrity", description: "Transparency and honesty in relationships.", icon: ShieldCheck }
   ],
   team: [
-    { name: "Abhinav", role: "Founder & CEO", bio: "With 15+ years in IT, Abhinav leads with a passion for education.", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" }
+    { name: "Abhinav", role: "Founder & CEO", bio: "With 15+ years in IT, Abhinav leads with a passion for education.", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=75" }
   ]
 };
 
