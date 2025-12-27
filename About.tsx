@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Target, Eye, History, Award, Users, Globe, Zap, ShieldCheck, ChevronRight } from 'lucide-react';
+import { Target, Eye, History, Globe, Zap } from 'lucide-react';
 import { ABOUT_EXTENDED, STATS } from './constants';
 
 export const About = () => {
@@ -30,6 +30,7 @@ export const About = () => {
             <img 
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" 
               alt="Our Story" 
+              loading="lazy"
               className="relative rounded-[3rem] shadow-2xl border border-white/10"
             />
           </div>
@@ -103,7 +104,7 @@ export const About = () => {
             <div key={i} className="group text-center">
               <div className="relative mb-8 inline-block">
                 <div className="absolute inset-0 bg-brand-500 rounded-full blur-[40px] opacity-0 group-hover:opacity-40 transition-opacity"></div>
-                <img src={member.image} alt={member.name} className="relative w-48 h-48 rounded-full object-cover mx-auto grayscale group-hover:grayscale-0 transition-all duration-500 shadow-2xl" />
+                <img src={member.image} alt={member.name} loading="lazy" className="relative w-48 h-48 rounded-full object-cover mx-auto grayscale group-hover:grayscale-0 transition-all duration-500 shadow-2xl" />
               </div>
               <h4 className="text-2xl font-black text-white mb-2">{member.name}</h4>
               <p className="text-brand-500 font-bold uppercase text-xs tracking-widest mb-4">{member.role}</p>

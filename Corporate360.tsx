@@ -1,11 +1,8 @@
-
 import React, { useEffect } from 'react';
 import { 
-  ArrowLeft, ArrowRight, CheckCircle, Zap, 
-  Brain, Globe, Target, BarChart3, Layers, 
-  Code, Search, Lightbulb, Clock, ShieldCheck,
-  Server, Cpu, Database, Layout, BookOpen,
-  Check
+  ArrowLeft, CheckCircle, Zap, 
+  Target, BarChart3, Layers, 
+  Clock, ShieldCheck, Globe
 } from 'lucide-react';
 import { CORPORATE_360_STRATEGY, CORPORATE_TRAINING_MODULES, CONTACT_INFO } from './constants';
 
@@ -55,13 +52,13 @@ export const Corporate360 = ({ onBack }: { onBack: () => void }) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {CORPORATE_TRAINING_MODULES.map((cat, i) => (
-            <div key={i} className="glass p-8 rounded-[3rem] border-white/5 flex flex-col">
-              <h4 className="text-xl font-black text-white mb-8 border-b border-white/10 pb-4">{cat.category}</h4>
+            <div key={i} className="glass p-8 rounded-[3rem] border-white/5 flex flex-col hover:border-brand-500/30 transition-all group">
+              <h4 className="text-xl font-black text-white mb-8 border-b border-white/10 pb-4 group-hover:text-brand-500 transition-colors">{cat.category}</h4>
               <div className="space-y-8 flex-grow">
                 {cat.modules.map((mod, j) => (
-                  <div key={j} className="group">
+                  <div key={j} className="group/mod">
                     <div className="flex justify-between items-start mb-3">
-                      <h5 className="font-bold text-slate-200 group-hover:text-brand-500 transition-colors">{mod.name}</h5>
+                      <h5 className="font-bold text-slate-200 group-hover/mod:text-brand-500 transition-colors">{mod.name}</h5>
                       <span className="text-[10px] font-black bg-white/5 px-2 py-1 rounded-md text-slate-500 uppercase">{mod.duration}</span>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -72,7 +69,7 @@ export const Corporate360 = ({ onBack }: { onBack: () => void }) => {
                   </div>
                 ))}
               </div>
-              <button onClick={() => window.open(CONTACT_INFO.googleFormUrl, '_blank')} className="mt-10 w-full py-4 glass border-brand-500/30 text-brand-500 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-brand-500 hover:text-white transition-all">
+              <button onClick={() => window.open(CONTACT_INFO.googleFormUrl, '_blank')} className="mt-10 w-full py-4 glass border-brand-500/30 text-brand-500 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-brand-500 hover:text-white transition-all active:scale-95">
                 Request Module Details
               </button>
             </div>

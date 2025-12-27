@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { GoogleGenAI, Modality } from "@google/genai";
 import { 
-  Mail, Phone, MessageCircle, MapPin, 
-  Send, Sparkles, Mic, X, Loader2,
-  Globe, Info, Bot, Brain, ShieldCheck
+  Mail, Phone, MapPin, 
+  Send, Sparkles, Mic, Loader2,
+  Globe, Brain, ShieldCheck
 } from 'lucide-react';
 import { CONTACT_INFO } from './constants';
 
-// Helper functions for audio processing
+// Clean audio decoding helper
 async function decodeAudioData(data: Uint8Array, ctx: AudioContext, sampleRate: number, numChannels: number): Promise<AudioBuffer> {
   const dataInt16 = new Int16Array(data.buffer);
   const frameCount = dataInt16.length / numChannels;
@@ -21,17 +21,21 @@ async function decodeAudioData(data: Uint8Array, ctx: AudioContext, sampleRate: 
   return buffer;
 }
 
-function decodeBase64(base64: string) {
-  const binaryString = atob(base64);
+function decodeBase64(base64: string): Uint8Array {
+  const binaryString = window.atob(base64);
   const bytes = new Uint8Array(binaryString.length);
-  for (let i = 0; i < binaryString.length; i++) bytes[i] = binaryString.charCodeAt(i);
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
   return bytes;
 }
 
-function encodeBase64(bytes: Uint8Array) {
+function encodeBase64(bytes: Uint8Array): string {
   let binary = '';
-  for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
-  return btoa(binary);
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return window.btoa(binary);
 }
 
 export const Contact = () => {
@@ -51,7 +55,7 @@ export const Contact = () => {
       setIsLive(true);
       setStatus('Initializing Concierge...');
       
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
       const outCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
       const inCtx = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 });
       audioContextRef.current = outCtx;
@@ -68,15 +72,20 @@ export const Contact = () => {
             scriptProcessor.onaudioprocess = (e) => {
               const inputData = e.inputBuffer.getChannelData(0);
               const int16 = new Int16Array(inputData.length);
-              for (let i = 0; i < inputData.length; i++) int16[i] = inputData[i] * 32768;
-              const blob = { data: encodeBase64(new Uint8Array(int16.buffer)), mimeType: 'audio/pcm;rate=16000' };
+              for (let i = 0; i < inputData.length; i++) {
+                int16[i] = inputData[i] * 32768;
+              }
+              const blob = { 
+                data: encodeBase64(new Uint8Array(int16.buffer)), 
+                mimeType: 'audio/pcm;rate=16000' 
+              };
               sessionPromise.then(s => s.sendRealtimeInput({ media: blob }));
             };
             source.connect(scriptProcessor);
             scriptProcessor.connect(inCtx.destination);
           },
           onmessage: async (msg) => {
-            const audioData = msg.serverContent?.modelTurn?.parts[0]?.inlineData.data;
+            const audioData = msg.serverContent?.modelTurn?.parts?.[0]?.inlineData?.data;
             if (audioData) {
               const buf = await decodeAudioData(decodeBase64(audioData), outCtx, 24000, 1);
               const source = outCtx.createBufferSource();
@@ -92,17 +101,20 @@ export const Contact = () => {
             }
           },
           onclose: () => stopLiveBridge(),
-          onerror: (e) => { console.error(e); stopLiveBridge(); }
+          onerror: (err) => {
+            console.error('Live Bridge Error:', err);
+            stopLiveBridge();
+          }
         },
         config: {
           responseModalities: [Modality.AUDIO],
-          systemInstruction: 'You are the Tech Skyline Digital Concierge. You are professional and helpful. Answer questions about IT consulting and training. If a user wants a quote, tell them to fill out the form on the left.',
+          systemInstruction: 'You are the Tech Skyline Digital Concierge. Professional, warm, and tech-savvy. Answer enterprise queries concisely. For quotes, refer to the form.',
           outputAudioTranscription: {},
         }
       });
       sessionRef.current = await sessionPromise;
     } catch (err: any) {
-      console.error(err);
+      console.error('Bridge failed:', err);
       stopLiveBridge();
     }
   };
@@ -111,8 +123,14 @@ export const Contact = () => {
     setIsLive(false);
     setStatus('');
     setTranscription('');
-    if (sessionRef.current) { sessionRef.current.close(); sessionRef.current = null; }
-    if (audioContextRef.current) { audioContextRef.current.close(); audioContextRef.current = null; }
+    if (sessionRef.current) {
+      sessionRef.current.close();
+      sessionRef.current = null;
+    }
+    if (audioContextRef.current) {
+      audioContextRef.current.close();
+      audioContextRef.current = null;
+    }
     sourcesRef.current.forEach(s => s.stop());
     sourcesRef.current.clear();
   };
@@ -122,7 +140,7 @@ export const Contact = () => {
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
-      alert('Message sent successfully!');
+      alert('Inquiry successfully deployed. Our lead architect will follow up shortly.');
       setForm({ name: '', email: '', company: '', message: '' });
     }, 1500);
   };
@@ -163,7 +181,7 @@ export const Contact = () => {
                    <label className="block text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-2">Project Brief</label>
                    <textarea required rows={5} value={form.message} onChange={e => setForm({...form, message: e.target.value})} className="w-full glass bg-slate-900 border-white/5 p-4 rounded-xl text-white outline-none focus:border-brand-500 transition-all resize-none"></textarea>
                 </div>
-                <button disabled={isSubmitting} className="w-full py-5 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-lg uppercase tracking-widest shadow-xl shadow-brand-600/20 transition-all flex items-center justify-center gap-3">
+                <button disabled={isSubmitting} className="w-full py-5 bg-brand-600 hover:bg-brand-500 text-white rounded-2xl font-black text-lg uppercase tracking-widest shadow-xl shadow-brand-600/20 transition-all flex items-center justify-center gap-3 active:scale-95">
                    {isSubmitting ? <Loader2 className="animate-spin" /> : <><Send size={20} /> Deploy Inquiry</>}
                 </button>
              </form>
@@ -224,14 +242,14 @@ export const Contact = () => {
                    <div className="bg-brand-600/10 p-3 rounded-2xl text-brand-500"><ShieldCheck size={24} /></div>
                    <div>
                       <h4 className="text-white font-bold text-sm">Secure Bridge</h4>
-                      <p className="text-[10px] text-slate-500 uppercase tracking-widest">AES-256 Encrypted</p>
+                      <p className="text-[10px] text-slate-500 uppercase tracking-widest">Neural Encryption</p>
                    </div>
                 </div>
                 <div className="glass p-6 rounded-3xl border-white/5 flex gap-4 items-center">
                    <div className="bg-studio-600/10 p-3 rounded-2xl text-studio-500"><Globe size={24} /></div>
                    <div>
                       <h4 className="text-white font-bold text-sm">Global Scale</h4>
-                      <p className="text-[10px] text-slate-500 uppercase tracking-widest">Edge Optimized</p>
+                      <p className="text-[10px] text-slate-500 uppercase tracking-widest">Edge-Node Ready</p>
                    </div>
                 </div>
              </div>

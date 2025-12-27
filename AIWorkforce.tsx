@@ -1,25 +1,13 @@
-
 import React from 'react';
 import { 
   ArrowLeft, 
   ArrowRight, 
-  CheckCircle, 
-  TrendingUp, 
-  Zap, 
   Sparkles, 
-  Smile, 
-  BarChart3, 
   Brain, 
-  Globe, 
-  Binary, 
-  Award,
-  AlertTriangle,
-  Users,
-  Target,
-  Rocket,
   ShieldCheck,
   Check,
-  MessageCircle
+  MessageCircle,
+  AlertTriangle
 } from 'lucide-react';
 import { AI_WORKFORCE_CONTENT, CONTACT_INFO } from './constants';
 
@@ -133,7 +121,7 @@ export const AIWorkforce = ({ onBack }: { onBack: () => void }) => {
                   </p>
                   <button 
                      onClick={() => window.open(CONTACT_INFO.googleFormUrl, '_blank')}
-                     className="w-full py-4 bg-white text-slate-900 rounded-2xl font-black text-lg hover:bg-cyan-400 transition-colors shadow-xl"
+                     className="w-full py-4 bg-white text-slate-900 rounded-2xl font-black text-lg hover:bg-cyan-400 transition-all shadow-xl active:scale-95"
                   >
                      Discuss Your AI Strategy
                   </button>
@@ -201,6 +189,7 @@ export const AIWorkforce = ({ onBack }: { onBack: () => void }) => {
                   <img 
                      src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80" 
                      alt="AI Future" 
+                     loading="lazy"
                      className="relative rounded-[3rem] shadow-2xl border border-white/10"
                   />
                </div>
@@ -220,7 +209,7 @@ export const AIWorkforce = ({ onBack }: { onBack: () => void }) => {
                <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <button 
                      onClick={() => window.open(CONTACT_INFO.googleFormUrl, '_blank')}
-                     className="bg-white text-blue-700 hover:bg-slate-100 px-12 py-5 rounded-2xl font-black text-xl shadow-2xl flex items-center justify-center gap-3 transition-transform hover:-translate-y-1"
+                     className="bg-white text-blue-700 hover:bg-slate-100 px-12 py-5 rounded-2xl font-black text-xl shadow-2xl flex items-center justify-center gap-3 transition-transform hover:-translate-y-1 active:scale-95"
                   >
                      Get Started <ArrowRight size={24} />
                   </button>
@@ -229,9 +218,6 @@ export const AIWorkforce = ({ onBack }: { onBack: () => void }) => {
                   </a>
                </div>
             </div>
-            {/* Decorative Orbs */}
-            <div className="absolute -top-32 -right-32 w-96 h-96 bg-white/10 rounded-full mix-blend-overlay filter blur-[100px] animate-pulse"></div>
-            <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-cyan-400/10 rounded-full mix-blend-overlay filter blur-[100px] animate-pulse delay-700"></div>
          </div>
       </section>
     </div>
